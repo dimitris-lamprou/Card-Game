@@ -1,0 +1,4 @@
+repository "Card Game@Dimitris_Lamprou@cloud"
+  path "/"
+    smartbranch "/main/test" 
+     
