@@ -125487,6 +125487,7 @@ GameObject:
   - component: {fileID: 1780139193}
   - component: {fileID: 1780139197}
   - component: {fileID: 1780139198}
+  - component: {fileID: 1780139199}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -125530,7 +125531,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.1875, y: 1.625}
+    oldSize: {x: 1.6875, y: 1.625}
     newSize: {x: 1.6875, y: 1.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -125606,13 +125607,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-<<<<<<< HEAD
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 119241785, guid: 0647235313f5cd84091d281a84203a46, type: 3}
-=======
   m_SortingOrder: 100
-  m_Sprite: {fileID: -1596856039, guid: 7114324d5435aaa44b211c334d48a4ea, type: 3}
->>>>>>> 1df4d77947eec85368273f025fcdd20ce69d45e5
+  m_Sprite: {fileID: 119241785, guid: 0647235313f5cd84091d281a84203a46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125673,6 +125669,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1780139199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780139192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15db0c0b0dc91294b92101a25f1dbdce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1780139198}
 --- !u!1 &2089968048
 GameObject:
   m_ObjectHideFlags: 0
