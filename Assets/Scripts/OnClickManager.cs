@@ -10,6 +10,7 @@ public class OnClickManager : MonoBehaviour
     [Space]
     [Header("Enemy")]
     [SerializeField] private TMP_Text enemysBlockText;
+    [SerializeField] private TMP_Text enemysHpText;
     [Space]
     [Header("Labels")]
     [SerializeField] private TMP_Text discardText;
@@ -30,27 +31,13 @@ public class OnClickManager : MonoBehaviour
 
         //Enemys action
 
-        if (Enemy.action == 0) //deal dmg
+        if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
-            Enemy.attack = 5;
-            EnemyDealDamage();
+            EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
         }
-        else if (Enemy.action == 1) //add 1 block
+        else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
         {
-            Enemy.addBlock = 5;
-            EnemyAddBlock();
-        }
-        else if (Enemy.action == 2)
-        {
-            Enemy.attack = 3;
-            Enemy.addBlock = 2;
-            EnemyDealDamage();
-            EnemyAddBlock();
-        }
-        else if (Enemy.action == 3)
-        {
-            discard.Add(Enemy.dazed);
-            Dealer.Shuffle(discard);
+            EnemysAI.EnemyB(discard, herosBlockText, herosHpText, enemysBlockText, enemysHpText);
         }
 
         //Deal Cards
@@ -90,36 +77,5 @@ public class OnClickManager : MonoBehaviour
         Enemy.action = Random.Range(0, 5);
         Dealer.WhatEnemyWillDo();
         discardText.text = discard.Count.ToString();
-    }
-
-    private void EnemyDealDamage()
-    {
-        if (Hero.block > 0)
-        {
-            if (Hero.block >= Enemy.attack)
-            {
-                Hero.block -= Enemy.attack;
-                herosBlockText.text = Hero.block.ToString();
-            }
-            else
-            {
-                int remainingDamage = Enemy.attack - Hero.block;
-                Hero.block = 0;
-                Hero.hp -= remainingDamage;
-                herosBlockText.text = "0";
-                herosHpText.text = Hero.hp.ToString();
-            }
-        }
-        else
-        {
-            Hero.hp -= Enemy.attack;
-            herosHpText.text = Hero.hp.ToString();
-        }
-    }
-
-    private void EnemyAddBlock()
-    {
-        Enemy.block += Enemy.addBlock;
-        enemysBlockText.text = Enemy.block.ToString();
     }
 }

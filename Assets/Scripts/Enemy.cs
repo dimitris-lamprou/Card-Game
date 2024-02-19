@@ -3,6 +3,8 @@ using Mono.Data.Sqlite;
 
 public class Enemy : MonoBehaviour
 {
+    public static readonly int hpCap = 4;
+
     public static int hp = 4;
     public static int block = 0;
     public static int action;

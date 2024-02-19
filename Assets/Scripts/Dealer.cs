@@ -134,25 +134,51 @@ public class Dealer : MonoBehaviour
 
     public static void WhatEnemyWillDo()
     {
-        if (Enemy.action == 0)
+        if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
-            Debug.Log("Enemy will deal 5 dmg");
+            if (Enemy.action == 0)
+            {
+                Debug.Log("Enemy will deal 5 dmg");
+            }
+            else if (Enemy.action == 1)
+            {
+                Debug.Log("Enemy will add 5 block");
+            }
+            else if (Enemy.action == 2)
+            {
+                Debug.Log("Enemy will deal 3 dmg and add 2 block");
+            }
+            else if (Enemy.action == 3)
+            {
+                Debug.Log("Enemy will add Dazed to your deck");
+            }
+            else
+            {
+                Debug.Log("Enemy is confused and will not do anything");
+            }
         }
-        else if (Enemy.action == 1)
+        else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
         {
-            Debug.Log("Enemy will add 5 block");
-        }
-        else if (Enemy.action == 2)
-        {
-            Debug.Log("Enemy will deal 3 dmg and add 2 block");
-        }
-        else if (Enemy.action == 3)
-        {
-            Debug.Log("Enemy will add Dazed to your deck");
-        }
-        else
-        {
-            Debug.Log("Enemy is confused and will not do anything");
+            if (Enemy.action == 0)
+            {
+                Debug.Log("Enemy will deal 3 dmg");
+            }
+            else if (Enemy.action == 1)
+            {
+                Debug.Log("Enemy will add 7 block");
+            }
+            else if (Enemy.action == 2)
+            {
+                Debug.Log("Enemy will add 5 block");
+            }
+            else if (Enemy.action == 3)
+            {
+                Debug.Log("Enemy will heal by 3");
+            }
+            else
+            {
+                Debug.Log("Enemy is confused and will not do anything");
+            }
         }
     }
 }

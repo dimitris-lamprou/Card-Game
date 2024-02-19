@@ -4702,6 +4702,7 @@ MonoBehaviour:
   herosHpText: {fileID: 673439763}
   herosBlockText: {fileID: 982614032}
   enemysBlockText: {fileID: 1365880842}
+  enemysHpText: {fileID: 294227907}
   discardText: {fileID: 823218692}
   graveyardText: {fileID: 670137975}
 --- !u!1 &1373354477

@@ -16,6 +16,7 @@ TagManager:
   - Canvas
   - Deck Text
   - Heros Hp
+  - Enemy
   layers:
   - Default
   - TransparentFX
