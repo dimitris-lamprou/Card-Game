@@ -17,6 +17,7 @@ TagManager:
   - Deck Text
   - Heros Hp
   - Enemy
+  - Sign Post
   layers:
   - Default
   - TransparentFX
