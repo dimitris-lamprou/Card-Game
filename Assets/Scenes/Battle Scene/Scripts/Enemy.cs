@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
 
     public static int addBlock;
     public static int attack;
+    public static bool isStuned = false;
 
     public static Card dazed;
 
@@ -30,10 +31,8 @@ public class Enemy : MonoBehaviour
             Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
             Title = reader["title"].ToString(),
             Description = reader["description"].ToString(),
-            Cost = int.TryParse(reader["cost"].ToString(), out int cost) ? cost : (int?)null,
             Effect = reader["effect"].ToString(),
             Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
-            Status = reader["status"].ToString()
         };
 
         db.Close();

@@ -60,7 +60,7 @@ public class Dealer : MonoBehaviour
                 deck[lastCard].Experience.ToString();
             card.name = deck[lastCard].Effect;
 
-            if (deck[lastCard].Title.Equals("Dazed"))
+            if (deck[lastCard].Title.Equals("Dazed") || deck[lastCard].Title.Equals("Focus"))
             {
                 Destroy(card.transform.Find("Sacrifice (Button)").gameObject);
             }
@@ -98,10 +98,8 @@ public class Dealer : MonoBehaviour
                         Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
                         Title = reader["title"].ToString(),
                         Description = reader["description"].ToString(),
-                        Cost = int.TryParse(reader["cost"].ToString(), out int cost) ? cost : (int?)null,
                         Effect = reader["effect"].ToString(),
                         Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
-                        Status = reader["status"].ToString()
                     };
                     deck.Add(card);
                 }
@@ -117,10 +115,8 @@ public class Dealer : MonoBehaviour
                     Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
                     Title = reader["title"].ToString(),
                     Description = reader["description"].ToString(),
-                    Cost = int.TryParse(reader["cost"].ToString(), out int cost) ? cost : (int?)null,
                     Effect = reader["effect"].ToString(),
                     Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
-                    Status = reader["status"].ToString()
                 };
                 deck.Add(card);
             }

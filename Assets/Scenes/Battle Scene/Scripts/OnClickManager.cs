@@ -32,9 +32,16 @@ public class OnClickManager : MonoBehaviour
 
         //Enemys action
 
-        EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
+        if (Enemy.isStuned)
+        {
+            Debug.Log("Enemy is stuned");
+        }
+        else
+        {
+            EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
+        }
 
-        //  FOR DEMO MAP 1
+        //  FOR DEMO MAP 1 without stun card
         /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
             EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
@@ -81,5 +88,6 @@ public class OnClickManager : MonoBehaviour
         Enemy.action = Random.Range(0, 5);
         Dealer.WhatEnemyWillDo();
         discardText.text = discard.Count.ToString();
+        Enemy.isStuned = false;
     }
 }

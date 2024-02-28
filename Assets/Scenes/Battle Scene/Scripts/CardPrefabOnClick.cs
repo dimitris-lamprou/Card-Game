@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -38,12 +39,22 @@ public class CardPrefabOnClick : MonoBehaviour
             return;
         }
 
-        Hero.attack = int.Parse(effect[0].ToString());
+        /*Hero.attack = int.Parse(effect[0].ToString());
         Hero.addBlock = int.Parse(effect[0].ToString());
-        Hero.addExp = int.Parse(effect[0].ToString());
+        Hero.addExp = int.Parse(effect[0].ToString());*/
+        string[] effectSplited = effect.Split(',');
 
         if (effect.Contains("Attack"))
         {
+            for (int i = 0; i < effectSplited.Length; i++)
+            {
+                if (effectSplited[i].Equals("Attack"))
+                {
+                    Hero.attack = int.Parse(effectSplited[i - 1]);
+                    break;
+                }
+            }
+
             if (Enemy.block > 0)
             {
                 if (Enemy.block >= Hero.attack)
@@ -75,13 +86,65 @@ public class CardPrefabOnClick : MonoBehaviour
         }
         else if (effect.Contains("Experience")) //works if card gives xp only
         {
+            for (int i = 0; i < effectSplited.Length; i++)
+            {
+                if (effectSplited[i].Equals("Experience"))
+                {
+                    Hero.addExp = int.Parse(effectSplited[i - 1]);
+                    break;
+                }
+            }
+
             Hero.exp += Hero.addExp;
             Debug.Log("Heros xp = " + Hero.exp);
         }
-        if (effect.Contains("Block"))
+        if (effect.Contains("Defence"))
         {
+            for (int i = 0; i < effectSplited.Length; i++)
+            {
+                if (effectSplited[i].Equals("Defence"))
+                {
+                    Hero.addBlock = int.Parse(effectSplited[i - 1]);
+                    break;
+                }
+            }
+
             Hero.block += Hero.addBlock;
             herosBlockText.text = Hero.block.ToString();
+        }
+        if (effect.Contains("Heal"))
+        {
+            for (int i = 0; i < effectSplited.Length; i++)
+            {
+                if (effectSplited[i].Equals("Heal"))
+                {
+                    Hero.heal = int.Parse(effectSplited[i - 1]);
+                    break;
+                }
+            }
+
+            for (int i = 1; i <= Hero.heal; i++)
+            {
+                if (Hero.hp == Hero.hpCap)
+                {
+                    break;
+                }
+                Hero.hp++;
+            }
+
+            herosHpText.text = Hero.hp.ToString();
+        }
+        if (effect.Contains("Stun"))
+        {
+            Enemy.isStuned = true;
+        }
+        if (effect.Contains("Reckless"))
+        {
+            if (Hero.block > 0)
+            {
+                Hero.block--;
+                herosBlockText.text = Hero.block.ToString();
+            }
         }
 
         Dealer.discard.Add(playedCard);
