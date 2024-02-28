@@ -18,9 +18,6 @@ public class Dealer : MonoBehaviour
     private static readonly SqliteConnection db = DBContext.db;
     private static readonly SqliteCommand cmd = DBContext.cmd;
 
-    [Header("For test")]
-    [SerializeField] private TMP_Text graveyardText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -134,7 +131,29 @@ public class Dealer : MonoBehaviour
 
     public static void WhatEnemyWillDo()
     {
-        if (CollideWithEnemy.enemysName.Equals("Enemy A"))
+        if (Enemy.action == 0)
+        {
+            Debug.Log("Enemy will deal 5 dmg");
+        }
+        else if (Enemy.action == 1)
+        {
+            Debug.Log("Enemy will add 5 block");
+        }
+        else if (Enemy.action == 2)
+        {
+            Debug.Log("Enemy will deal 3 dmg and add 2 block");
+        }
+        else if (Enemy.action == 3)
+        {
+            Debug.Log("Enemy will add Dazed to your deck");
+        }
+        else
+        {
+            Debug.Log("Enemy is confused and will not do anything");
+        }
+
+        //  FOR DEMO MAP 1
+        /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
             if (Enemy.action == 0)
             {
@@ -179,6 +198,6 @@ public class Dealer : MonoBehaviour
             {
                 Debug.Log("Enemy is confused and will not do anything");
             }
-        }
+        }*/
     }
 }

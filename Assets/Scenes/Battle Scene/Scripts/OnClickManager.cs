@@ -18,6 +18,7 @@ public class OnClickManager : MonoBehaviour
     [Header("For test")]
     [SerializeField] private TMP_Text graveyardText;
 
+
     private readonly List<Card> deck = Dealer.deck;
     private readonly List<Card> discard = Dealer.discard;
     private readonly List<Card> hand = Dealer.hand;
@@ -31,14 +32,17 @@ public class OnClickManager : MonoBehaviour
 
         //Enemys action
 
-        if (CollideWithEnemy.enemysName.Equals("Enemy A"))
+        EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
+
+        //  FOR DEMO MAP 1
+        /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
             EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
         }
         else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
         {
             EnemysAI.EnemyB(discard, herosBlockText, herosHpText, enemysBlockText, enemysHpText);
-        }
+        }*/
 
         //Deal Cards
         if (hand.Count > 0)
