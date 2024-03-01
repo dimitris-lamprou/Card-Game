@@ -89,5 +89,6 @@ public class OnClickManager : MonoBehaviour
         Dealer.WhatEnemyWillDo();
         discardText.text = discard.Count.ToString();
         Enemy.isStuned = false;
+        Enemy.isEnraged = false;
     }
 }

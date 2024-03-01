@@ -39,9 +39,6 @@ public class CardPrefabOnClick : MonoBehaviour
             return;
         }
 
-        /*Hero.attack = int.Parse(effect[0].ToString());
-        Hero.addBlock = int.Parse(effect[0].ToString());
-        Hero.addExp = int.Parse(effect[0].ToString());*/
         string[] effectSplited = effect.Split(',');
 
         if (effect.Contains("Attack"))
@@ -144,6 +141,26 @@ public class CardPrefabOnClick : MonoBehaviour
             {
                 Hero.block--;
                 herosBlockText.text = Hero.block.ToString();
+            }
+        }
+        if (effect.Contains("Enrage"))
+        {
+            Enemy.isEnraged = true;
+            Debug.Log("Enemy is enraged");
+            if (Enemy.block > 0)
+            {
+                Enemy.block--;
+                enemysBlockText.text = Enemy.block.ToString();
+            }
+        }
+        if (effect.Contains("Drain")) //only for test reasons
+        {
+            if (Enemy.isEnraged)
+            {
+                Enemy.hp--;
+                Hero.hp++;
+                enemysHpText.text = Enemy.hp.ToString();
+                herosHpText.text = Hero.hp.ToString();
             }
         }
 

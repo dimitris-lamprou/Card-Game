@@ -8,6 +8,10 @@ public static class EnemysAI
         if (Enemy.action == 0) //deal dmg
         {
             Enemy.attack = 5;
+            if (Enemy.isEnraged)
+            {
+                Enemy.attack++;
+            }
             EnemyDealDamage(herosBlockText, herosHpText);
         }
         else if (Enemy.action == 1) //add block
@@ -18,6 +22,10 @@ public static class EnemysAI
         else if (Enemy.action == 2) //deal dmg and add block
         {
             Enemy.attack = 3;
+            if (Enemy.isEnraged)
+            {
+                Enemy.attack++;
+            }
             Enemy.addBlock = 2;
             EnemyDealDamage(herosBlockText, herosHpText);
             EnemyAddBlock(enemysBlockText);

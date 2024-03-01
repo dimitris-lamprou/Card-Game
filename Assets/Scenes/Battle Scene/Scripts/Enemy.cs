@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public static int addBlock;
     public static int attack;
     public static bool isStuned = false;
+    public static bool isEnraged = false;
 
     public static Card dazed;
 
