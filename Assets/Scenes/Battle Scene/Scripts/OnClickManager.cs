@@ -7,6 +7,7 @@ public class OnClickManager : MonoBehaviour
     [Header("Hero")]
     [SerializeField] private TMP_Text herosHpText;
     [SerializeField] private TMP_Text herosBlockText;
+    [SerializeField] private TMP_Text staminaText;
     [Space]
     [Header("Enemy")]
     [SerializeField] private TMP_Text enemysBlockText;
@@ -28,7 +29,10 @@ public class OnClickManager : MonoBehaviour
     public void EndTurn()
     {
         Enemy.block = 0;
+        Hero.stamina = 3;
+
         enemysBlockText.text = "0";
+        staminaText.text = Hero.stamina.ToString();
 
         //Enemys action
 

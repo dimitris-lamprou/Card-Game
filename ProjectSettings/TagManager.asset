@@ -18,6 +18,7 @@ TagManager:
   - Heros Hp
   - Enemy
   - Sign Post
+  - Stamina Text
   layers:
   - Default
   - TransparentFX

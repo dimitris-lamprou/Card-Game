@@ -13,6 +13,7 @@ public class CardPrefabOnClick : MonoBehaviour
     private TMP_Text herosBlockText;
     private TMP_Text discardText;
     private TMP_Text graveyardText;
+    private TMP_Text staminaText;
 
     private string effect;
 
@@ -24,6 +25,7 @@ public class CardPrefabOnClick : MonoBehaviour
         herosHpText = GameObject.FindWithTag("Heros Hp").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
+        staminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
 
         effect = card.name;
     }
@@ -166,7 +168,12 @@ public class CardPrefabOnClick : MonoBehaviour
 
         Dealer.discard.Add(playedCard);
         Dealer.hand.Remove(playedCard);
+
+        Hero.stamina--;
+
+        staminaText.text = Hero.stamina.ToString();
         discardText.text = Dealer.discard.Count.ToString();
+
         Destroy(card);
     }
 
