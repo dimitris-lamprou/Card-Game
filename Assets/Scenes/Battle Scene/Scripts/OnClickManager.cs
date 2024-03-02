@@ -54,7 +54,15 @@ public class OnClickManager : MonoBehaviour
         //Deal Cards
         if (hand.Count > 0)
         {
-            if (deck.Count + hand.Count < handLimit)
+            discard.AddRange(hand);
+            hand.Clear();
+            var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
+            foreach (var card in listOfUnusedCards)
+            {
+                Destroy(card);
+            }
+            // IF I WANT TO KEEP UNPLAYED CARDS IN MY HAND
+            /*if (deck.Count + hand.Count < handLimit)
             {
                 deck.AddRange(discard);
                 discard.Clear();
@@ -69,9 +77,9 @@ public class OnClickManager : MonoBehaviour
             {
                 Destroy(card);
             }
-            Dealer.Deal(deck);
+            Dealer.Deal(deck);*/
         }
-        else if (deck.Count < handLimit)
+        if (deck.Count < handLimit)     //else if for the above comment section to work
         {
             deck.AddRange(discard);
             discard.Clear();
