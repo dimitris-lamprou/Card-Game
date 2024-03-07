@@ -5,6 +5,8 @@ using Mono.Data.Sqlite;
 
 public class Dealer : MonoBehaviour
 {
+    private static TMP_Text enemysActionText;
+
     public static GameObject cardPrefab;
     public static Canvas canvas;
     public static TMP_Text deckCountText;
@@ -25,6 +27,7 @@ public class Dealer : MonoBehaviour
         canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
         deckCountText = GameObject.FindWithTag("Deck Text").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
+        enemysActionText = GameObject.FindWithTag("Action Text").GetComponent<TMP_Text>();
 
         Init(deck);
         Shuffle(deck);
@@ -89,7 +92,7 @@ public class Dealer : MonoBehaviour
         var reader = cmd.ExecuteReader();
         while (reader.Read())
         {
-            if (reader["title"].ToString().Equals("Strike") || reader["title"].ToString().Equals("Block"))
+            if (reader["title"].ToString().Equals("Strike") || reader["title"].ToString().Equals("Defence"))
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -129,23 +132,23 @@ public class Dealer : MonoBehaviour
     {
         if (Enemy.action == 0)
         {
-            Debug.Log("Enemy will deal 5 dmg");
+            enemysActionText.text = "Enemy will deal 5 dmg";
         }
         else if (Enemy.action == 1)
         {
-            Debug.Log("Enemy will add 5 block");
+            enemysActionText.text = "Enemy will add 5 defence";
         }
         else if (Enemy.action == 2)
         {
-            Debug.Log("Enemy will deal 3 dmg and add 2 block");
+            enemysActionText.text = "Enemy will deal 3 dmg and add 2 defence";
         }
         else if (Enemy.action == 3)
         {
-            Debug.Log("Enemy will add Dazed to your deck");
+            enemysActionText.text = "Enemy will add Dazed to your deck";
         }
         else
         {
-            Debug.Log("Enemy is confused and will not do anything");
+            enemysActionText.text = "Enemy is confused and will not do anything";
         }
 
         //  FOR DEMO MAP 1
@@ -157,11 +160,11 @@ public class Dealer : MonoBehaviour
             }
             else if (Enemy.action == 1)
             {
-                Debug.Log("Enemy will add 5 block");
+                Debug.Log("Enemy will add 5 defence");
             }
             else if (Enemy.action == 2)
             {
-                Debug.Log("Enemy will deal 3 dmg and add 2 block");
+                Debug.Log("Enemy will deal 3 dmg and add 2 defence");
             }
             else if (Enemy.action == 3)
             {
@@ -180,11 +183,11 @@ public class Dealer : MonoBehaviour
             }
             else if (Enemy.action == 1)
             {
-                Debug.Log("Enemy will add 7 block");
+                Debug.Log("Enemy will add 7 defence");
             }
             else if (Enemy.action == 2)
             {
-                Debug.Log("Enemy will add 5 block");
+                Debug.Log("Enemy will add 5 defence");
             }
             else if (Enemy.action == 3)
             {

@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour
     public static readonly int hpCap = 4;
 
     public static int hp = 4;
-    public static int block = 0;
+    public static int defence = 0;
     public static int action;
 
-    public static int addBlock;
+    public static int addDefence;
     public static int attack;
     public static bool isStuned = false;
     public static bool isEnraged = false;

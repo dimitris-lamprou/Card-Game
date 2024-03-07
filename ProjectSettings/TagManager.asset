@@ -20,6 +20,7 @@ TagManager:
   - Sign Post
   - Stamina Text
   - Attack Text
+  - Action Text
   layers:
   - Default
   - TransparentFX

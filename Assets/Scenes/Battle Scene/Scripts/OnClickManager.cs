@@ -6,12 +6,12 @@ public class OnClickManager : MonoBehaviour
 {
     [Header("Hero")]
     [SerializeField] private TMP_Text herosHpText;
-    [SerializeField] private TMP_Text herosBlockText;
+    [SerializeField] private TMP_Text herosDefenceText;
     [SerializeField] private TMP_Text staminaText;
     [SerializeField] private TMP_Text attackText;
     [Space]
     [Header("Enemy")]
-    [SerializeField] private TMP_Text enemysBlockText;
+    [SerializeField] private TMP_Text enemysDefenceText;
     [SerializeField] private TMP_Text enemysHpText;
     [Space]
     [Header("Labels")]
@@ -27,19 +27,19 @@ public class OnClickManager : MonoBehaviour
     {
         //Heros attack
 
-        if (Enemy.block > 0)
+        if (Enemy.defence > 0)
         {
-            if (Enemy.block >= Hero.attack)
+            if (Enemy.defence >= Hero.attack)
             {
-                Enemy.block -= Hero.attack;
-                enemysBlockText.text = Enemy.block.ToString();
+                Enemy.defence -= Hero.attack;
+                enemysDefenceText.text = Enemy.defence.ToString();
             }
             else
             {
-                int remainingDamage = Hero.attack - Enemy.block;
-                Enemy.block = 0;
+                int remainingDamage = Hero.attack - Enemy.defence;
+                Enemy.defence = 0;
                 Enemy.hp -= remainingDamage;
-                enemysBlockText.text = "0";
+                enemysDefenceText.text = "0";
                 enemysHpText.text = Enemy.hp.ToString();
             }
         }
@@ -67,17 +67,17 @@ public class OnClickManager : MonoBehaviour
         }
         else
         {
-            EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
+            EnemysAI.EnemyA(discard, herosDefenceText, herosHpText, enemysDefenceText);
         }
 
         //  FOR DEMO MAP 1 without stun card
         /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
-            EnemysAI.EnemyA(discard, herosBlockText, herosHpText, enemysBlockText);
+            EnemysAI.EnemyA(discard, herosDefenceText, herosHpText, enemysDefenceText);
         }
         else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
         {
-            EnemysAI.EnemyB(discard, herosBlockText, herosHpText, enemysBlockText, enemysHpText);
+            EnemysAI.EnemyB(discard, herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
         }*/
 
         //Deal Cards
@@ -120,17 +120,17 @@ public class OnClickManager : MonoBehaviour
             Dealer.Deal(deck);
         }
 
-        Hero.block = 0;
+        Hero.defence = 0;
         Hero.stamina = 3;
         Enemy.action = Random.Range(0, 5);
         Enemy.isStuned = false;
         Enemy.isEnraged = false;
-        Enemy.block = 0;
+        Enemy.defence = 0;
         Dealer.WhatEnemyWillDo();
 
-        herosBlockText.text = Hero.block.ToString();
+        herosDefenceText.text = Hero.defence.ToString();
         staminaText.text = Hero.stamina.ToString();
-        enemysBlockText.text = "0";
+        enemysDefenceText.text = "0";
         discardText.text = discard.Count.ToString();
     }
 }

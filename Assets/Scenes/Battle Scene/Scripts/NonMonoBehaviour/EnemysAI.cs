@@ -3,7 +3,7 @@ using TMPro;
 
 public static class EnemysAI
 {
-    public static void EnemyA(List<Card> discard, TMP_Text herosBlockText, TMP_Text herosHpText, TMP_Text enemysBlockText)
+    public static void EnemyA(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText)
     {
         if (Enemy.action == 0) //deal dmg
         {
@@ -12,23 +12,23 @@ public static class EnemysAI
             {
                 Enemy.attack++;
             }
-            EnemyDealDamage(herosBlockText, herosHpText);
+            EnemyDealDamage(herosDefenceText, herosHpText);
         }
-        else if (Enemy.action == 1) //add block
+        else if (Enemy.action == 1) //add defence
         {
-            Enemy.addBlock = 5;
-            EnemyAddBlock(enemysBlockText);
+            Enemy.addDefence = 5;
+            EnemyAddDefence(enemysDefenceText);
         }
-        else if (Enemy.action == 2) //deal dmg and add block
+        else if (Enemy.action == 2) //deal dmg and add defence
         {
             Enemy.attack = 3;
             if (Enemy.isEnraged)
             {
                 Enemy.attack++;
             }
-            Enemy.addBlock = 2;
-            EnemyDealDamage(herosBlockText, herosHpText);
-            EnemyAddBlock(enemysBlockText);
+            Enemy.addDefence = 2;
+            EnemyDealDamage(herosDefenceText, herosHpText);
+            EnemyAddDefence(enemysDefenceText);
         }
         else if (Enemy.action == 3) // add dazed to heros deck
         {
@@ -38,23 +38,23 @@ public static class EnemysAI
                                     // if action = 4 dont do anything || Confused
     }
 
-    public static void EnemyB(List<Card> discard, TMP_Text herosBlockText, TMP_Text herosHpText, TMP_Text enemysBlockText, 
+    public static void EnemyB(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText, 
         TMP_Text enemysHpText)
     {
         if (Enemy.action == 0) //deal dmg
         {
             Enemy.attack = 3;
-            EnemyDealDamage(herosBlockText, herosHpText);
+            EnemyDealDamage(herosDefenceText, herosHpText);
         }
-        else if (Enemy.action == 1) //add block
+        else if (Enemy.action == 1) //add defence
         {
-            Enemy.addBlock = 7;
-            EnemyAddBlock(enemysBlockText);
+            Enemy.addDefence = 7;
+            EnemyAddDefence(enemysDefenceText);
         }
-        else if (Enemy.action == 2) //add block
+        else if (Enemy.action == 2) //add defence
         {
-            Enemy.addBlock = 5;
-            EnemyAddBlock(enemysBlockText);
+            Enemy.addDefence = 5;
+            EnemyAddDefence(enemysDefenceText);
         }
         else if (Enemy.action == 3) //heal
         {
@@ -72,21 +72,21 @@ public static class EnemysAI
                                     // if action = 4 dont do anything || Confused
     }
 
-    private static void EnemyDealDamage(TMP_Text herosBlockText, TMP_Text herosHpText)
+    private static void EnemyDealDamage(TMP_Text herosDefenceText, TMP_Text herosHpText)
     {
-        if (Hero.block > 0)
+        if (Hero.defence > 0)
         {
-            if (Hero.block >= Enemy.attack)
+            if (Hero.defence >= Enemy.attack)
             {
-                Hero.block -= Enemy.attack;
-                herosBlockText.text = Hero.block.ToString();
+                Hero.defence -= Enemy.attack;
+                herosDefenceText.text = Hero.defence.ToString();
             }
             else
             {
-                int remainingDamage = Enemy.attack - Hero.block;
-                Hero.block = 0;
+                int remainingDamage = Enemy.attack - Hero.defence;
+                Hero.defence = 0;
                 Hero.hp -= remainingDamage;
-                herosBlockText.text = "0";
+                herosDefenceText.text = "0";
                 herosHpText.text = Hero.hp.ToString();
             }
         }
@@ -97,9 +97,9 @@ public static class EnemysAI
         }
     }
 
-    private static void EnemyAddBlock(TMP_Text enemysBlockText)
+    private static void EnemyAddDefence(TMP_Text enemysDefenceText)
     {
-        Enemy.block += Enemy.addBlock;
-        enemysBlockText.text = Enemy.block.ToString();
+        Enemy.defence += Enemy.addDefence;
+        enemysDefenceText.text = Enemy.defence.ToString();
     }
 }

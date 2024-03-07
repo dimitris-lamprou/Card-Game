@@ -8,9 +8,9 @@ public class CardPrefabOnClick : MonoBehaviour
     [SerializeField] private TMP_Text title;
 
     private TMP_Text enemysHpText;
-    private TMP_Text enemysBlockText;
+    private TMP_Text enemysDefenceText;
     private TMP_Text herosHpText;
-    private TMP_Text herosBlockText;
+    private TMP_Text herosDefenceText;
     private TMP_Text discardText;
     private TMP_Text graveyardText;
     private TMP_Text staminaText;
@@ -21,8 +21,8 @@ public class CardPrefabOnClick : MonoBehaviour
     private void Start()
     {
         enemysHpText = GameObject.FindWithTag("Enemys Health Text").GetComponent<TMP_Text>();
-        enemysBlockText = GameObject.FindWithTag("Enemys Block Text").GetComponent<TMP_Text>();
-        herosBlockText = GameObject.FindWithTag("Heros Block Text").GetComponent<TMP_Text>();
+        enemysDefenceText = GameObject.FindWithTag("Enemys Defence Text").GetComponent<TMP_Text>();
+        herosDefenceText = GameObject.FindWithTag("Heros Defence Text").GetComponent<TMP_Text>();
         herosHpText = GameObject.FindWithTag("Heros Hp").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
@@ -58,19 +58,19 @@ public class CardPrefabOnClick : MonoBehaviour
             }
 
             // FOR INSTANT ATTACK
-            /*if (Enemy.block > 0)
+            /*if (Enemy.defence > 0)
             {
-                if (Enemy.block >= Hero.attack)
+                if (Enemy.defence >= Hero.attack)
                 {
-                    Enemy.block -= Hero.attack;
-                    enemysBlockText.text = Enemy.block.ToString();
+                    Enemy.defence -= Hero.attack;
+                    enemysDefenceText.text = Enemy.defence.ToString();
                 }
                 else
                 {
-                    int remainingDamage = Hero.attack - Enemy.block;
-                    Enemy.block = 0;
+                    int remainingDamage = Hero.attack - Enemy.defence;
+                    Enemy.defence = 0;
                     Enemy.hp -= remainingDamage;
-                    enemysBlockText.text = "0";
+                    enemysDefenceText.text = "0";
                     enemysHpText.text = Enemy.hp.ToString();
                 }
             }
@@ -107,13 +107,13 @@ public class CardPrefabOnClick : MonoBehaviour
             {
                 if (effectSplited[i].Equals("Defence"))
                 {
-                    Hero.addBlock = int.Parse(effectSplited[i - 1]);
+                    Hero.addDefence = int.Parse(effectSplited[i - 1]);
                     break;
                 }
             }
 
-            Hero.block += Hero.addBlock;
-            herosBlockText.text = Hero.block.ToString();
+            Hero.defence += Hero.addDefence;
+            herosDefenceText.text = Hero.defence.ToString();
         }
         if (effect.Contains("Heal"))
         {
@@ -143,20 +143,20 @@ public class CardPrefabOnClick : MonoBehaviour
         }
         if (effect.Contains("Reckless"))
         {
-            if (Hero.block > 0)
+            if (Hero.defence > 0)
             {
-                Hero.block--;
-                herosBlockText.text = Hero.block.ToString();
+                Hero.defence--;
+                herosDefenceText.text = Hero.defence.ToString();
             }
         }
         if (effect.Contains("Enrage"))
         {
             Enemy.isEnraged = true;
             Debug.Log("Enemy is enraged");
-            if (Enemy.block > 0)
+            if (Enemy.defence > 0)
             {
-                Enemy.block--;
-                enemysBlockText.text = Enemy.block.ToString();
+                Enemy.defence--;
+                enemysDefenceText.text = Enemy.defence.ToString();
             }
         }
         if (effect.Contains("Drain")) //only for test reasons
