@@ -19,6 +19,7 @@ TagManager:
   - Enemy
   - Sign Post
   - Stamina Text
+  - Attack Text
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class OnClickManager : MonoBehaviour
     [SerializeField] private TMP_Text herosHpText;
     [SerializeField] private TMP_Text herosBlockText;
     [SerializeField] private TMP_Text staminaText;
+    [SerializeField] private TMP_Text attackText;
     [Space]
     [Header("Enemy")]
     [SerializeField] private TMP_Text enemysBlockText;
@@ -15,10 +16,6 @@ public class OnClickManager : MonoBehaviour
     [Space]
     [Header("Labels")]
     [SerializeField] private TMP_Text discardText;
-    [Space]
-    [Header("For test")]
-    [SerializeField] private TMP_Text graveyardText;
-
 
     private readonly List<Card> deck = Dealer.deck;
     private readonly List<Card> discard = Dealer.discard;
@@ -28,11 +25,39 @@ public class OnClickManager : MonoBehaviour
 
     public void EndTurn()
     {
-        Enemy.block = 0;
-        Hero.stamina = 3;
+        //Heros attack
 
-        enemysBlockText.text = "0";
-        staminaText.text = Hero.stamina.ToString();
+        if (Enemy.block > 0)
+        {
+            if (Enemy.block >= Hero.attack)
+            {
+                Enemy.block -= Hero.attack;
+                enemysBlockText.text = Enemy.block.ToString();
+            }
+            else
+            {
+                int remainingDamage = Hero.attack - Enemy.block;
+                Enemy.block = 0;
+                Enemy.hp -= remainingDamage;
+                enemysBlockText.text = "0";
+                enemysHpText.text = Enemy.hp.ToString();
+            }
+        }
+        else
+        {
+            Enemy.hp -= Hero.attack;
+            enemysHpText.text = Enemy.hp.ToString();
+        }
+
+        if (Enemy.hp <= 0) //if hero destroyed enemy
+        {
+            //TODO MUST BE A FUNCTION OR CLASS
+            //Store Exp
+            Debug.Log("Enemy died");
+        }
+
+        Hero.attack = 0;
+        attackText.text = Hero.attack.ToString();
 
         //Enemys action
 
@@ -95,12 +120,17 @@ public class OnClickManager : MonoBehaviour
             Dealer.Deal(deck);
         }
 
-        herosBlockText.text = "0";
         Hero.block = 0;
+        Hero.stamina = 3;
         Enemy.action = Random.Range(0, 5);
-        Dealer.WhatEnemyWillDo();
-        discardText.text = discard.Count.ToString();
         Enemy.isStuned = false;
         Enemy.isEnraged = false;
+        Enemy.block = 0;
+        Dealer.WhatEnemyWillDo();
+
+        herosBlockText.text = Hero.block.ToString();
+        staminaText.text = Hero.stamina.ToString();
+        enemysBlockText.text = "0";
+        discardText.text = discard.Count.ToString();
     }
 }

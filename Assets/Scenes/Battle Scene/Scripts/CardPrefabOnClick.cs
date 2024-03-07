@@ -1,6 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardPrefabOnClick : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class CardPrefabOnClick : MonoBehaviour
     private TMP_Text discardText;
     private TMP_Text graveyardText;
     private TMP_Text staminaText;
+    private TMP_Text attackText;
 
     private string effect;
 
@@ -26,6 +27,7 @@ public class CardPrefabOnClick : MonoBehaviour
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
         staminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
+        attackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
 
         effect = card.name;
     }
@@ -50,11 +52,13 @@ public class CardPrefabOnClick : MonoBehaviour
                 if (effectSplited[i].Equals("Attack"))
                 {
                     Hero.attack = int.Parse(effectSplited[i - 1]);
+                    attackText.text = Hero.attack.ToString();
                     break;
                 }
             }
 
-            if (Enemy.block > 0)
+            // FOR INSTANT ATTACK
+            /*if (Enemy.block > 0)
             {
                 if (Enemy.block >= Hero.attack)
                 {
@@ -81,7 +85,7 @@ public class CardPrefabOnClick : MonoBehaviour
                 //TODO MUST BE A FUNCTION OR CLASS
                 //Store Exp
                 Debug.Log("Enemy died");
-            }
+            }*/
         }
         else if (effect.Contains("Experience")) //works if card gives xp only
         {
@@ -175,6 +179,17 @@ public class CardPrefabOnClick : MonoBehaviour
         discardText.text = Dealer.discard.Count.ToString();
 
         Destroy(card);
+
+        if (Hero.stamina == 0)
+        {
+            Debug.Log("Stamina = 0");
+            var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
+            foreach (var card in listOfUnusedCards)
+            {
+                card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
+                card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+            }
+        }
     }
 
     public void Sacrifice()
