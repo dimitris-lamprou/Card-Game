@@ -52,6 +52,12 @@ public class Dealer : MonoBehaviour
         for (int i = 0; i < limit; i++)
         {
             lastCard = deck.Count - 1;
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Attack", "<sprite name=Attack>");
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Defence", "<sprite name=Defence>");
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Heal", "<sprite name=Heal>");
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Enrage", "<sprite name=Enrage>");
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Stun", "<sprite name=Stun>");
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Reckless", "<sprite name=Reckless>");
 
             GameObject card = Instantiate(cardPrefab);
             card.transform.parent = canvas.transform;

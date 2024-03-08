@@ -2142,7 +2142,7 @@ GameObject:
   - component: {fileID: 828024576}
   - component: {fileID: 828024575}
   m_Layer: 5
-  m_Name: Block (Image)
+  m_Name: Defence (Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2462,8 +2462,8 @@ GameObject:
   - component: {fileID: 982614033}
   - component: {fileID: 982614032}
   m_Layer: 5
-  m_Name: Block (Text)
-  m_TagString: Heros Block Text
+  m_Name: Defence (Text)
+  m_TagString: Heros Defence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3297,8 +3297,8 @@ GameObject:
   - component: {fileID: 1365880843}
   - component: {fileID: 1365880842}
   m_Layer: 5
-  m_Name: Block (Text)
-  m_TagString: Enemys Block Text
+  m_Name: Defence (Text)
+  m_TagString: Enemys Defence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3490,10 +3490,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   herosHpText: {fileID: 673439763}
-  herosDefenceText: {fileID: 0}
+  herosDefenceText: {fileID: 982614032}
   staminaText: {fileID: 1063561770}
   attackText: {fileID: 1065269224}
-  enemysDefenceText: {fileID: 0}
+  enemysDefenceText: {fileID: 1365880842}
   enemysHpText: {fileID: 294227907}
   discardText: {fileID: 823218692}
 --- !u!1 &1373354477

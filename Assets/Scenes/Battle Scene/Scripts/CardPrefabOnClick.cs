@@ -21,8 +21,8 @@ public class CardPrefabOnClick : MonoBehaviour
     private void Start()
     {
         enemysHpText = GameObject.FindWithTag("Enemys Health Text").GetComponent<TMP_Text>();
-        enemysDefenceText = GameObject.FindWithTag("Enemys Defence Text").GetComponent<TMP_Text>();
-        herosDefenceText = GameObject.FindWithTag("Heros Defence Text").GetComponent<TMP_Text>();
+        enemysDefenceText = GameObject.FindWithTag("Enemys Defence").GetComponent<TMP_Text>();
+        herosDefenceText = GameObject.FindWithTag("Heros Defence").GetComponent<TMP_Text>();
         herosHpText = GameObject.FindWithTag("Heros Hp").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();

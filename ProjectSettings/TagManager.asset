@@ -4,11 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Heros Block Bar
-  - Heros Block Text
-  - Enemys Block Bar
-  - Enemys Block Text
-  - Enemys Health Bar
   - Enemys Health Text
   - Discard Text
   - Graveyard Text
@@ -21,6 +16,8 @@ TagManager:
   - Stamina Text
   - Attack Text
   - Action Text
+  - Heros Defence
+  - Enemys Defence
   layers:
   - Default
   - TransparentFX
