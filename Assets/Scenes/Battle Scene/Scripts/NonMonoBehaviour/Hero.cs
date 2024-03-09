@@ -1,7 +1,7 @@
 public static class Hero
 {
-    public static int hp = 10;
-    public const int hpCap = 10;
+    public static int hp = 100;
+    public const int hpCap = 100;
     public static int defence = 0;
     public static int exp = 0;
     public static int handLimit = 5;
