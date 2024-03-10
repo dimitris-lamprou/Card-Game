@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,9 @@ public class CardPrefabOnClick : MonoBehaviour
     private TMP_Text graveyardText;
     private TMP_Text staminaText;
     private TMP_Text attackText;
+    private TMP_Text enemysThoughtText;
+    private TMP_Text herosStatusEffectsText;
+    private TMP_Text enemysStatusEffectsText;
 
     private string effect;
 
@@ -28,6 +32,9 @@ public class CardPrefabOnClick : MonoBehaviour
         graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
         staminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
         attackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
+        enemysThoughtText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
+        herosStatusEffectsText = GameObject.FindWithTag("Heros Status Effects Text").GetComponent<TMP_Text>();
+        enemysStatusEffectsText = GameObject.FindWithTag("Enemys Status Effects Text").GetComponent<TMP_Text>();
 
         effect = card.name;
     }
@@ -51,7 +58,7 @@ public class CardPrefabOnClick : MonoBehaviour
             {
                 if (effectSplited[i].Equals("Attack"))
                 {
-                    Hero.attack = int.Parse(effectSplited[i - 1]);
+                    Hero.attack += int.Parse(effectSplited[i - 1]);
                     attackText.text = Hero.attack.ToString();
                     break;
                 }
@@ -140,6 +147,8 @@ public class CardPrefabOnClick : MonoBehaviour
         if (effect.Contains("Stun"))
         {
             Enemy.isStuned = true;
+            enemysStatusEffectsText.text += "<sprite name=Stun>";
+            enemysThoughtText.text = "";
         }
         if (effect.Contains("Reckless"))
         {
@@ -148,16 +157,18 @@ public class CardPrefabOnClick : MonoBehaviour
                 Hero.defence--;
                 herosDefenceText.text = Hero.defence.ToString();
             }
+            herosStatusEffectsText.text += "<sprite name=Reckless>";
         }
         if (effect.Contains("Enrage"))
         {
             Enemy.isEnraged = true;
-            Debug.Log("Enemy is enraged");
+            //Debug.Log("Enemy is enraged");
             if (Enemy.defence > 0)
             {
                 Enemy.defence--;
                 enemysDefenceText.text = Enemy.defence.ToString();
             }
+            enemysStatusEffectsText.text += "<sprite name=Enrage>";
         }
         if (effect.Contains("Drain")) //only for test reasons
         {
@@ -182,12 +193,15 @@ public class CardPrefabOnClick : MonoBehaviour
 
         if (Hero.stamina == 0)
         {
-            Debug.Log("Stamina = 0");
+            //Debug.Log("Stamina = 0");
             var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
             foreach (var card in listOfUnusedCards)
             {
                 card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
-                card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+                if (card.transform.Find("Sacrifice (Button)") != null)
+                {
+                    card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+                }
             }
         }
     }
@@ -198,7 +212,7 @@ public class CardPrefabOnClick : MonoBehaviour
 
         if (Hero.handLimit == 1)
         {
-            Debug.Log("You cant sacrifice another card");
+            //Debug.Log("You cant sacrifice another card");
             return;
         }
 

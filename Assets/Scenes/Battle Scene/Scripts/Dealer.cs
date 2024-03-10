@@ -27,7 +27,7 @@ public class Dealer : MonoBehaviour
         canvas = GameObject.FindWithTag("Canvas").GetComponent<Canvas>();
         deckCountText = GameObject.FindWithTag("Deck Text").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
-        enemysActionText = GameObject.FindWithTag("Action Text").GetComponent<TMP_Text>();
+        enemysActionText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
 
         Init(deck);
         Shuffle(deck);
@@ -52,17 +52,16 @@ public class Dealer : MonoBehaviour
         for (int i = 0; i < limit; i++)
         {
             lastCard = deck.Count - 1;
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Attack", "<sprite name=Attack>");
+            /*deck[lastCard].Description = deck[lastCard].Description.Replace("Attack", "<sprite name=Attack>");
             deck[lastCard].Description = deck[lastCard].Description.Replace("Defence", "<sprite name=Defence>");
             deck[lastCard].Description = deck[lastCard].Description.Replace("Heal", "<sprite name=Heal>");
             deck[lastCard].Description = deck[lastCard].Description.Replace("Enrage", "<sprite name=Enrage>");
             deck[lastCard].Description = deck[lastCard].Description.Replace("Stun", "<sprite name=Stun>");
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Reckless", "<sprite name=Reckless>");
+            deck[lastCard].Description = deck[lastCard].Description.Replace("Reckless", "<sprite name=Reckless>");*/
 
             GameObject card = Instantiate(cardPrefab);
             card.transform.parent = canvas.transform;
             card.transform.localPosition = new Vector3(-1602 + (216 * (i + 1)), -1030, 0);
-
             card.transform.Find("Play Card (Button)/Title (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Title;
             card.transform.Find("Play Card (Button)/Description (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Description;
             card.transform.Find("Sacrifice (Button)/Experience (Text)").GetComponent<TMP_Text>().text = 
@@ -138,15 +137,15 @@ public class Dealer : MonoBehaviour
     {
         if (Enemy.action == 0)
         {
-            enemysActionText.text = "Enemy will deal 5 dmg";
+            enemysActionText.text = "+5 <sprite name=Attack>";
         }
         else if (Enemy.action == 1)
         {
-            enemysActionText.text = "Enemy will add 5 defence";
+            enemysActionText.text = "+5 <sprite name=Defence>";
         }
         else if (Enemy.action == 2)
         {
-            enemysActionText.text = "Enemy will deal 3 dmg and add 2 defence";
+            enemysActionText.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
         }
         else if (Enemy.action == 3)
         {

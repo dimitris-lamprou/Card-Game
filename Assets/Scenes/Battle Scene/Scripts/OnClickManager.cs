@@ -9,6 +9,8 @@ public class OnClickManager : MonoBehaviour
     [SerializeField] private TMP_Text herosDefenceText;
     [SerializeField] private TMP_Text staminaText;
     [SerializeField] private TMP_Text attackText;
+    [SerializeField] private TMP_Text herosStatusEffectsText;
+    [SerializeField] private TMP_Text enemysStatusEffectsText;
     [Space]
     [Header("Enemy")]
     [SerializeField] private TMP_Text enemysDefenceText;
@@ -63,7 +65,7 @@ public class OnClickManager : MonoBehaviour
 
         if (Enemy.isStuned)
         {
-            Debug.Log("Enemy is stuned");
+            //Debug.Log("Enemy is stuned");
         }
         else
         {
@@ -132,5 +134,7 @@ public class OnClickManager : MonoBehaviour
         staminaText.text = Hero.stamina.ToString();
         enemysDefenceText.text = "0";
         discardText.text = discard.Count.ToString();
+        herosStatusEffectsText.text = "";
+        enemysStatusEffectsText.text = "";
     }
 }

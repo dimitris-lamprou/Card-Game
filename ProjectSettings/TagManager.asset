@@ -18,6 +18,12 @@ TagManager:
   - Action Text
   - Heros Defence
   - Enemys Defence
+  - Enemys Block Bar
+  - Heros Block Bar
+  - Enemys Health Bar
+  - Enemys Thought Text
+  - Heros Status Effects Text
+  - Enemys Status Effects Text
   layers:
   - Default
   - TransparentFX
