@@ -61,7 +61,7 @@ public class Dealer : MonoBehaviour
 
             GameObject card = Instantiate(cardPrefab);
             card.transform.parent = canvas.transform;
-            card.transform.localPosition = new Vector3(-1602 + (216 * (i + 1)), -1030, 0);
+            card.transform.localPosition = new Vector3(-1505 + (180 * (i + 1)), -1030, 0);
             card.transform.Find("Play Card (Button)/Title (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Title;
             card.transform.Find("Play Card (Button)/Description (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Description;
             card.transform.Find("Sacrifice (Button)/Experience (Text)").GetComponent<TMP_Text>().text = 
