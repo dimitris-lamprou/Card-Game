@@ -200,8 +200,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Strike
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1759fc38d93054140ad71ae02896edde, type: 2}
-  m_sharedMaterial: {fileID: 1722689671670666083, guid: 1759fc38d93054140ad71ae02896edde, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 05e5da6ed686aa94ab3764046a55c4cd, type: 2}
+  m_sharedMaterial: {fileID: 9141509656254307522, guid: 05e5da6ed686aa94ab3764046a55c4cd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_fontSizeMax: 0
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -334,8 +334,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: +1 Attack
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1759fc38d93054140ad71ae02896edde, type: 2}
-  m_sharedMaterial: {fileID: 1722689671670666083, guid: 1759fc38d93054140ad71ae02896edde, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 05e5da6ed686aa94ab3764046a55c4cd, type: 2}
+  m_sharedMaterial: {fileID: 9141509656254307522, guid: 05e5da6ed686aa94ab3764046a55c4cd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -664,8 +664,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1759fc38d93054140ad71ae02896edde, type: 2}
-  m_sharedMaterial: {fileID: 1722689671670666083, guid: 1759fc38d93054140ad71ae02896edde, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 05e5da6ed686aa94ab3764046a55c4cd, type: 2}
+  m_sharedMaterial: {fileID: 9141509656254307522, guid: 05e5da6ed686aa94ab3764046a55c4cd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
