@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OnClickManager : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class OnClickManager : MonoBehaviour
             //TODO MUST BE A FUNCTION OR CLASS
             //Store Exp
             Debug.Log("Enemy died");
+            SceneManager.LoadScene(2);
         }
 
         Hero.attack = 0;
