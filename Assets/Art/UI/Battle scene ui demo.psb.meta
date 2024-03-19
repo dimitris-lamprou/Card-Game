@@ -94,27 +94,6 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: END TURN
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 314
-      y: 365
-      width: 132
-      height: 28
-    spriteID: b88af19563d151a44a3391e4f11dd5fc
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 314, y: 365}
-    spritePosition: {x: 1720, y: 119}
   - name: Ellipse 2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -261,8 +240,8 @@ ScriptedImporter:
     layerID: 101
     mosaicPosition: {x: 314, y: 365}
     flatten: 0
-    isImported: 1
-    isVisible: 1
+    isImported: 0
+    isVisible: 0
   - name: Shape 2
     spriteName: 
     isGroup: 0
