@@ -8,14 +8,15 @@ public class OnClickManager : MonoBehaviour
     [Header("Hero")]
     [SerializeField] private TMP_Text herosHpText;
     [SerializeField] private TMP_Text herosDefenceText;
-    [SerializeField] private TMP_Text staminaText;
-    [SerializeField] private TMP_Text attackText;
+    [SerializeField] private TMP_Text herosAttackText;
     [SerializeField] private TMP_Text herosStatusEffectsText;
-    [SerializeField] private TMP_Text enemysStatusEffectsText;
+    [SerializeField] private TMP_Text herosStaminaText;
     [Space]
     [Header("Enemy")]
-    [SerializeField] private TMP_Text enemysDefenceText;
     [SerializeField] private TMP_Text enemysHpText;
+    [SerializeField] private TMP_Text enemysDefenceText;
+    [SerializeField] private TMP_Text enemysAttackText;
+    [SerializeField] private TMP_Text enemysStatusEffectsText;
     [Space]
     [Header("Labels")]
     [SerializeField] private TMP_Text discardText;
@@ -57,11 +58,26 @@ public class OnClickManager : MonoBehaviour
             //TODO MUST BE A FUNCTION OR CLASS
             //Store Exp
             Debug.Log("Enemy died");
-            SceneManager.LoadScene(2);
+            if (MapManager.isFromMap)
+            {
+                SceneManager.LoadScene(2);
+            }
         }
 
         Hero.attack = 0;
-        attackText.text = Hero.attack.ToString();
+        herosAttackText.text = Hero.attack.ToString();
+
+        //Enemy Reset def
+        /*if (Enemy.attack > 0)
+        {
+            Enemy.attack = 0;
+            enemysAttackText.text = Enemy.attack.ToString();
+        }*/
+        if (Enemy.defence > 0)
+        {
+            Enemy.defence = 0;
+            enemysDefenceText.text = Enemy.defence.ToString();
+        }
 
         //Enemys action
 
@@ -69,9 +85,18 @@ public class OnClickManager : MonoBehaviour
         {
             //Debug.Log("Enemy is stuned");
         }
+        else if (MapManager.stageIndex == 2)
+        {
+            EnemysAI.EnemyB(discard, herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
+        }
         else
         {
             EnemysAI.EnemyA(discard, herosDefenceText, herosHpText, enemysDefenceText);
+        }
+
+        if (Enemy.attack > 0)
+        {
+            EnemysAI.EnemyDealDamage(herosDefenceText, herosHpText);
         }
 
         //  FOR DEMO MAP 1 without stun card
@@ -124,19 +149,22 @@ public class OnClickManager : MonoBehaviour
             Dealer.Deal(deck);
         }
 
+        //Reset
         Hero.defence = 0;
         Hero.stamina = 3;
         Enemy.action = Random.Range(0, 5);
         Enemy.isStuned = false;
         Enemy.isEnraged = false;
-        Enemy.defence = 0;
+        Enemy.attack = 0;
+        //Enemy.defence = 0;
         Dealer.WhatEnemyWillDo();
 
         herosDefenceText.text = Hero.defence.ToString();
-        staminaText.text = Hero.stamina.ToString();
-        enemysDefenceText.text = "0";
-        discardText.text = discard.Count.ToString();
         herosStatusEffectsText.text = "";
+        herosStaminaText.text = Hero.stamina.ToString();
+        enemysDefenceText.text = Enemy.defence.ToString();
         enemysStatusEffectsText.text = "";
+        enemysAttackText.text = Enemy.attack.ToString();
+        discardText.text = discard.Count.ToString();
     }
 }

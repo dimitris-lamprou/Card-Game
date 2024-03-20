@@ -8,17 +8,18 @@ public class CardPrefabOnClick : MonoBehaviour
     [SerializeField] private GameObject card;
     [SerializeField] private TMP_Text title;
 
+    private TMP_Text herosHpText;
+    private TMP_Text herosStatusEffectsText;
+    private TMP_Text herosDefenceText;
+    private TMP_Text herosStaminaText;
+    private TMP_Text herosAttackText;
     private TMP_Text enemysHpText;
     private TMP_Text enemysDefenceText;
-    private TMP_Text herosHpText;
-    private TMP_Text herosDefenceText;
+    private TMP_Text enemysThoughtText;
+    private TMP_Text enemysStatusEffectsText;
+    private TMP_Text enemysAttackText;
     private TMP_Text discardText;
     private TMP_Text graveyardText;
-    private TMP_Text staminaText;
-    private TMP_Text attackText;
-    private TMP_Text enemysThoughtText;
-    private TMP_Text herosStatusEffectsText;
-    private TMP_Text enemysStatusEffectsText;
 
     private string effect;
 
@@ -30,11 +31,12 @@ public class CardPrefabOnClick : MonoBehaviour
         herosHpText = GameObject.FindWithTag("Heros Hp").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
-        staminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
-        attackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
+        herosStaminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
+        herosAttackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
         enemysThoughtText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
         herosStatusEffectsText = GameObject.FindWithTag("Heros Status Effects Text").GetComponent<TMP_Text>();
         enemysStatusEffectsText = GameObject.FindWithTag("Enemys Status Effects Text").GetComponent<TMP_Text>();
+        enemysAttackText = GameObject.FindWithTag("Enemys Attack Text").GetComponent<TMP_Text>();
 
         effect = card.name;
     }
@@ -59,7 +61,7 @@ public class CardPrefabOnClick : MonoBehaviour
                 if (effectSplited[i].Equals("Attack"))
                 {
                     Hero.attack += int.Parse(effectSplited[i - 1]);
-                    attackText.text = Hero.attack.ToString();
+                    herosAttackText.text = Hero.attack.ToString();
                     break;
                 }
             }
@@ -162,12 +164,13 @@ public class CardPrefabOnClick : MonoBehaviour
         if (effect.Contains("Enrage"))
         {
             Enemy.isEnraged = true;
-            //Debug.Log("Enemy is enraged");
             if (Enemy.defence > 0)
             {
                 Enemy.defence--;
                 enemysDefenceText.text = Enemy.defence.ToString();
             }
+            Enemy.attack++;
+            enemysAttackText.text = Enemy.attack.ToString();
             enemysStatusEffectsText.text += "<sprite name=Enrage>";
         }
         if (effect.Contains("Drain")) //only for test reasons
@@ -186,14 +189,13 @@ public class CardPrefabOnClick : MonoBehaviour
 
         Hero.stamina--;
 
-        staminaText.text = Hero.stamina.ToString();
+        herosStaminaText.text = Hero.stamina.ToString();
         discardText.text = Dealer.discard.Count.ToString();
 
         Destroy(card);
 
         if (Hero.stamina == 0)
         {
-            //Debug.Log("Stamina = 0");
             var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
             foreach (var card in listOfUnusedCards)
             {

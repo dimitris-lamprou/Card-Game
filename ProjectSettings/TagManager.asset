@@ -24,6 +24,7 @@ TagManager:
   - Enemys Thought Text
   - Heros Status Effects Text
   - Enemys Status Effects Text
+  - Enemys Attack Text
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public static class Hero
 {
     public static int hp = 100;
@@ -11,4 +13,6 @@ public static class Hero
     public static int addDefence;
     public static int addExp;
     public static int heal;
+
+    public static List<Card> deck;
 }

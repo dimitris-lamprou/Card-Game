@@ -33,6 +33,10 @@ public class Dealer : MonoBehaviour
         Shuffle(deck);
         Deal(deck);
         WhatEnemyWillDo();
+
+        Enemy.defence = 0;
+        Enemy.hp = 4;
+        Hero.attack = 0;
     }
 
     public static void Deal(List<Card> deck)
@@ -52,12 +56,6 @@ public class Dealer : MonoBehaviour
         for (int i = 0; i < limit; i++)
         {
             lastCard = deck.Count - 1;
-            /*deck[lastCard].Description = deck[lastCard].Description.Replace("Attack", "<sprite name=Attack>");
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Defence", "<sprite name=Defence>");
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Heal", "<sprite name=Heal>");
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Enrage", "<sprite name=Enrage>");
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Stun", "<sprite name=Stun>");
-            deck[lastCard].Description = deck[lastCard].Description.Replace("Reckless", "<sprite name=Reckless>");*/
 
             GameObject card = Instantiate(cardPrefab);
             card.transform.parent = canvas.transform;
@@ -92,12 +90,23 @@ public class Dealer : MonoBehaviour
 
     public static void Init(List<Card> deck)
     {
+        bool deckLimit;
         db.Open();
         cmd.CommandText = "Select * from Card";
         var reader = cmd.ExecuteReader();
-        while (reader.Read())
+
+        if (MapManager.isFromMap)
         {
-            if (reader["title"].ToString().Equals("Strike") || reader["title"].ToString().Equals("Defence"))
+            deckLimit = deck.Count < 10;
+        }
+        else
+        {
+            deckLimit = true;
+        }
+
+        while (reader.Read() && deckLimit)  //for 10 cards i < 10 or reader.Read() for all cards
+        {
+            if (reader["title"].ToString().Equals("Strike") || reader["title"].ToString().Equals("Block"))
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -128,32 +137,63 @@ public class Dealer : MonoBehaviour
                 };
                 deck.Add(card);
             }
+            if (MapManager.isFromMap)
+            {
+                deckLimit = deck.Count < 10;
+            }
         }
         db.Close();
         reader.Close();
+        Hero.deck = deck;
     }
 
     public static void WhatEnemyWillDo()
     {
-        if (Enemy.action == 0)
+        if (MapManager.stageIndex == 2)
         {
-            enemysActionText.text = "+5 <sprite name=Attack>";
-        }
-        else if (Enemy.action == 1)
-        {
-            enemysActionText.text = "+5 <sprite name=Defence>";
-        }
-        else if (Enemy.action == 2)
-        {
-            enemysActionText.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
-        }
-        else if (Enemy.action == 3)
-        {
-            enemysActionText.text = "Enemy will add Dazed to your deck";
+            if (Enemy.action == 0)
+            {
+                enemysActionText.text = "+3 <sprite name=Attack>";
+            }
+            else if (Enemy.action == 1)
+            {
+                enemysActionText.text = "+7 <sprite name=Defence>";
+            }
+            else if (Enemy.action == 2)
+            {
+                enemysActionText.text = "+5 <sprite name=Defence>";
+            }
+            else if (Enemy.action == 3)
+            {
+                enemysActionText.text = "+3 <sprite name=Heal>";
+            }
+            else
+            {
+                enemysActionText.text = "Enemy is confused and will not do anything";
+            }
         }
         else
         {
-            enemysActionText.text = "Enemy is confused and will not do anything";
+            if (Enemy.action == 0)
+            {
+                enemysActionText.text = "+5 <sprite name=Attack>";
+            }
+            else if (Enemy.action == 1)
+            {
+                enemysActionText.text = "+5 <sprite name=Defence>";
+            }
+            else if (Enemy.action == 2)
+            {
+                enemysActionText.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
+            }
+            else if (Enemy.action == 3)
+            {
+                enemysActionText.text = "Enemy will add Dazed to your deck";
+            }
+            else
+            {
+                enemysActionText.text = "Enemy is confused and will not do anything";
+            }
         }
 
         //  FOR DEMO MAP 1

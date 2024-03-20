@@ -7,11 +7,7 @@ public static class EnemysAI
     {
         if (Enemy.action == 0) //deal dmg
         {
-            Enemy.attack = 5;
-            if (Enemy.isEnraged)
-            {
-                Enemy.attack++;
-            }
+            Enemy.attack += 5;
             EnemyDealDamage(herosDefenceText, herosHpText);
         }
         else if (Enemy.action == 1) //add defence
@@ -21,11 +17,7 @@ public static class EnemysAI
         }
         else if (Enemy.action == 2) //deal dmg and add defence
         {
-            Enemy.attack = 3;
-            if (Enemy.isEnraged)
-            {
-                Enemy.attack++;
-            }
+            Enemy.attack += 3;
             Enemy.addDefence = 2;
             EnemyDealDamage(herosDefenceText, herosHpText);
             EnemyAddDefence(enemysDefenceText);
@@ -43,7 +35,7 @@ public static class EnemysAI
     {
         if (Enemy.action == 0) //deal dmg
         {
-            Enemy.attack = 3;
+            Enemy.attack += 3;
             EnemyDealDamage(herosDefenceText, herosHpText);
         }
         else if (Enemy.action == 1) //add defence
@@ -72,7 +64,7 @@ public static class EnemysAI
                                     // if action = 4 dont do anything || Confused
     }
 
-    private static void EnemyDealDamage(TMP_Text herosDefenceText, TMP_Text herosHpText)
+    public static void EnemyDealDamage(TMP_Text herosDefenceText, TMP_Text herosHpText)
     {
         if (Hero.defence > 0)
         {
@@ -86,7 +78,7 @@ public static class EnemysAI
                 int remainingDamage = Enemy.attack - Hero.defence;
                 Hero.defence = 0;
                 Hero.hp -= remainingDamage;
-                herosDefenceText.text = "0";
+                herosDefenceText.text = Hero.defence.ToString();
                 herosHpText.text = Hero.hp.ToString();
             }
         }
@@ -95,6 +87,7 @@ public static class EnemysAI
             Hero.hp -= Enemy.attack;
             herosHpText.text = Hero.hp.ToString();
         }
+        Enemy.attack = 0;
     }
 
     private static void EnemyAddDefence(TMP_Text enemysDefenceText)
