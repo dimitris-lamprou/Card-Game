@@ -9,7 +9,14 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject.Find("Stage (Button) (" + stageIndex.ToString() + ")").GetComponent<Button>().interactable = true;
+        GameObject buttonGameObject = GameObject.Find("Stage (Button) (" + stageIndex.ToString() + ")");
+        buttonGameObject.GetComponent<Image>().enabled = true;
+        Button button = buttonGameObject.GetComponent<Button>();
+        button.enabled = true;
+        if (buttonGameObject.name.Contains("5"))
+        {
+            button.interactable = true;
+        }
     }
 
     public void GoToBattle()
