@@ -3123,6 +3123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0998ae5cb80494b85547e40cb2ab1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  herosHpText: {fileID: 673439763}
+  enemysImage: {fileID: 487010612}
 --- !u!114 &1370346464
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,9 +2,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Mono.Data.Sqlite;
+using UnityEngine.UI;
+using UnityEditor;
 
 public class Dealer : MonoBehaviour
 {
+    [SerializeField] private TMP_Text herosHpText;
+    [SerializeField] private SpriteRenderer enemysImage;
+
     private static TMP_Text enemysActionText;
 
     public static GameObject cardPrefab;
@@ -37,6 +42,12 @@ public class Dealer : MonoBehaviour
         Enemy.defence = 0;
         Enemy.hp = 4;
         Hero.attack = 0;
+
+        herosHpText.text = Hero.hp.ToString();
+        if (MapManager.isFromMap)
+        {
+            enemysImage.sprite = Resources.Load<Sprite>("Enemies/" + MapManager.stageIndex.ToString());
+        }
     }
 
     public static void Deal(List<Card> deck)
