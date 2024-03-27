@@ -8,6 +8,7 @@ using UnityEditor;
 public class Dealer : MonoBehaviour
 {
     [SerializeField] private TMP_Text herosHpText;
+    [SerializeField] private TMP_Text herosStaminaText;
     [SerializeField] private SpriteRenderer enemysImage;
 
     private static TMP_Text enemysActionText;
@@ -42,8 +43,11 @@ public class Dealer : MonoBehaviour
         Enemy.defence = 0;
         Enemy.hp = 4;
         Hero.attack = 0;
+        Hero.stamina = 3;
 
         herosHpText.text = Hero.hp.ToString();
+        herosStaminaText.text = Hero.stamina.ToString();
+
         if (MapManager.isFromMap)
         {
             enemysImage.sprite = Resources.Load<Sprite>("Enemies/" + MapManager.stageIndex.ToString());

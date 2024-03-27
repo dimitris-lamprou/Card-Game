@@ -29,9 +29,15 @@ public class OnClickManager : MonoBehaviour
 
     public void EndTurn()
     {
+        if (Hero.attack > 0)
+        {
+            Debug.Log("Hero has to Attack");
+            return;
+        }
+
         //Heros attack
 
-        if (Enemy.defence > 0)
+        /*if (Enemy.defence > 0)
         {
             if (Enemy.defence >= Hero.attack)
             {
@@ -65,9 +71,10 @@ public class OnClickManager : MonoBehaviour
         }
 
         Hero.attack = 0;
-        herosAttackText.text = Hero.attack.ToString();
+        herosAttackText.text = Hero.attack.ToString();*/
 
         //Enemy Reset def
+
         /*if (Enemy.attack > 0)
         {
             Enemy.attack = 0;
