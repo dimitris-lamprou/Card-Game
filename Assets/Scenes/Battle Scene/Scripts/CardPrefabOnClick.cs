@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -135,7 +134,7 @@ public class CardPrefabOnClick : MonoBehaviour
                 }
             }
 
-            for (int i = 1; i <= Hero.heal; i++)
+            for (int i = 1; i <= Hero.heal; i++) //dont overheal
             {
                 if (Hero.hp == Hero.hpCap)
                 {
@@ -178,7 +177,14 @@ public class CardPrefabOnClick : MonoBehaviour
             if (Enemy.isEnraged)
             {
                 Enemy.hp--;
-                Hero.hp++;
+                if (Hero.hp == Hero.hpCap)
+                {
+                    //dont do anything
+                }
+                else
+                {
+                    Hero.hp++;
+                }
                 enemysHpText.text = Enemy.hp.ToString();
                 herosHpText.text = Hero.hp.ToString();
             }
