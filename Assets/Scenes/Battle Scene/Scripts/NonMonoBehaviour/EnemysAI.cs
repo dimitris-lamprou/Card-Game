@@ -30,7 +30,7 @@ public static class EnemysAI
                                     // if action = 4 dont do anything || Confused
     }
 
-    public static void EnemyB(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText, 
+    public static void EnemyB(TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText, 
         TMP_Text enemysHpText)
     {
         if (Enemy.action == 0) //deal dmg

@@ -14,5 +14,5 @@ public static class Hero
     public static int addExp;
     public static int heal;
 
-    public static List<Card> deck;
+    public static List<Card> deck = new();
 }

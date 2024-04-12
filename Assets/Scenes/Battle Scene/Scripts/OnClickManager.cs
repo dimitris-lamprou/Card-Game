@@ -94,7 +94,7 @@ public class OnClickManager : MonoBehaviour
         }
         else if (MapManager.stageIndex == 2)
         {
-            EnemysAI.EnemyB(discard, herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
+            EnemysAI.EnemyB(herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
         }
         else
         {

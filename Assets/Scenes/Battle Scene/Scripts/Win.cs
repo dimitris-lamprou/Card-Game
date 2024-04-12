@@ -26,7 +26,7 @@ public class Win : MonoBehaviour
     private static readonly SqliteCommand cmd = DBContext.cmd;
 
     private readonly List<Card> tempDeck = new();
-    private List<Card> deck = new();
+    private readonly List<Card> deck = new();
 
     private void OnEnable()
     {
@@ -73,6 +73,9 @@ public class Win : MonoBehaviour
         string selectedCardsTitle = selectedCard.transform.Find("Title (Text)").GetComponent<TMP_Text>().text;
         Card newCard = deck.Find(card => card.Title == selectedCardsTitle);
         Hero.deck.Add(newCard);
+
+        Dealer.discard.Clear();
+        Dealer.hand.Clear();
 
         SceneManager.LoadScene(2);
     }

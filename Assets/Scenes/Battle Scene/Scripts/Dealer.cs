@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Mono.Data.Sqlite;
-using UnityEngine.UI;
-using UnityEditor;
 
 public class Dealer : MonoBehaviour
 {
@@ -26,6 +24,8 @@ public class Dealer : MonoBehaviour
     private static readonly SqliteConnection db = DBContext.db;
     private static readonly SqliteCommand cmd = DBContext.cmd;
 
+    private static bool isTheFirstTime = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +35,17 @@ public class Dealer : MonoBehaviour
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         enemysActionText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
 
-        Init(deck);
+        if (isTheFirstTime)
+        {
+            Init(deck);
+        }
+
+        deck.Clear();
+        deck.AddRange(Hero.deck);
+
+        deckCountText.text = deck.Count.ToString();
+        discardText.text = discard.Count.ToString();
+
         Shuffle(deck);
         Deal(deck);
         WhatEnemyWillDo();
@@ -159,7 +169,8 @@ public class Dealer : MonoBehaviour
         }
         db.Close();
         reader.Close();
-        Hero.deck = deck;
+        Hero.deck.AddRange(deck);
+        isTheFirstTime = false;
     }
 
     public static void WhatEnemyWillDo()
