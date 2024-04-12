@@ -7,6 +7,7 @@ public class DealDamage : MonoBehaviour
     [SerializeField] private TMP_Text enemysHpText;
     [SerializeField] private TMP_Text enemysDefenceText;
     [SerializeField] private TMP_Text herosAttackText;
+    [SerializeField] private GameObject newCards;
 
     private void OnMouseEnter()
     {
@@ -54,7 +55,8 @@ public class DealDamage : MonoBehaviour
                 Debug.Log("Enemy died");
                 if (MapManager.isFromMap)
                 {
-                    SceneManager.LoadScene(2);
+                    newCards.SetActive(true);
+                    //SceneManager.LoadScene(2);
                 }
             }
 

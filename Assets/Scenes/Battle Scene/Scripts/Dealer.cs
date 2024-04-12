@@ -127,7 +127,7 @@ public class Dealer : MonoBehaviour
                 {
                     Card card = new()
                     {
-                        Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
+                        //Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
                         Title = reader["title"].ToString(),
                         Description = reader["description"].ToString(),
                         Effect = reader["effect"].ToString(),
@@ -144,7 +144,7 @@ public class Dealer : MonoBehaviour
             {
                 Card card = new()
                 {
-                    Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
+                    //Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
                     Title = reader["title"].ToString(),
                     Description = reader["description"].ToString(),
                     Effect = reader["effect"].ToString(),
