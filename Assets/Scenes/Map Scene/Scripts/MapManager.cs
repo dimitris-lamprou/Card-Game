@@ -27,6 +27,6 @@ public class MapManager : MonoBehaviour
     {
         isFromMap = true;
         stageIndex++;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }

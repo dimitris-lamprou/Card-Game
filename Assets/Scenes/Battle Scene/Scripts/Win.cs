@@ -77,6 +77,6 @@ public class Win : MonoBehaviour
         Dealer.discard.Clear();
         Dealer.hand.Clear();
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 }
