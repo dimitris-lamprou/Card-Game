@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Card Game
-  defaultCursor: {fileID: 2800000, guid: f711e92307a98a84ea0bc79ff5a3940a, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 3b08ebe2544e2e24e9e21072c7d56967, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1

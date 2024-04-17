@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Map Scene/Old/DEMO Map 1.unity
-    guid: 2daf44b54ee556d47a50378acb1845a2
+    path: Assets/Scenes/Map Scene/Map Scene.unity
+    guid: fdff2a0c631c2634e8b2c9c28783bb76
   - enabled: 1
     path: Assets/Scenes/Battle Scene/Battle Scene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/Map Scene/Map Scene.unity
-    guid: fdff2a0c631c2634e8b2c9c28783bb76
   m_configObjects: {}
