@@ -549,8 +549,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 384289196}
-        m_TargetAssemblyTypeName: ButtonClickManager, Assembly-CSharp
-        m_MethodName: GoToBattle
+        m_TargetAssemblyTypeName: MapManager, Assembly-CSharp
+        m_MethodName: GoToRegroup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1599,7 +1599,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 384289196}
-        m_TargetAssemblyTypeName: ButtonClickManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: MapManager, Assembly-CSharp
         m_MethodName: GoToBattle
         m_Mode: 1
         m_Arguments:
