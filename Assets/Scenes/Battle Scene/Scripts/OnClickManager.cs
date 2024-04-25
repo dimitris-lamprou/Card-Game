@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class OnClickManager : MonoBehaviour
 {
@@ -29,11 +28,13 @@ public class OnClickManager : MonoBehaviour
 
     public void EndTurn()
     {
-        if (Hero.attack > 0)
+        //Stops end turn in case Hero has attack
+
+        /*if (Hero.attack > 0)
         {
             Debug.Log("Hero has to Attack");
             return;
-        }
+        }*/
 
         //Heros attack
 
@@ -159,6 +160,7 @@ public class OnClickManager : MonoBehaviour
         //Reset
         Hero.defence = 0;
         Hero.stamina = 3;
+        Hero.attack = 0;
         Enemy.action = Random.Range(0, 5);
         Enemy.isStuned = false;
         Enemy.isEnraged = false;
@@ -169,6 +171,7 @@ public class OnClickManager : MonoBehaviour
         herosDefenceText.text = Hero.defence.ToString();
         herosStatusEffectsText.text = "";
         herosStaminaText.text = Hero.stamina.ToString();
+        herosAttackText.text = Hero.attack.ToString();
         enemysDefenceText.text = Enemy.defence.ToString();
         enemysStatusEffectsText.text = "";
         enemysAttackText.text = Enemy.attack.ToString();
