@@ -29,7 +29,6 @@ public class Enemy : MonoBehaviour
 
         dazed = new()
         {
-            //Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
             Title = reader["title"].ToString(),
             Description = reader["description"].ToString(),
             Effect = reader["effect"].ToString(),

@@ -52,14 +52,16 @@ public class DealDamage : MonoBehaviour
                 //TODO MUST BE A FUNCTION OR CLASS
                 //Store Exp
                 Debug.Log("Enemy died");
+                //Reset
+                Hero.stamina = 3; // = cap for later
+                Hero.attack = 0;
+                Enemy.defence = 0;
+                Enemy.hp = 4;
                 if (MapManager.isFromMap)
                 {
                     newCards.SetActive(true);
                     //SceneManager.LoadScene(2);
                 }
-                //Reset
-                Hero.stamina = 3; // = cap for later
-                Hero.attack = 0;
             }
 
             Hero.attack = 0;

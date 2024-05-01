@@ -220,7 +220,7 @@ public class CardPrefabOnClick : MonoBehaviour
 
         if (Hero.handLimit == 1)
         {
-            //Debug.Log("You cant sacrifice another card");
+            Debug.Log("You cant sacrifice another card");
             return;
         }
 

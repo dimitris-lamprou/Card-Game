@@ -10,14 +10,6 @@ public class ButtonManager : MonoBehaviour
 
     public void Quit()
     {
-        /*if (UnityEditor.EditorApplication.isPlaying)
-        {
-            UnityEditor.EditorApplication.isPlaying = false; //build error
-        }
-        else
-        {
-            Application.Quit();
-        }*/
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // Stops the game in the editor
 #else

@@ -52,11 +52,6 @@ public class Dealer : MonoBehaviour
         Deal(deck);
         WhatEnemyWillDo();
 
-        Enemy.defence = 0;
-        Enemy.hp = 4;           // those lines are wrong and must be fixed
-        //Hero.attack = 0;
-        //Hero.stamina = 3;
-
         herosHpText.text = Hero.hp.ToString();
         herosStaminaText.text = Hero.stamina.ToString();
         herosDefenceText.text = Hero.defence.ToString();
@@ -141,7 +136,6 @@ public class Dealer : MonoBehaviour
                 {
                     Card card = new()
                     {
-                        //Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
                         Title = reader["title"].ToString(),
                         Description = reader["description"].ToString(),
                         Effect = reader["effect"].ToString(),
@@ -158,7 +152,6 @@ public class Dealer : MonoBehaviour
             {
                 Card card = new()
                 {
-                    //Id = int.TryParse(reader["id"].ToString(), out int id) ? id : (int?)null,
                     Title = reader["title"].ToString(),
                     Description = reader["description"].ToString(),
                     Effect = reader["effect"].ToString(),

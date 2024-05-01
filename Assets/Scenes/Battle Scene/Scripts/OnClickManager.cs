@@ -91,7 +91,7 @@ public class OnClickManager : MonoBehaviour
 
         if (Enemy.isStuned)
         {
-            //Debug.Log("Enemy is stuned");
+            //dont act
         }
         else if (MapManager.stageIndex == 2)
         {
@@ -165,7 +165,6 @@ public class OnClickManager : MonoBehaviour
         Enemy.isStuned = false;
         Enemy.isEnraged = false;
         Enemy.attack = 0;
-        //Enemy.defence = 0;
         Dealer.WhatEnemyWillDo();
 
         herosDefenceText.text = Hero.defence.ToString();
