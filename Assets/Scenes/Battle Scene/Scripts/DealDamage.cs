@@ -57,6 +57,9 @@ public class DealDamage : MonoBehaviour
                     newCards.SetActive(true);
                     //SceneManager.LoadScene(2);
                 }
+                //Reset
+                Hero.stamina = 3; // = cap for later
+                Hero.attack = 0;
             }
 
             Hero.attack = 0;

@@ -7,6 +7,8 @@ public class Dealer : MonoBehaviour
 {
     [SerializeField] private TMP_Text herosHpText;
     [SerializeField] private TMP_Text herosStaminaText;
+    [SerializeField] private TMP_Text herosDefenceText;
+    [SerializeField] private TMP_Text herosAttackText;
     [SerializeField] private SpriteRenderer enemysImage;
 
     private static TMP_Text enemysActionText;
@@ -51,12 +53,14 @@ public class Dealer : MonoBehaviour
         WhatEnemyWillDo();
 
         Enemy.defence = 0;
-        Enemy.hp = 4;
-        Hero.attack = 0;
-        Hero.stamina = 3;
+        Enemy.hp = 4;           // those lines are wrong and must be fixed
+        //Hero.attack = 0;
+        //Hero.stamina = 3;
 
         herosHpText.text = Hero.hp.ToString();
         herosStaminaText.text = Hero.stamina.ToString();
+        herosDefenceText.text = Hero.defence.ToString();
+        herosAttackText.text = Hero.attack.ToString();
 
         if (MapManager.isFromMap)
         {

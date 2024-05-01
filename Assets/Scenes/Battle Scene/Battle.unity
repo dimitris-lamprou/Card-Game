@@ -3725,6 +3725,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   herosHpText: {fileID: 673439763}
   herosStaminaText: {fileID: 1063561770}
+  herosDefenceText: {fileID: 982614032}
+  herosAttackText: {fileID: 1065269224}
   enemysImage: {fileID: 487010612}
 --- !u!114 &1370346464
 MonoBehaviour:
