@@ -27,14 +27,14 @@ public class RegroupButtonManager : MonoBehaviour
         Debug.Log("1st rand int = " + firstRandomInt);
         Debug.Log("2nd rand int = " + secondRandomInt);
 
-        if (/*firstRandomInt <= 50*/ true)
+        if (firstRandomInt <= 50)
         {
             if (secondRandomInt <= 25)
             {
                 Hero.attack += 3;
                 Debug.Log("Hero.attack += 3;");
             }
-            else if (secondRandomInt <= 50 || true)
+            else if (secondRandomInt <= 50)
             {
                 Hero.defence += 3;
                 Debug.Log("Hero.defence += 3;");
