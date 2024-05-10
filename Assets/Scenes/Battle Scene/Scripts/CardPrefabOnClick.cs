@@ -48,12 +48,30 @@ public class CardPrefabOnClick : MonoBehaviour
         {
             Dealer.hand.Remove(playedCard);
             Destroy(card);
+
+            //IF I WANT DAZED TO DRAIN 1 STAMINA
+
+            Hero.stamina--;
+            herosStaminaText.text = Hero.stamina.ToString();
+            if (Hero.stamina == 0)
+            {
+                var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
+                foreach (var card in listOfUnusedCards)
+                {
+                    card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
+                    if (card.transform.Find("Sacrifice (Button)") != null)
+                    {
+                        card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+                    }
+                }
+            }
+
             return;
         }
 
         string[] effectSplited = effect.Split(',');
 
-        if (effect.Contains("Attack"))
+        if (effect.Contains("Attack") && StatusEffects.heroStunRounds == 0)
         {
             for (int i = 0; i < effectSplited.Length; i++)
             {
@@ -66,6 +84,7 @@ public class CardPrefabOnClick : MonoBehaviour
             }
 
             // FOR INSTANT ATTACK
+
             /*if (Enemy.defence > 0)
             {
                 if (Enemy.defence >= Hero.attack)

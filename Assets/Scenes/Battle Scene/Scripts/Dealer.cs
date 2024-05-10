@@ -9,6 +9,7 @@ public class Dealer : MonoBehaviour
     [SerializeField] private TMP_Text herosStaminaText;
     [SerializeField] private TMP_Text herosDefenceText;
     [SerializeField] private TMP_Text herosAttackText;
+    [SerializeField] private TMP_Text herosStatusEffectsText;
     [SerializeField] private SpriteRenderer enemysImage;
 
     private static TMP_Text enemysActionText;
@@ -60,6 +61,11 @@ public class Dealer : MonoBehaviour
         if (MapManager.isFromMap)
         {
             enemysImage.sprite = Resources.Load<Sprite>("Enemies/" + MapManager.stageIndex.ToString());
+        }
+
+        if (StatusEffects.heroStunRounds > 0)
+        {
+            herosStatusEffectsText.text += StatusEffects.stunIcon;
         }
     }
 

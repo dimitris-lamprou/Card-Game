@@ -4,6 +4,7 @@ using Mono.Data.Sqlite;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Win : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class Win : MonoBehaviour
     [SerializeField] private TMP_Text title3Text;
     [SerializeField] private TMP_Text description3Text;
     [SerializeField] private TMP_Text exp3Text;
+    [Space]
+    [SerializeField] private Button endTurnButton;
+    [Space]
+    [Header("Hero Reset")]
+    [SerializeField] private TMP_Text herosDefenceText;
+    [SerializeField] private TMP_Text herosAttackText;
 
     private static readonly SqliteConnection db = DBContext.db;
     private static readonly SqliteCommand cmd = DBContext.cmd;
@@ -30,6 +37,18 @@ public class Win : MonoBehaviour
 
     private void OnEnable()
     {
+        endTurnButton.interactable = false;
+
+        var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
+        foreach (var card in listOfUnusedCards)
+        {
+            card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
+            if (card.transform.Find("Sacrifice (Button)") != null)
+            {
+                card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+            }
+        }
+
         db.Open();
         cmd.CommandText = "Select * from Card Where Id >= 6 and Id <= 13";
         var reader = cmd.ExecuteReader();
@@ -75,6 +94,12 @@ public class Win : MonoBehaviour
 
         Dealer.discard.Clear();
         Dealer.hand.Clear();
+
+        Hero.attack = 0;
+        Hero.defence = 0;
+
+        herosAttackText.text = Hero.attack.ToString();
+        herosDefenceText.text = Hero.defence.ToString();
 
         SceneManager.LoadScene(1);
     }

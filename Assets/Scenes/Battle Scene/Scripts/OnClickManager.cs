@@ -167,6 +167,11 @@ public class OnClickManager : MonoBehaviour
         Enemy.attack = 0;
         Dealer.WhatEnemyWillDo();
 
+        if (StatusEffects.heroStunRounds > 0)
+        {
+            StatusEffects.heroStunRounds--;
+        }
+
         herosDefenceText.text = Hero.defence.ToString();
         herosStatusEffectsText.text = "";
         herosStaminaText.text = Hero.stamina.ToString();
@@ -175,5 +180,10 @@ public class OnClickManager : MonoBehaviour
         enemysStatusEffectsText.text = "";
         enemysAttackText.text = Enemy.attack.ToString();
         discardText.text = discard.Count.ToString();
+
+        if (StatusEffects.heroStunRounds > 0)
+        {
+            herosStatusEffectsText.text += StatusEffects.stunIcon;
+        }
     }
 }

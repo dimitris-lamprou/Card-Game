@@ -897,6 +897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5814630198917131601, guid: a6ad21f2dff77394b8a073431b0909de, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7761917537646823593, guid: a6ad21f2dff77394b8a073431b0909de, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3347,6 +3351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5814630198917131601, guid: a6ad21f2dff77394b8a073431b0909de, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7761917537646823593, guid: a6ad21f2dff77394b8a073431b0909de, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3677,6 +3685,7 @@ GameObject:
   - component: {fileID: 1370346463}
   - component: {fileID: 1370346462}
   - component: {fileID: 1370346464}
+  - component: {fileID: 1370346465}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -3727,6 +3736,7 @@ MonoBehaviour:
   herosStaminaText: {fileID: 1063561770}
   herosDefenceText: {fileID: 982614032}
   herosAttackText: {fileID: 1065269224}
+  herosStatusEffectsText: {fileID: 1964129514}
   enemysImage: {fileID: 487010612}
 --- !u!114 &1370346464
 MonoBehaviour:
@@ -3750,6 +3760,18 @@ MonoBehaviour:
   enemysAttackText: {fileID: 954798641}
   enemysStatusEffectsText: {fileID: 1075694309}
   discardText: {fileID: 823218692}
+--- !u!114 &1370346465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370346457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27429ac9f72276149adebc5d3dbca881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1372877583
 GameObject:
   m_ObjectHideFlags: 0
@@ -4405,6 +4427,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5814630198917131601, guid: a6ad21f2dff77394b8a073431b0909de, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7761917537646823593, guid: a6ad21f2dff77394b8a073431b0909de, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4821,6 +4847,9 @@ MonoBehaviour:
   title3Text: {fileID: 436849613}
   description3Text: {fileID: 436849612}
   exp3Text: {fileID: 436849611}
+  endTurnButton: {fileID: 554485433}
+  herosDefenceText: {fileID: 982614032}
+  herosAttackText: {fileID: 1065269224}
 --- !u!1 &111943030758054076
 GameObject:
   m_ObjectHideFlags: 0
