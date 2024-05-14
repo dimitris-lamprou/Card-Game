@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3440203692981543449}
-        m_TargetAssemblyTypeName: CardPrefabOnClick, Assembly-CSharp
+      - m_Target: {fileID: 7688908222973334095}
+        m_TargetAssemblyTypeName: CardPrefab, Assembly-CSharp
         m_MethodName: Sacrifice
         m_Mode: 1
         m_Arguments:
@@ -523,9 +523,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3440203692981543449}
-        m_TargetAssemblyTypeName: CardPrefabOnClick, Assembly-CSharp
-        m_MethodName: DoCardEffect
+      - m_Target: {fileID: 7688908222973334095}
+        m_TargetAssemblyTypeName: CardPrefab, Assembly-CSharp
+        m_MethodName: PlayTheCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -544,8 +544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1357113826756687720}
-  - component: {fileID: 3440203692981543449}
-  - component: {fileID: 7669917163396949106}
+  - component: {fileID: 7688908222973334095}
   m_Layer: 0
   m_Name: Card
   m_TagString: Card
@@ -570,7 +569,7 @@ Transform:
   - {fileID: 2925357485156831385}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3440203692981543449
+--- !u!114 &7688908222973334095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -579,23 +578,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5814630198917131601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 569b1339c5c90a44ca5d3776f6141320, type: 3}
+  m_Script: {fileID: 11500000, guid: 85c1190420d8b9e4c8543cc854a69c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 5814630198917131601}
   title: {fileID: 8155786221362807929}
---- !u!114 &7669917163396949106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5814630198917131601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccfff52a9bbace841ae2c88061db72e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   hoverAmount: 100
 --- !u!1 &8222169355755304390
 GameObject:

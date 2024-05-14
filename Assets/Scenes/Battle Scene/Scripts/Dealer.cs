@@ -143,7 +143,7 @@ public class Dealer : MonoBehaviour
 
         if (MapManager.isFromMap)
         {
-            deckLimit = deck.Count < 10;
+            deckLimit = deck.Count < 11;
         }
         else
         {
@@ -189,7 +189,7 @@ public class Dealer : MonoBehaviour
             }
             if (MapManager.isFromMap)
             {
-                deckLimit = deck.Count < 10;
+                deckLimit = deck.Count < 11;
             }
         }
         db.Close();

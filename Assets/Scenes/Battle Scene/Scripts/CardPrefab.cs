@@ -1,21 +1,29 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CardPrefabOnClick : MonoBehaviour
+public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject card;
     [SerializeField] private TMP_Text title;
+    [Space]
+    [Header("For Hover")]
+    [SerializeField] private int hoverAmount = 50;
+    
+    private Vector3 initialPosition;
 
     private string effect;
     private int amount;
 
-    private void Start()
+    void Start()
     {
+        // Save the initial position of the button
+        initialPosition = transform.position;
         effect = card.name;
     }
 
-    public void DoCardEffect()
+    public void PlayTheCard()
     {
         Card playedCard = Dealer.hand.Find(card => card.Title == title.text);
 
@@ -224,5 +232,17 @@ public class CardPrefabOnClick : MonoBehaviour
         Dealer.hand.Remove(playedCard);
         Dealer.graveyardText.text = Dealer.graveyard.Count.ToString();
         Destroy(card);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // Move the button up when the mouse enters
+        transform.position = initialPosition + new Vector3(0, hoverAmount, 0);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // Return the button to its initial position when the mouse exits
+        transform.position = initialPosition;
     }
 }
