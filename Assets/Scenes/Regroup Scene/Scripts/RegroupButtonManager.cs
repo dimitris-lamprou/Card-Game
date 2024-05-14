@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,13 +5,9 @@ public class RegroupButtonManager : MonoBehaviour
 {
     public void Rest()
     {
-        int heal;
-        heal = (30 * Hero.hpCap) / 100;
-        Hero.hp += heal;
-        if (Hero.hp > Hero.hpCap)
-        {
-            Hero.hp = Hero.hpCap;
-        }
+        int amount;
+        amount = (30 * Hero.hpCap) / 100;
+        Hero.Heal(amount);
         SceneManager.LoadScene(1);
     }
 
@@ -112,22 +107,22 @@ public class RegroupButtonManager : MonoBehaviour
             if (secondRandomInt <= 50)
             {
                 Hero.scales += 70;
-                Hero.deck.Add(Enemy.dazed);
+                Hero.deck.Add(Dealer.dazed);
                 Debug.Log("Hero.scales += 70 and 1 dazed");
             }
             else if (secondRandomInt <= 80)
             {
                 Hero.scales += 140;
-                Hero.deck.Add(Enemy.dazed);
-                Hero.deck.Add(Enemy.dazed);
+                Hero.deck.Add(Dealer.dazed);
+                Hero.deck.Add(Dealer.dazed);
                 Debug.Log("Hero.scales += 140 and 2 dazed");
             }
             else
             {
                 Hero.scales += 200;
-                Hero.deck.Add(Enemy.dazed);
-                Hero.deck.Add(Enemy.dazed);
-                Hero.deck.Add(Enemy.dazed);
+                Hero.deck.Add(Dealer.dazed);
+                Hero.deck.Add(Dealer.dazed);
+                Hero.deck.Add(Dealer.dazed);
                 Debug.Log("Hero.scales += 200 and 3 dazed");
             }
         }

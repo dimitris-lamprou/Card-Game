@@ -7,36 +7,11 @@ public class CardPrefabOnClick : MonoBehaviour
     [SerializeField] private GameObject card;
     [SerializeField] private TMP_Text title;
 
-    private TMP_Text herosHpText;
-    private TMP_Text herosStatusEffectsText;
-    private TMP_Text herosDefenceText;
-    private TMP_Text herosStaminaText;
-    private TMP_Text herosAttackText;
-    private TMP_Text enemysHpText;
-    private TMP_Text enemysDefenceText;
-    private TMP_Text enemysThoughtText;
-    private TMP_Text enemysStatusEffectsText;
-    private TMP_Text enemysAttackText;
-    private TMP_Text discardText;
-    private TMP_Text graveyardText;
-
     private string effect;
+    private int amount;
 
     private void Start()
     {
-        enemysHpText = GameObject.FindWithTag("Enemys Health Text").GetComponent<TMP_Text>();
-        enemysDefenceText = GameObject.FindWithTag("Enemys Defence").GetComponent<TMP_Text>();
-        herosDefenceText = GameObject.FindWithTag("Heros Defence").GetComponent<TMP_Text>();
-        herosHpText = GameObject.FindWithTag("Heros Hp").GetComponent<TMP_Text>();
-        discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
-        graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
-        herosStaminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
-        herosAttackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
-        enemysThoughtText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
-        herosStatusEffectsText = GameObject.FindWithTag("Heros Status Effects Text").GetComponent<TMP_Text>();
-        enemysStatusEffectsText = GameObject.FindWithTag("Enemys Status Effects Text").GetComponent<TMP_Text>();
-        enemysAttackText = GameObject.FindWithTag("Enemys Attack Text").GetComponent<TMP_Text>();
-
         effect = card.name;
     }
 
@@ -52,7 +27,7 @@ public class CardPrefabOnClick : MonoBehaviour
             //IF I WANT DAZED TO DRAIN 1 STAMINA
 
             Hero.stamina--;
-            herosStaminaText.text = Hero.stamina.ToString();
+            Dealer.herosStaminaText.text = Hero.stamina.ToString();
             if (Hero.stamina == 0)
             {
                 var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
@@ -78,7 +53,7 @@ public class CardPrefabOnClick : MonoBehaviour
                 if (effectSplited[i].Equals("Attack"))
                 {
                     Hero.attack += int.Parse(effectSplited[i - 1]);
-                    herosAttackText.text = Hero.attack.ToString();
+                    Dealer.herosAttackText.text = Hero.attack.ToString();
                     break;
                 }
             }
@@ -120,12 +95,12 @@ public class CardPrefabOnClick : MonoBehaviour
             {
                 if (effectSplited[i].Equals("Experience"))
                 {
-                    Hero.addExp = int.Parse(effectSplited[i - 1]);
+                    amount = int.Parse(effectSplited[i - 1]);
                     break;
                 }
             }
 
-            Hero.exp += Hero.addExp;
+            Hero.AddExp(amount);
             Debug.Log("Heros xp = " + Hero.exp);
         }
         if (effect.Contains("Defence"))
@@ -134,50 +109,44 @@ public class CardPrefabOnClick : MonoBehaviour
             {
                 if (effectSplited[i].Equals("Defence"))
                 {
-                    Hero.addDefence = int.Parse(effectSplited[i - 1]);
+                    amount = int.Parse(effectSplited[i - 1]);
                     break;
                 }
             }
 
-            Hero.defence += Hero.addDefence;
-            herosDefenceText.text = Hero.defence.ToString();
+            Hero.AddDefence(amount);
+            Dealer.herosDefenceText.text = Hero.defence.ToString();
         }
         if (effect.Contains("Heal"))
         {
+            int amount = 0;
             for (int i = 0; i < effectSplited.Length; i++)
             {
                 if (effectSplited[i].Equals("Heal"))
                 {
-                    Hero.heal = int.Parse(effectSplited[i - 1]);
+                    amount = int.Parse(effectSplited[i - 1]);
                     break;
                 }
             }
 
-            for (int i = 1; i <= Hero.heal; i++) //dont overheal
-            {
-                if (Hero.hp == Hero.hpCap)
-                {
-                    break;
-                }
-                Hero.hp++;
-            }
+            Hero.Heal(amount);
 
-            herosHpText.text = Hero.hp.ToString();
+            Dealer.herosHpText.text = Hero.hp.ToString();
         }
         if (effect.Contains("Stun"))
         {
             Enemy.isStuned = true;
-            enemysStatusEffectsText.text += "<sprite name=Stun>";
-            enemysThoughtText.text = "";
+            Dealer.enemysStatusEffectsText.text += "<sprite name=Stun>";
+            Dealer.enemysThoughtText.text = "";
         }
         if (effect.Contains("Reckless"))
         {
             if (Hero.defence > 0)
             {
                 Hero.defence--;
-                herosDefenceText.text = Hero.defence.ToString();
+                Dealer.herosDefenceText.text = Hero.defence.ToString();
             }
-            herosStatusEffectsText.text += "<sprite name=Reckless>";
+            Dealer.herosStatusEffectsText.text += "<sprite name=Reckless>";
         }
         if (effect.Contains("Enrage"))
         {
@@ -185,11 +154,11 @@ public class CardPrefabOnClick : MonoBehaviour
             if (Enemy.defence > 0)
             {
                 Enemy.defence--;
-                enemysDefenceText.text = Enemy.defence.ToString();
+                Dealer.enemysDefenceText.text = Enemy.defence.ToString();
             }
             Enemy.attack++;
-            enemysAttackText.text = Enemy.attack.ToString();
-            enemysStatusEffectsText.text += "<sprite name=Enrage>";
+            Dealer.enemysAttackText.text = Enemy.attack.ToString();
+            Dealer.enemysStatusEffectsText.text += "<sprite name=Enrage>";
         }
         if (effect.Contains("Drain")) //only for test reasons
         {
@@ -204,8 +173,8 @@ public class CardPrefabOnClick : MonoBehaviour
                 {
                     Hero.hp++;
                 }
-                enemysHpText.text = Enemy.hp.ToString();
-                herosHpText.text = Hero.hp.ToString();
+                Dealer.enemysHpText.text = Enemy.hp.ToString();
+                Dealer.herosHpText.text = Hero.hp.ToString();
             }
         }
 
@@ -214,8 +183,8 @@ public class CardPrefabOnClick : MonoBehaviour
 
         Hero.stamina--;
 
-        herosStaminaText.text = Hero.stamina.ToString();
-        discardText.text = Dealer.discard.Count.ToString();
+        Dealer.herosStaminaText.text = Hero.stamina.ToString();
+        Dealer.discardText.text = Dealer.discard.Count.ToString();
 
         Destroy(card);
 
@@ -249,11 +218,11 @@ public class CardPrefabOnClick : MonoBehaviour
 
         Hero.handLimit--;
         Hero.hp--;
-        herosHpText.text = Hero.hp.ToString();
+        Dealer.herosHpText.text = Hero.hp.ToString();
 
         Dealer.graveyard.Add(playedCard);
         Dealer.hand.Remove(playedCard);
-        graveyardText.text = Dealer.graveyard.Count.ToString();
+        Dealer.graveyardText.text = Dealer.graveyard.Count.ToString();
         Destroy(card);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnClickManager : MonoBehaviour
 {
-    [Header("Hero")]
+    /*[Header("Hero")]
     [SerializeField] private TMP_Text herosHpText;
     [SerializeField] private TMP_Text herosDefenceText;
     [SerializeField] private TMP_Text herosAttackText;
@@ -18,7 +18,7 @@ public class OnClickManager : MonoBehaviour
     [SerializeField] private TMP_Text enemysStatusEffectsText;
     [Space]
     [Header("Labels")]
-    [SerializeField] private TMP_Text discardText;
+    [SerializeField] private TMP_Text discardText;*/
 
     private readonly List<Card> deck = Dealer.deck;
     private readonly List<Card> discard = Dealer.discard;
@@ -84,7 +84,7 @@ public class OnClickManager : MonoBehaviour
         if (Enemy.defence > 0)
         {
             Enemy.defence = 0;
-            enemysDefenceText.text = Enemy.defence.ToString();
+            Dealer.enemysDefenceText.text = Enemy.defence.ToString();
         }
 
         //Enemys action
@@ -95,16 +95,16 @@ public class OnClickManager : MonoBehaviour
         }
         else if (MapManager.stageIndex == 2)
         {
-            EnemysAI.EnemyB(herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
+            EnemysAI.EnemyB(Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText, Dealer.enemysHpText);
         }
         else
         {
-            EnemysAI.EnemyA(discard, herosDefenceText, herosHpText, enemysDefenceText);
+            EnemysAI.EnemyA(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText);
         }
 
         if (Enemy.attack > 0)
         {
-            EnemysAI.EnemyDealDamage(herosDefenceText, herosHpText);
+            EnemysAI.EnemyDealDamage(Dealer.herosDefenceText, Dealer.herosHpText);
         }
 
         //  FOR DEMO MAP 1 without stun card
@@ -165,25 +165,25 @@ public class OnClickManager : MonoBehaviour
         Enemy.isStuned = false;
         Enemy.isEnraged = false;
         Enemy.attack = 0;
-        Dealer.WhatEnemyWillDo();
+        Enemy.WhatWillDo();
 
         if (StatusEffects.heroStunRounds > 0)
         {
             StatusEffects.heroStunRounds--;
         }
 
-        herosDefenceText.text = Hero.defence.ToString();
-        herosStatusEffectsText.text = "";
-        herosStaminaText.text = Hero.stamina.ToString();
-        herosAttackText.text = Hero.attack.ToString();
-        enemysDefenceText.text = Enemy.defence.ToString();
-        enemysStatusEffectsText.text = "";
-        enemysAttackText.text = Enemy.attack.ToString();
-        discardText.text = discard.Count.ToString();
+        Dealer.herosDefenceText.text = Hero.defence.ToString();
+        Dealer.herosStatusEffectsText.text = "";
+        Dealer.herosStaminaText.text = Hero.stamina.ToString();
+        Dealer.herosAttackText.text = Hero.attack.ToString();
+        Dealer.enemysDefenceText.text = Enemy.defence.ToString();
+        Dealer.enemysStatusEffectsText.text = "";
+        Dealer.enemysAttackText.text = Enemy.attack.ToString();
+        Dealer.discardText.text = discard.Count.ToString();
 
         if (StatusEffects.heroStunRounds > 0)
         {
-            herosStatusEffectsText.text += StatusEffects.stunIcon;
+            Dealer.herosStatusEffectsText.text += StatusEffects.stunIcon;
         }
     }
 }

@@ -5,24 +5,29 @@ using Mono.Data.Sqlite;
 
 public class Dealer : MonoBehaviour
 {
-    [SerializeField] private TMP_Text herosHpText;
-    [SerializeField] private TMP_Text herosStaminaText;
-    [SerializeField] private TMP_Text herosDefenceText;
-    [SerializeField] private TMP_Text herosAttackText;
-    [SerializeField] private TMP_Text herosStatusEffectsText;
     [SerializeField] private SpriteRenderer enemysImage;
-
-    private static TMP_Text enemysActionText;
-
-    public static GameObject cardPrefab;
-    public static Canvas canvas;
-    public static TMP_Text deckCountText;
-    public static TMP_Text discardText;
-
     [HideInInspector] public static List<Card> deck = new();
     [HideInInspector] public static List<Card> hand = new();
     [HideInInspector] public static List<Card> discard = new();
     [HideInInspector] public static List<Card> graveyard = new();
+
+    public static TMP_Text herosHpText;
+    public static TMP_Text herosStatusEffectsText;
+    public static TMP_Text herosDefenceText;
+    public static TMP_Text herosStaminaText;
+    public static TMP_Text herosAttackText;
+    public static TMP_Text enemysHpText;
+    public static TMP_Text enemysDefenceText;
+    public static TMP_Text enemysThoughtText;
+    public static TMP_Text enemysStatusEffectsText;
+    public static TMP_Text enemysAttackText;
+    public static TMP_Text discardText;
+    public static TMP_Text graveyardText;
+    public static GameObject cardPrefab;
+    public static Canvas canvas;
+    public static TMP_Text deckCountText;
+    public static TMP_Text enemysActionText;
+    public static Card dazed;
 
     private static readonly SqliteConnection db = DBContext.db;
     private static readonly SqliteCommand cmd = DBContext.cmd;
@@ -37,6 +42,17 @@ public class Dealer : MonoBehaviour
         deckCountText = GameObject.FindWithTag("Deck Text").GetComponent<TMP_Text>();
         discardText = GameObject.FindWithTag("Discard Text").GetComponent<TMP_Text>();
         enemysActionText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
+        enemysHpText = GameObject.FindWithTag("Enemys Health Text").GetComponent<TMP_Text>();
+        enemysDefenceText = GameObject.FindWithTag("Enemys Defence").GetComponent<TMP_Text>();
+        herosDefenceText = GameObject.FindWithTag("Heros Defence").GetComponent<TMP_Text>();
+        herosHpText = GameObject.FindWithTag("Heros Hp").GetComponent<TMP_Text>();
+        graveyardText = GameObject.FindWithTag("Graveyard Text").GetComponent<TMP_Text>();
+        herosStaminaText = GameObject.FindWithTag("Stamina Text").GetComponent<TMP_Text>();
+        herosAttackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
+        enemysThoughtText = GameObject.FindWithTag("Enemys Thought Text").GetComponent<TMP_Text>();
+        herosStatusEffectsText = GameObject.FindWithTag("Heros Status Effects Text").GetComponent<TMP_Text>();
+        enemysStatusEffectsText = GameObject.FindWithTag("Enemys Status Effects Text").GetComponent<TMP_Text>();
+        enemysAttackText = GameObject.FindWithTag("Enemys Attack Text").GetComponent<TMP_Text>();
 
         if (isTheFirstTime)
         {
@@ -51,7 +67,7 @@ public class Dealer : MonoBehaviour
 
         Shuffle(deck);
         Deal(deck);
-        WhatEnemyWillDo();
+        Enemy.WhatWillDo();
 
         herosHpText.text = Hero.hp.ToString();
         herosStaminaText.text = Hero.stamina.ToString();
@@ -152,7 +168,13 @@ public class Dealer : MonoBehaviour
             }
             else if (reader["title"].ToString().Equals("Dazed"))
             {
-                //pass this card
+                dazed = new()
+                {
+                    Title = reader["title"].ToString(),
+                    Description = reader["description"].ToString(),
+                    Effect = reader["effect"].ToString(),
+                    Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
+                };
             }
             else
             {
@@ -176,101 +198,5 @@ public class Dealer : MonoBehaviour
         isTheFirstTime = false;
     }
 
-    public static void WhatEnemyWillDo()
-    {
-        if (MapManager.stageIndex == 2)
-        {
-            if (Enemy.action == 0)
-            {
-                enemysActionText.text = "+3 <sprite name=Attack>";
-            }
-            else if (Enemy.action == 1)
-            {
-                enemysActionText.text = "+7 <sprite name=Defence>";
-            }
-            else if (Enemy.action == 2)
-            {
-                enemysActionText.text = "+5 <sprite name=Defence>";
-            }
-            else if (Enemy.action == 3)
-            {
-                enemysActionText.text = "+3 <sprite name=Heal>";
-            }
-            else
-            {
-                enemysActionText.text = "Enemy is confused and will not do anything";
-            }
-        }
-        else
-        {
-            if (Enemy.action == 0)
-            {
-                enemysActionText.text = "+5 <sprite name=Attack>";
-            }
-            else if (Enemy.action == 1)
-            {
-                enemysActionText.text = "+5 <sprite name=Defence>";
-            }
-            else if (Enemy.action == 2)
-            {
-                enemysActionText.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
-            }
-            else if (Enemy.action == 3)
-            {
-                enemysActionText.text = "Enemy will add Dazed to your deck";
-            }
-            else
-            {
-                enemysActionText.text = "Enemy is confused and will not do anything";
-            }
-        }
-
-        //  FOR DEMO MAP 1
-        /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
-        {
-            if (Enemy.action == 0)
-            {
-                Debug.Log("Enemy will deal 5 dmg");
-            }
-            else if (Enemy.action == 1)
-            {
-                Debug.Log("Enemy will add 5 defence");
-            }
-            else if (Enemy.action == 2)
-            {
-                Debug.Log("Enemy will deal 3 dmg and add 2 defence");
-            }
-            else if (Enemy.action == 3)
-            {
-                Debug.Log("Enemy will add Dazed to your deck");
-            }
-            else
-            {
-                Debug.Log("Enemy is confused and will not do anything");
-            }
-        }
-        else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
-        {
-            if (Enemy.action == 0)
-            {
-                Debug.Log("Enemy will deal 3 dmg");
-            }
-            else if (Enemy.action == 1)
-            {
-                Debug.Log("Enemy will add 7 defence");
-            }
-            else if (Enemy.action == 2)
-            {
-                Debug.Log("Enemy will add 5 defence");
-            }
-            else if (Enemy.action == 3)
-            {
-                Debug.Log("Enemy will heal by 3");
-            }
-            else
-            {
-                Debug.Log("Enemy is confused and will not do anything");
-            }
-        }*/
-    }
+    
 }

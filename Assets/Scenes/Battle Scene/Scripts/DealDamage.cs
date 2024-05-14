@@ -1,11 +1,7 @@
-using TMPro;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
-    [SerializeField] private TMP_Text enemysHpText;
-    [SerializeField] private TMP_Text enemysDefenceText;
-    [SerializeField] private TMP_Text herosAttackText;
     [SerializeField] private GameObject newCards;
 
     private void OnMouseEnter()
@@ -30,21 +26,21 @@ public class DealDamage : MonoBehaviour
                 if (Enemy.defence >= Hero.attack)
                 {
                     Enemy.defence -= Hero.attack;
-                    enemysDefenceText.text = Enemy.defence.ToString();
+                    Dealer.enemysDefenceText.text = Enemy.defence.ToString();
                 }
                 else
                 {
                     int remainingDamage = Hero.attack - Enemy.defence;
                     Enemy.defence = 0;
                     Enemy.hp -= remainingDamage;
-                    enemysDefenceText.text = Enemy.defence.ToString();
-                    enemysHpText.text = Enemy.hp.ToString();
+                    Dealer.enemysDefenceText.text = Enemy.defence.ToString();
+                    Dealer.enemysHpText.text = Enemy.hp.ToString();
                 }
             }
             else
             {
                 Enemy.hp -= Hero.attack;
-                enemysHpText.text = Enemy.hp.ToString();
+                Dealer.enemysHpText.text = Enemy.hp.ToString();
             }
 
             if (Enemy.hp <= 0) //if hero destroyed enemy
@@ -65,7 +61,7 @@ public class DealDamage : MonoBehaviour
             }
 
             Hero.attack = 0;
-            herosAttackText.text = Hero.attack.ToString();
+            Dealer.herosAttackText.text = Hero.attack.ToString();
         }
         Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Cursor"), Vector2.zero, CursorMode.Auto);
     }

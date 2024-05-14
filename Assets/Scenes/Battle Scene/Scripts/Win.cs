@@ -24,10 +24,6 @@ public class Win : MonoBehaviour
     [SerializeField] private TMP_Text exp3Text;
     [Space]
     [SerializeField] private Button endTurnButton;
-    [Space]
-    [Header("Hero Reset")]
-    [SerializeField] private TMP_Text herosDefenceText;
-    [SerializeField] private TMP_Text herosAttackText;
 
     private static readonly SqliteConnection db = DBContext.db;
     private static readonly SqliteCommand cmd = DBContext.cmd;
@@ -92,14 +88,17 @@ public class Win : MonoBehaviour
         Card newCard = deck.Find(card => card.Title == selectedCardsTitle);
         Hero.deck.Add(newCard);
 
+        //RESET
+
         Dealer.discard.Clear();
         Dealer.hand.Clear();
 
         Hero.attack = 0;
         Hero.defence = 0;
+        Hero.handLimit = 5;
 
-        herosAttackText.text = Hero.attack.ToString();
-        herosDefenceText.text = Hero.defence.ToString();
+        Dealer.herosAttackText.text = Hero.attack.ToString();
+        Dealer.herosDefenceText.text = Hero.defence.ToString();
 
         SceneManager.LoadScene(1);
     }

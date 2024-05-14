@@ -12,19 +12,17 @@ public static class EnemysAI
         }
         else if (Enemy.action == 1) //add defence
         {
-            Enemy.addDefence = 5;
-            EnemyAddDefence(enemysDefenceText);
+            EnemyAddDefence(enemysDefenceText , 5);
         }
         else if (Enemy.action == 2) //deal dmg and add defence
         {
             Enemy.attack += 3;
-            Enemy.addDefence = 2;
             EnemyDealDamage(herosDefenceText, herosHpText);
-            EnemyAddDefence(enemysDefenceText);
+            EnemyAddDefence(enemysDefenceText, 2);
         }
         else if (Enemy.action == 3) // add dazed to heros deck
         {
-            discard.Add(Enemy.dazed);
+            discard.Add(Dealer.dazed);
             Dealer.Shuffle(discard);
         }
                                     // if action = 4 dont do anything || Confused
@@ -40,25 +38,16 @@ public static class EnemysAI
         }
         else if (Enemy.action == 1) //add defence
         {
-            Enemy.addDefence = 7;
-            EnemyAddDefence(enemysDefenceText);
+            EnemyAddDefence(enemysDefenceText, 7);
         }
         else if (Enemy.action == 2) //add defence
         {
-            Enemy.addDefence = 5;
-            EnemyAddDefence(enemysDefenceText);
+            EnemyAddDefence(enemysDefenceText, 5);
         }
         else if (Enemy.action == 3) //heal
         {
-            int heal = 3;
-            for (int i = 0; i < heal; i++)
-            {
-                if (Enemy.hp == Enemy.hpCap)
-                {
-                    break;
-                }
-                Enemy.hp++;
-            }
+            int amount = 3;
+            Enemy.Heal(amount);
             enemysHpText.text = Enemy.hp.ToString();
         }
                                     // if action = 4 dont do anything || Confused
@@ -90,9 +79,9 @@ public static class EnemysAI
         Enemy.attack = 0;
     }
 
-    private static void EnemyAddDefence(TMP_Text enemysDefenceText)
+    private static void EnemyAddDefence(TMP_Text enemysDefenceText, int amount)
     {
-        Enemy.defence += Enemy.addDefence;
+        Enemy.defence += amount;
         enemysDefenceText.text = Enemy.defence.ToString();
     }
 }
