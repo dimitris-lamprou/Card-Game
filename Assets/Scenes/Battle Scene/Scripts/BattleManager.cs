@@ -1,25 +1,8 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class OnClickManager : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
-    /*[Header("Hero")]
-    [SerializeField] private TMP_Text herosHpText;
-    [SerializeField] private TMP_Text herosDefenceText;
-    [SerializeField] private TMP_Text herosAttackText;
-    [SerializeField] private TMP_Text herosStatusEffectsText;
-    [SerializeField] private TMP_Text herosStaminaText;
-    [Space]
-    [Header("Enemy")]
-    [SerializeField] private TMP_Text enemysHpText;
-    [SerializeField] private TMP_Text enemysDefenceText;
-    [SerializeField] private TMP_Text enemysAttackText;
-    [SerializeField] private TMP_Text enemysStatusEffectsText;
-    [Space]
-    [Header("Labels")]
-    [SerializeField] private TMP_Text discardText;*/
-
     private readonly List<Card> deck = Dealer.deck;
     private readonly List<Card> discard = Dealer.discard;
     private readonly List<Card> hand = Dealer.hand;
@@ -95,26 +78,26 @@ public class OnClickManager : MonoBehaviour
         }
         else if (MapManager.stageIndex == 2)
         {
-            EnemysAI.EnemyB(Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText, Dealer.enemysHpText);
+            Enemy.B(Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText, Dealer.enemysHpText);
         }
         else
         {
-            EnemysAI.EnemyA(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText);
+            Enemy.A(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText);
         }
 
         if (Enemy.attack > 0)
         {
-            EnemysAI.EnemyDealDamage(Dealer.herosDefenceText, Dealer.herosHpText);
+            Enemy.DealDamage(Dealer.herosDefenceText, Dealer.herosHpText);
         }
 
         //  FOR DEMO MAP 1 without stun card
         /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
-            EnemysAI.EnemyA(discard, herosDefenceText, herosHpText, enemysDefenceText);
+            EnemysAI.A(discard, herosDefenceText, herosHpText, enemysDefenceText);
         }
         else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
         {
-            EnemysAI.EnemyB(discard, herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
+            EnemysAI.B(discard, herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
         }*/
 
         //Deal Cards

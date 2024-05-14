@@ -13,8 +13,6 @@ public static class Hero
     public static int level = 1;
     public static int inventorySlots = 1;
     public static int attack = 0;
-    //public static int addDefence;
-    //public static int addExp;
 
     public static List<Card> deck = new();
 

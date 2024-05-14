@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RegroupButtonManager : MonoBehaviour
+public class RegroupManager : MonoBehaviour
 {
     public void Rest()
     {

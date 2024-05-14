@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 384289197}
   - component: {fileID: 384289196}
   m_Layer: 0
-  m_Name: ButtonClickManager
+  m_Name: ScriptHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

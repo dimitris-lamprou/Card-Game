@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,10 +10,91 @@ public class Enemy : MonoBehaviour
     public static int defence = 0;
     public static int action;
 
-    //public static int addDefence;
     public static int attack;
     public static bool isStuned = false;
     public static bool isEnraged = false;
+
+    public static void A(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText)
+    {
+        if (action == 0) //deal dmg
+        {
+            attack += 5;
+            DealDamage(herosDefenceText, herosHpText);
+        }
+        else if (action == 1) //add defence
+        {
+            AddDefence(enemysDefenceText, 5);
+        }
+        else if (action == 2) //deal dmg and add defence
+        {
+            attack += 3;
+            DealDamage(herosDefenceText, herosHpText);
+            AddDefence(enemysDefenceText, 2);
+        }
+        else if (action == 3) // add dazed to heros deck
+        {
+            discard.Add(Dealer.dazed);
+            Dealer.Shuffle(discard);
+        }
+        // if action = 4 dont do anything || Confused
+    }
+
+    public static void B(TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText,
+        TMP_Text enemysHpText)
+    {
+        if (action == 0) //deal dmg
+        {
+            attack += 3;
+            DealDamage(herosDefenceText, herosHpText);
+        }
+        else if (action == 1) //add defence
+        {
+            AddDefence(enemysDefenceText, 7);
+        }
+        else if (action == 2) //add defence
+        {
+            AddDefence(enemysDefenceText, 5);
+        }
+        else if (action == 3) //heal
+        {
+            int amount = 3;
+            Heal(amount);
+            enemysHpText.text = hp.ToString();
+        }
+        // if action = 4 dont do anything || Confused
+    }
+
+    public static void DealDamage(TMP_Text herosDefenceText, TMP_Text herosHpText)
+    {
+        if (Hero.defence > 0)
+        {
+            if (Hero.defence >= attack)
+            {
+                Hero.defence -= attack;
+                herosDefenceText.text = Hero.defence.ToString();
+            }
+            else
+            {
+                int remainingDamage = attack - Hero.defence;
+                Hero.defence = 0;
+                Hero.hp -= remainingDamage;
+                herosDefenceText.text = Hero.defence.ToString();
+                herosHpText.text = Hero.hp.ToString();
+            }
+        }
+        else
+        {
+            Hero.hp -= attack;
+            herosHpText.text = Hero.hp.ToString();
+        }
+        attack = 0;
+    }
+
+    private static void AddDefence(TMP_Text enemysDefenceText, int amount)
+    {
+        defence += amount;
+        enemysDefenceText.text = defence.ToString();
+    }
 
     public static void Heal(int amount)
     {

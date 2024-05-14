@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonManager : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
     public void NewGame()
     {
