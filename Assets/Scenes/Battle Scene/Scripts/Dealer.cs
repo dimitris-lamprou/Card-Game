@@ -137,13 +137,14 @@ public class Dealer : MonoBehaviour
     public static void Init(List<Card> deck)
     {
         bool deckLimit;
+        int j = 5;
         db.Open();
         cmd.CommandText = "Select * from Card";
         var reader = cmd.ExecuteReader();
 
         if (MapManager.isFromMap)
         {
-            deckLimit = deck.Count < 11;
+            deckLimit = j < 10;
         }
         else
         {
@@ -187,9 +188,10 @@ public class Dealer : MonoBehaviour
                 };
                 deck.Add(card);
             }
+            j++;
             if (MapManager.isFromMap)
             {
-                deckLimit = deck.Count < 11;
+                deckLimit = j < 10;
             }
         }
         db.Close();

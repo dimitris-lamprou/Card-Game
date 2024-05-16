@@ -3681,7 +3681,6 @@ GameObject:
   - component: {fileID: 1370346460}
   - component: {fileID: 1370346463}
   - component: {fileID: 1370346462}
-  - component: {fileID: 1370346465}
   - component: {fileID: 1370346466}
   m_Layer: 0
   m_Name: ScriptHolder
@@ -3730,18 +3729,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemysImage: {fileID: 487010612}
---- !u!114 &1370346465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370346457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27429ac9f72276149adebc5d3dbca881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1370346466
 MonoBehaviour:
   m_ObjectHideFlags: 0
