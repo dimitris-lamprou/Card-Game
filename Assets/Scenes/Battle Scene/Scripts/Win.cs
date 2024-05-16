@@ -96,6 +96,7 @@ public class Win : MonoBehaviour
         Hero.attack = 0;
         Hero.defence = 0;
         Hero.handLimit = 5;
+        Hero.stamina = Hero.staminaCap;
 
         Dealer.herosAttackText.text = Hero.attack.ToString();
         Dealer.herosDefenceText.text = Hero.defence.ToString();

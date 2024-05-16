@@ -142,7 +142,7 @@ public class BattleManager : MonoBehaviour
 
         //Reset
         Hero.defence = 0;
-        Hero.stamina = 3;
+        Hero.stamina = Hero.staminaCap;
         Hero.attack = 0;
         Enemy.action = Random.Range(0, 5);
         Enemy.isStuned = false;
