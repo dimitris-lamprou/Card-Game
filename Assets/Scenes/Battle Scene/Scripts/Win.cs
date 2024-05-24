@@ -57,6 +57,8 @@ public class Win : MonoBehaviour
                 Description = reader["description"].ToString(),
                 Effect = reader["effect"].ToString(),
                 Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
+                StaminaCost = int.TryParse(reader["stamina cost"].ToString(), out int staminaCost)
+                            ? staminaCost : (int?)null
             };
             tempDeck.Add(card);
         }

@@ -105,16 +105,17 @@ public class Dealer : MonoBehaviour
 
             GameObject card = Instantiate(cardPrefab);
             card.transform.parent = canvas.transform;
-            card.transform.localPosition = new Vector3(-1505 + (180 * (i + 1)), -1030, 0);
+            card.transform.localPosition = new Vector3(-1500 + (185 * (i + 1)), -1015, 0);
             card.transform.Find("Play Card (Button)/Title (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Title;
             card.transform.Find("Play Card (Button)/Description (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Description;
-            card.transform.Find("Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text = 
+            card.transform.Find("Play Card (Button)/Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text = 
                 deck[lastCard].Sacrifice.ToString();
+            card.transform.Find("Play Card (Button)/Stamina Cost (Image)/Text").GetComponent<TMP_Text>().text = deck[lastCard].StaminaCost.ToString();
             card.name = deck[lastCard].Effect;
 
             if (deck[lastCard].Title.Equals("Dazed") || deck[lastCard].Title.Equals("Focus"))
             {
-                Destroy(card.transform.Find("Sacrifice (Button)").gameObject);
+                Destroy(card.transform.Find("Play Card (Button)/Sacrifice (Button)").gameObject);
             }
 
             hand.Add(deck[lastCard]);
@@ -163,6 +164,8 @@ public class Dealer : MonoBehaviour
                         Description = reader["description"].ToString(),
                         Effect = reader["effect"].ToString(),
                         Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
+                        StaminaCost = int.TryParse(reader["stamina cost"].ToString(), out int staminaCost) 
+                            ? staminaCost : (int?)null
                     };
                     deck.Add(card);
                 }
@@ -175,6 +178,8 @@ public class Dealer : MonoBehaviour
                     Description = reader["description"].ToString(),
                     Effect = reader["effect"].ToString(),
                     Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
+                    StaminaCost = int.TryParse(reader["stamina cost"].ToString(), out int staminaCost)
+                            ? staminaCost : (int?)null
                 };
             }
             else
@@ -185,6 +190,8 @@ public class Dealer : MonoBehaviour
                     Description = reader["description"].ToString(),
                     Effect = reader["effect"].ToString(),
                     Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
+                    StaminaCost = int.TryParse(reader["stamina cost"].ToString(), out int staminaCost)
+                            ? staminaCost : (int?)null
                 };
                 deck.Add(card);
             }

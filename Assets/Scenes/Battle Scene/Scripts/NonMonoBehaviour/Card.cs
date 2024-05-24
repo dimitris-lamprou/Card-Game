@@ -5,4 +5,5 @@ public class Card
     public string Effect { get; set; }
     public string Description { get; set; }
     public int? Sacrifice { get; set; }
+    public int? StaminaCost { get; set; }
 }

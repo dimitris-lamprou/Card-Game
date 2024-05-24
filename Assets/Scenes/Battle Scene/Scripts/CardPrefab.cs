@@ -109,7 +109,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
 
             Hero.AddScales(amount);
-            Debug.Log("Heros xp = " + Hero.scales);
+            Debug.Log("Heros scales = " + Hero.scales);
         }
         if (effect.Contains("Defence"))
         {
@@ -220,9 +220,9 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
         }
 
-        Hero.scales += int.Parse( //works for one char xp
-            card.transform.Find("Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text[0].ToString());
-        Debug.Log("Heros xp = " + Hero.scales);
+        Hero.scales += int.Parse(
+            card.transform.Find("Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text.ToString());
+        Debug.Log("Heros Scales = " + Hero.scales);
 
         Hero.handLimit--;
         Hero.hp--;
