@@ -108,8 +108,8 @@ public class Dealer : MonoBehaviour
             card.transform.localPosition = new Vector3(-1505 + (180 * (i + 1)), -1030, 0);
             card.transform.Find("Play Card (Button)/Title (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Title;
             card.transform.Find("Play Card (Button)/Description (Text)").GetComponent<TMP_Text>().text = deck[lastCard].Description;
-            card.transform.Find("Sacrifice (Button)/Experience (Text)").GetComponent<TMP_Text>().text = 
-                deck[lastCard].Experience.ToString();
+            card.transform.Find("Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text = 
+                deck[lastCard].Sacrifice.ToString();
             card.name = deck[lastCard].Effect;
 
             if (deck[lastCard].Title.Equals("Dazed") || deck[lastCard].Title.Equals("Focus"))
@@ -162,7 +162,7 @@ public class Dealer : MonoBehaviour
                         Title = reader["title"].ToString(),
                         Description = reader["description"].ToString(),
                         Effect = reader["effect"].ToString(),
-                        Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
+                        Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
                     };
                     deck.Add(card);
                 }
@@ -174,7 +174,7 @@ public class Dealer : MonoBehaviour
                     Title = reader["title"].ToString(),
                     Description = reader["description"].ToString(),
                     Effect = reader["effect"].ToString(),
-                    Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
+                    Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
                 };
             }
             else
@@ -184,7 +184,7 @@ public class Dealer : MonoBehaviour
                     Title = reader["title"].ToString(),
                     Description = reader["description"].ToString(),
                     Effect = reader["effect"].ToString(),
-                    Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
+                    Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
                 };
                 deck.Add(card);
             }

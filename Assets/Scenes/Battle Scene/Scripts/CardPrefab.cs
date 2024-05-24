@@ -97,19 +97,19 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 Debug.Log("Enemy died");
             }*/
         }
-        else if (effect.Contains("Experience")) //works if card gives xp only
+        else if (effect.Contains("Scales")) //works if card gives xp only
         {
             for (int i = 0; i < effectSplited.Length; i++)
             {
-                if (effectSplited[i].Equals("Experience"))
+                if (effectSplited[i].Equals("Scales"))
                 {
                     amount = int.Parse(effectSplited[i - 1]);
                     break;
                 }
             }
 
-            Hero.AddExp(amount);
-            Debug.Log("Heros xp = " + Hero.exp);
+            Hero.AddScales(amount);
+            Debug.Log("Heros xp = " + Hero.scales);
         }
         if (effect.Contains("Defence"))
         {
@@ -220,9 +220,9 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
         }
 
-        Hero.exp += int.Parse( //works for one char xp
-            card.transform.Find("Sacrifice (Button)/Experience (Text)").GetComponent<TMP_Text>().text[0].ToString());
-        Debug.Log("Heros xp = " + Hero.exp);
+        Hero.scales += int.Parse( //works for one char xp
+            card.transform.Find("Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text[0].ToString());
+        Debug.Log("Heros xp = " + Hero.scales);
 
         Hero.handLimit--;
         Hero.hp--;

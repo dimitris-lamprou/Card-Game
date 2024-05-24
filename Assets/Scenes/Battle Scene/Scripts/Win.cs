@@ -56,7 +56,7 @@ public class Win : MonoBehaviour
                 Title = reader["title"].ToString(),
                 Description = reader["description"].ToString(),
                 Effect = reader["effect"].ToString(),
-                Experience = int.TryParse(reader["experience"].ToString(), out int experience) ? experience : (int?)null,
+                Sacrifice = int.TryParse(reader["sacrifice"].ToString(), out int sacrifice) ? sacrifice : (int?)null,
             };
             tempDeck.Add(card);
         }
@@ -74,7 +74,7 @@ public class Win : MonoBehaviour
         {
             titles[i].text = tempDeck[tempRandVal].Title;
             descriptions[i].text = tempDeck[tempRandVal].Description;
-            exps[i].text = tempDeck[tempRandVal].Experience.ToString();
+            exps[i].text = tempDeck[tempRandVal].Sacrifice.ToString();
 
             tempDeck.RemoveAt(tempRandVal);
             tempRandVal = Random.Range(0, tempDeck.Count);

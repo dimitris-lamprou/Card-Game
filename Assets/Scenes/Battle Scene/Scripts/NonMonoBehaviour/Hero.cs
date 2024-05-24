@@ -30,8 +30,8 @@ public static class Hero
         defence += amount;
     }
 
-    public static void AddExp(int amount)
+    public static void AddScales(int amount)
     {
-        exp += amount;
+        scales += amount;
     }
 }
