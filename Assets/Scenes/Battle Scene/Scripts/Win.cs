@@ -39,9 +39,9 @@ public class Win : MonoBehaviour
         foreach (var card in listOfUnusedCards)
         {
             card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
-            if (card.transform.Find("Sacrifice (Button)") != null)
+            if (card.transform.Find("Play Card (Button)/Sacrifice (Button)") != null)
             {
-                card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+                card.transform.Find("Play Card (Button)/Sacrifice (Button)").GetComponent<Button>().interactable = false;
             }
         }
 

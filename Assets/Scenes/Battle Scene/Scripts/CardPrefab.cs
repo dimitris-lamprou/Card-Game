@@ -42,9 +42,9 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 foreach (var card in listOfUnusedCards)
                 {
                     card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
-                    if (card.transform.Find("Sacrifice (Button)") != null)
+                    if (card.transform.Find("Play Card (Button)/Sacrifice (Button)") != null)
                     {
-                        card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+                        card.transform.Find("Play Card (Button)/Sacrifice (Button)").GetComponent<Button>().interactable = false;
                     }
                 }
             }
@@ -189,25 +189,32 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Dealer.discard.Add(playedCard);
         Dealer.hand.Remove(playedCard);
 
-        Hero.stamina--;
+        //Hero.stamina--;
+        Hero.stamina -= int.Parse(card.transform.Find("Play Card (Button)/Stamina Cost (Image)/Text")
+            .GetComponent<TMP_Text>().text);
 
         Dealer.herosStaminaText.text = Hero.stamina.ToString();
         Dealer.discardText.text = Dealer.discard.Count.ToString();
 
-        Destroy(card);
 
         if (Hero.stamina == 0)
         {
             var listOfUnusedCards = GameObject.FindGameObjectsWithTag("Card");
             foreach (var card in listOfUnusedCards)
             {
-                card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
-                if (card.transform.Find("Sacrifice (Button)") != null)
+                if (card.transform.Find("Play Card (Button)/Stamina Cost (Image)/Text").GetComponent<TMP_Text>().text.Equals("0"))
                 {
-                    card.transform.Find("Sacrifice (Button)").GetComponent<Button>().interactable = false;
+                    continue;
+                }
+
+                card.transform.Find("Play Card (Button)").GetComponent<Button>().interactable = false;
+                if (card.transform.Find("Play Card (Button)/Sacrifice (Button)") != null)
+                {
+                    card.transform.Find("Play Card (Button)/Sacrifice (Button)").GetComponent<Button>().interactable = false;
                 }
             }
         }
+        Destroy(card);
     }
 
     public void Sacrifice()
@@ -221,7 +228,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
 
         Hero.scales += int.Parse(
-            card.transform.Find("Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text.ToString());
+            card.transform.Find("Play Card (Button)/Sacrifice (Button)/Scales (Text)").GetComponent<TMP_Text>().text.ToString());
         Debug.Log("Heros Scales = " + Hero.scales);
 
         Hero.handLimit--;
