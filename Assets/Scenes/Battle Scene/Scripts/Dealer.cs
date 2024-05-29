@@ -57,6 +57,7 @@ public class Dealer : MonoBehaviour
         if (isTheFirstTime)
         {
             Init(deck);
+            Enemy.InitEnemies();
         }
 
         deck.Clear();
@@ -67,7 +68,9 @@ public class Dealer : MonoBehaviour
 
         Shuffle(deck);
         Deal(deck);
-        Enemy.WhatWillDo();
+
+        Enemy.imp.PrepareMove();
+        Enemy.imp.WhatWillDo();
 
         herosHpText.text = Hero.hp.ToString();
         herosStaminaText.text = Hero.stamina.ToString();

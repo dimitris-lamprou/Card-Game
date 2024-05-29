@@ -1,20 +1,105 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
-public class Enemy : MonoBehaviour
+public class Enemy
 {
-    public static readonly int hpCap = 4;
+    public int hpCap;
+    public int hp;
+    public int defence;
+    public int attack;
+    public bool isStuned = false;
+    public bool isEnraged = false;
+    public int action;
 
-    public static int hp = 4;
-    public static int defence = 0;
-    public static int action;
+    public int countMove1;
+    public int countMove2;
 
-    public static int attack;
-    public static bool isStuned = false;
-    public static bool isEnraged = false;
+    public static string move;
 
-    public static void A(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText)
+    //Enemies
+    public static Enemy imp;
+
+    public static void InitEnemies()
+    {
+        imp = new()
+        {
+            hpCap = 30,
+            hp = 30,
+            defence = 0,
+            attack = 0,
+            isStuned = false,
+            isEnraged = false,
+            action = 0
+        };
+    }
+
+    public void Move(string name)
+    {
+        if (name.Equals("Rake"))
+        {
+            attack = 10;
+        }
+        else if (name.Equals("Bite"))
+        {
+            attack = 6;
+            //and Weak
+        }
+    }
+
+    public void PrepareMove()
+    {
+        action = Random.Range(0, 100);
+        if (countMove1 == 2)
+        {
+            countMove1 = 0;
+            move = "Bite";
+            Move(move);
+            countMove2++;
+            Debug.Log("move2 = " + countMove2);
+            return;
+        }
+        else if (countMove2 == 2)
+        {
+            countMove2 = 0;
+            move = "Rake";
+            Move(move);
+            countMove1++;
+            Debug.Log("move1 = " + countMove1);
+            return;
+        }
+
+        if (action <= 60)
+        {
+            move = "Rake";
+            Move(move);
+            countMove1++;
+            Debug.Log("move1 = " + countMove1);
+            countMove2 = 0;
+        }
+        else
+        {
+            move = "Bite";
+            Move(move);
+            countMove2++;
+            Debug.Log("move2 = " + countMove2);
+            countMove1 = 0;
+        }
+    }
+
+    public void Act()
+    {
+        switch (move)
+        {
+            case "Rake":
+                DealDamage();
+                break;
+            case "Bite":
+                DealDamage();
+                break;
+        }
+    }
+
+    /*public void A(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText)
     {
         if (action == 0) //deal dmg
         {
@@ -37,9 +122,9 @@ public class Enemy : MonoBehaviour
             Dealer.Shuffle(discard);
         }
         // if action = 4 dont do anything || Confused
-    }
+    }*/
 
-    public static void B(TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText,
+    /*public void B(TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText,
         TMP_Text enemysHpText)
     {
         if (action == 0) //deal dmg
@@ -62,41 +147,41 @@ public class Enemy : MonoBehaviour
             enemysHpText.text = hp.ToString();
         }
         // if action = 4 dont do anything || Confused
-    }
+    }*/
 
-    public static void DealDamage(TMP_Text herosDefenceText, TMP_Text herosHpText)
+    public void DealDamage()
     {
         if (Hero.defence > 0)
         {
             if (Hero.defence >= attack)
             {
                 Hero.defence -= attack;
-                herosDefenceText.text = Hero.defence.ToString();
+                Dealer.herosDefenceText.text = Hero.defence.ToString();
             }
             else
             {
                 int remainingDamage = attack - Hero.defence;
                 Hero.defence = 0;
                 Hero.hp -= remainingDamage;
-                herosDefenceText.text = Hero.defence.ToString();
-                herosHpText.text = Hero.hp.ToString();
+                Dealer.herosDefenceText.text = Hero.defence.ToString();
+                Dealer.herosHpText.text = Hero.hp.ToString();
             }
         }
         else
         {
             Hero.hp -= attack;
-            herosHpText.text = Hero.hp.ToString();
+            Dealer.herosHpText.text = Hero.hp.ToString();
         }
         attack = 0;
     }
 
-    private static void AddDefence(TMP_Text enemysDefenceText, int amount)
+    private void AddDefence(TMP_Text enemysDefenceText, int amount)
     {
         defence += amount;
         enemysDefenceText.text = defence.ToString();
     }
 
-    public static void Heal(int amount)
+    public void Heal(int amount)
     {
         hp += amount;
         if (hp > hpCap)
@@ -105,9 +190,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public static void WhatWillDo()
+    public void WhatWillDo()
     {
-        if (MapManager.stageIndex == 2)
+        switch (move)
+        {
+            case "Rake":
+                Dealer.enemysActionText.text = "+10 <sprite name=Attack>";
+                break;
+            case "Bite":
+                Dealer.enemysActionText.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
+                break;
+        }
+        
+
+        /*if (MapManager.stageIndex == 2)
         {
             if (Enemy.action == 0)
             {
@@ -152,7 +248,7 @@ public class Enemy : MonoBehaviour
             {
                 Dealer.enemysActionText.text = "Enemy is confused and will not do anything";
             }
-        }
+        }*/
 
         //  FOR DEMO MAP 1
         /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))

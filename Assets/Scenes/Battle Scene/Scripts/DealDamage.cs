@@ -21,29 +21,29 @@ public class DealDamage : MonoBehaviour
     {
         if (Hero.attack > 0)
         {
-            if (Enemy.defence > 0)
+            if (Enemy.imp.defence > 0)
             {
-                if (Enemy.defence >= Hero.attack)
+                if (Enemy.imp.defence >= Hero.attack)
                 {
-                    Enemy.defence -= Hero.attack;
-                    Dealer.enemysDefenceText.text = Enemy.defence.ToString();
+                    Enemy.imp.defence -= Hero.attack;
+                    Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
                 }
                 else
                 {
-                    int remainingDamage = Hero.attack - Enemy.defence;
-                    Enemy.defence = 0;
-                    Enemy.hp -= remainingDamage;
-                    Dealer.enemysDefenceText.text = Enemy.defence.ToString();
-                    Dealer.enemysHpText.text = Enemy.hp.ToString();
+                    int remainingDamage = Hero.attack - Enemy.imp.defence;
+                    Enemy.imp.defence = 0;
+                    Enemy.imp.hp -= remainingDamage;
+                    Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
+                    Dealer.enemysHpText.text = Enemy.imp.hp.ToString();
                 }
             }
             else
             {
-                Enemy.hp -= Hero.attack;
-                Dealer.enemysHpText.text = Enemy.hp.ToString();
+                Enemy.imp.hp -= Hero.attack;
+                Dealer.enemysHpText.text = Enemy.imp.hp.ToString();
             }
 
-            if (Enemy.hp <= 0) //if hero destroyed enemy
+            if (Enemy.imp.hp <= 0) //if hero destroyed enemy
             {
                 //TODO MUST BE A FUNCTION OR CLASS
                 //Store Exp
@@ -51,8 +51,8 @@ public class DealDamage : MonoBehaviour
                 //Reset
                 Hero.stamina = 3; // = cap for later
                 Hero.attack = 0;
-                Enemy.defence = 0;
-                Enemy.hp = 4;
+                Enemy.imp.defence = 0;
+                Enemy.imp.hp = 4;
                 if (MapManager.isFromMap)
                 {
                     newCards.SetActive(true);

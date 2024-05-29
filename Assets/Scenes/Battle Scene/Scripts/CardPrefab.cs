@@ -143,7 +143,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         if (effect.Contains("Stun"))
         {
-            Enemy.isStuned = true;
+            Enemy.imp.isStuned = true;
             Dealer.enemysStatusEffectsText.text += "<sprite name=Stun>";
             Dealer.enemysThoughtText.text = "";
         }
@@ -158,21 +158,21 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         if (effect.Contains("Enrage"))
         {
-            Enemy.isEnraged = true;
-            if (Enemy.defence > 0)
+            Enemy.imp.isEnraged = true;
+            if (Enemy.imp.defence > 0)
             {
-                Enemy.defence--;
-                Dealer.enemysDefenceText.text = Enemy.defence.ToString();
+                Enemy.imp.defence--;
+                Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
             }
-            Enemy.attack++;
-            Dealer.enemysAttackText.text = Enemy.attack.ToString();
+            Enemy.imp.attack++;
+            Dealer.enemysAttackText.text = Enemy.imp.attack.ToString();
             Dealer.enemysStatusEffectsText.text += "<sprite name=Enrage>";
         }
         if (effect.Contains("Drain")) //only for test reasons
         {
-            if (Enemy.isEnraged)
+            if (Enemy.imp.isEnraged)
             {
-                Enemy.hp--;
+                Enemy.imp.hp--;
                 if (Hero.hp == Hero.hpCap)
                 {
                     //dont do anything
@@ -181,7 +181,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 {
                     Hero.hp++;
                 }
-                Dealer.enemysHpText.text = Enemy.hp.ToString();
+                Dealer.enemysHpText.text = Enemy.imp.hp.ToString();
                 Dealer.herosHpText.text = Hero.hp.ToString();
             }
         }

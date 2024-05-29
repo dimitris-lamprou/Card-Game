@@ -64,15 +64,15 @@ public class BattleManager : MonoBehaviour
             Enemy.attack = 0;
             enemysAttackText.text = Enemy.attack.ToString();
         }*/
-        if (Enemy.defence > 0)
+        if (Enemy.imp.defence > 0)
         {
-            Enemy.defence = 0;
-            Dealer.enemysDefenceText.text = Enemy.defence.ToString();
+            Enemy.imp.defence = 0;
+            Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
         }
 
         //Enemys action
 
-        if (Enemy.isStuned)
+        /*if (Enemy.isStuned)
         {
             //dont act
         }
@@ -83,12 +83,21 @@ public class BattleManager : MonoBehaviour
         else
         {
             Enemy.A(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText);
+        }*/
+
+        if (Enemy.imp.isStuned)
+        {
+            //dont act
+        }
+        else
+        {
+            Enemy.imp.Act();
         }
 
-        if (Enemy.attack > 0)
+        /*if (Enemy.attack > 0)
         {
             Enemy.DealDamage(Dealer.herosDefenceText, Dealer.herosHpText);
-        }
+        }*/
 
         //  FOR DEMO MAP 1 without stun card
         /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
@@ -144,11 +153,12 @@ public class BattleManager : MonoBehaviour
         Hero.defence = 0;
         Hero.stamina = Hero.staminaCap;
         Hero.attack = 0;
-        Enemy.action = Random.Range(0, 5);
-        Enemy.isStuned = false;
-        Enemy.isEnraged = false;
-        Enemy.attack = 0;
-        Enemy.WhatWillDo();
+        Enemy.imp.action = Random.Range(0, 100);
+        Enemy.imp.isStuned = false;
+        Enemy.imp.isEnraged = false;
+        Enemy.imp.attack = 0;
+        Enemy.imp.PrepareMove();
+        Enemy.imp.WhatWillDo();
 
         if (StatusEffects.heroStunRounds > 0)
         {
@@ -159,9 +169,9 @@ public class BattleManager : MonoBehaviour
         Dealer.herosStatusEffectsText.text = "";
         Dealer.herosStaminaText.text = Hero.stamina.ToString();
         Dealer.herosAttackText.text = Hero.attack.ToString();
-        Dealer.enemysDefenceText.text = Enemy.defence.ToString();
+        Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
         Dealer.enemysStatusEffectsText.text = "";
-        Dealer.enemysAttackText.text = Enemy.attack.ToString();
+        Dealer.enemysAttackText.text = Enemy.imp.attack.ToString();
         Dealer.discardText.text = discard.Count.ToString();
 
         if (StatusEffects.heroStunRounds > 0)
