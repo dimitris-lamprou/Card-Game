@@ -4,27 +4,26 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemys Health Text
   - Discard Text
   - Graveyard Text
-  - Card
   - Canvas
   - Deck Text
   - Heros Hp
-  - Enemy
-  - Sign Post
   - Stamina Text
   - Attack Text
-  - Action Text
   - Heros Defence
-  - Enemys Defence
-  - Enemys Block Bar
-  - Heros Block Bar
-  - Enemys Health Bar
-  - Enemys Thought Text
   - Heros Status Effects Text
-  - Enemys Status Effects Text
-  - Enemys Attack Text
+  - Enemys Health Text1
+  - Enemys Health Text2
+  - Card
+  - Enemys Defence Text1
+  - Enemys Defence Text2
+  - Enemys Thought Text1
+  - Enemys Thought Text2
+  - Enemys Status Effects Text1
+  - Enemys Status Effects Text2
+  - Enemys Attack Text1
+  - Enemys Attack Text2
   layers:
   - Default
   - TransparentFX

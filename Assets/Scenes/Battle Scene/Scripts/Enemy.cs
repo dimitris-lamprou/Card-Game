@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Enemy
 {
@@ -13,11 +14,15 @@ public class Enemy
 
     public int countMove1;
     public int countMove2;
+    public int percentageOfMove;
+    public string move1;
+    public string move2;
 
     public static string move;
 
     //Enemies
     public static Enemy imp;
+    public static Enemy darkImp;
 
     public static void InitEnemies()
     {
@@ -29,19 +34,42 @@ public class Enemy
             attack = 0,
             isStuned = false,
             isEnraged = false,
-            action = 0
+            action = 0,
+            percentageOfMove = 60,
+            move1 = "Rake",
+            move2 = "Bite"
+        };
+        darkImp = new()
+        {
+            hpCap = 40,
+            hp = 40,
+            defence = 0,
+            attack = 0,
+            isStuned = false,
+            isEnraged = false,
+            action = 0,
+            percentageOfMove = 60,
+            move1 = "PowerRake",
+            move2 = "PowerBite"
         };
     }
 
     public void Move(string name)
     {
-        if (name.Equals("Rake"))
+        switch (name)
         {
-            attack = 10;
-        }
-        else if (name.Equals("Bite"))
-        {
-            attack = 6;
+            case "Rake":
+                attack = 10;
+                break;
+            case "Bite":
+                attack = 6;
+                break;
+            case "PowerRake":
+                attack = 15;
+                break;
+            case "PowerBite":
+                attack = 8;
+                break;
         }
     }
 
@@ -51,7 +79,7 @@ public class Enemy
         if (countMove1 == 2)
         {
             countMove1 = 0;
-            move = "Bite";
+            move = move2;
             Move(move);
             countMove2++;
             return;
@@ -59,22 +87,22 @@ public class Enemy
         else if (countMove2 == 2)
         {
             countMove2 = 0;
-            move = "Rake";
+            move = move1;
             Move(move);
             countMove1++;
             return;
         }
 
-        if (action <= 60)
+        if (action <= percentageOfMove)
         {
-            move = "Rake";
+            move = move1;
             Move(move);
             countMove1++;
             countMove2 = 0;
         }
         else
         {
-            move = "Bite";
+            move = move2;
             Move(move);
             countMove2++;
             countMove1 = 0;
@@ -92,10 +120,17 @@ public class Enemy
                 DealDamage();
                 MakeHeroWeak();
                 break;
+            case "PowerRake":
+                DealDamage();
+                break;
+            case "PowerBite":
+                DealDamage();
+                MakeHeroWeak();
+                break;
         }
     }
 
-    /*public void A(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText)
+    /*public void A(List<Card> discard, TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText1)
     {
         if (action == 0) //deal dmg
         {
@@ -104,13 +139,13 @@ public class Enemy
         }
         else if (action == 1) //add defence
         {
-            AddDefence(enemysDefenceText, 5);
+            AddDefence(enemysDefenceText1, 5);
         }
         else if (action == 2) //deal dmg and add defence
         {
             attack += 3;
             DealDamage(herosDefenceText, herosHpText);
-            AddDefence(enemysDefenceText, 2);
+            AddDefence(enemysDefenceText1, 2);
         }
         else if (action == 3) // add dazed to heros deck
         {
@@ -120,8 +155,8 @@ public class Enemy
         // if action = 4 dont do anything || Confused
     }*/
 
-    /*public void B(TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText,
-        TMP_Text enemysHpText)
+    /*public void B(TMP_Text herosDefenceText, TMP_Text herosHpText, TMP_Text enemysDefenceText1,
+        TMP_Text enemysHpText1)
     {
         if (action == 0) //deal dmg
         {
@@ -130,17 +165,17 @@ public class Enemy
         }
         else if (action == 1) //add defence
         {
-            AddDefence(enemysDefenceText, 7);
+            AddDefence(enemysDefenceText1, 7);
         }
         else if (action == 2) //add defence
         {
-            AddDefence(enemysDefenceText, 5);
+            AddDefence(enemysDefenceText1, 5);
         }
         else if (action == 3) //heal
         {
             int amount = 3;
             Heal(amount);
-            enemysHpText.text = hp.ToString();
+            enemysHpText1.text = hp.ToString();
         }
         // if action = 4 dont do anything || Confused
     }*/
@@ -171,10 +206,10 @@ public class Enemy
         attack = 0;
     }
 
-    private void AddDefence(TMP_Text enemysDefenceText, int amount)
+    private void AddDefence(TMP_Text enemysDefenceText1, int amount)
     {
         defence += amount;
-        enemysDefenceText.text = defence.ToString();
+        enemysDefenceText1.text = defence.ToString();
     }
 
     public void Heal(int amount)
@@ -191,10 +226,16 @@ public class Enemy
         switch (move)
         {
             case "Rake":
-                Dealer.enemysActionText.text = "+10 <sprite name=Attack>";
+                Dealer.enemysActionText1.text = "+10 <sprite name=Attack>";
                 break;
             case "Bite":
-                Dealer.enemysActionText.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
+                Dealer.enemysActionText1.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
+                break;
+            case "PowerRake":
+                Dealer.enemysActionText1.text = "+15 <sprite name=Attack>";
+                break;
+            case "PowerBite":
+                Dealer.enemysActionText1.text = "+8 <sprite name=Attack> and <sprite name=Weak>";
                 break;
         }
         
@@ -203,46 +244,46 @@ public class Enemy
         {
             if (Enemy.action == 0)
             {
-                Dealer.enemysActionText.text = "+3 <sprite name=Attack>";
+                Dealer.enemysActionText1.text = "+3 <sprite name=Attack>";
             }
             else if (Enemy.action == 1)
             {
-                Dealer.enemysActionText.text = "+7 <sprite name=Defence>";
+                Dealer.enemysActionText1.text = "+7 <sprite name=Defence>";
             }
             else if (Enemy.action == 2)
             {
-                Dealer.enemysActionText.text = "+5 <sprite name=Defence>";
+                Dealer.enemysActionText1.text = "+5 <sprite name=Defence>";
             }
             else if (Enemy.action == 3)
             {
-                Dealer.enemysActionText.text = "+3 <sprite name=Heal>";
+                Dealer.enemysActionText1.text = "+3 <sprite name=Heal>";
             }
             else
             {
-                Dealer.enemysActionText.text = "Enemy is confused and will not do anything";
+                Dealer.enemysActionText1.text = "Enemy is confused and will not do anything";
             }
         }
         else
         {
             if (Enemy.action == 0)
             {
-                Dealer.enemysActionText.text = "+5 <sprite name=Attack>";
+                Dealer.enemysActionText1.text = "+5 <sprite name=Attack>";
             }
             else if (Enemy.action == 1)
             {
-                Dealer.enemysActionText.text = "+5 <sprite name=Defence>";
+                Dealer.enemysActionText1.text = "+5 <sprite name=Defence>";
             }
             else if (Enemy.action == 2)
             {
-                Dealer.enemysActionText.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
+                Dealer.enemysActionText1.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
             }
             else if (Enemy.action == 3)
             {
-                Dealer.enemysActionText.text = "Enemy will add Dazed to your deck";
+                Dealer.enemysActionText1.text = "Enemy will add Dazed to your deck";
             }
             else
             {
-                Dealer.enemysActionText.text = "Enemy is confused and will not do anything";
+                Dealer.enemysActionText1.text = "Enemy is confused and will not do anything";
             }
         }*/
 

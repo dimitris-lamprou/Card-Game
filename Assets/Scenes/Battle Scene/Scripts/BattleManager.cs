@@ -26,21 +26,21 @@ public class BattleManager : MonoBehaviour
             if (Enemy.defence >= Hero.attack)
             {
                 Enemy.defence -= Hero.attack;
-                enemysDefenceText.text = Enemy.defence.ToString();
+                enemysDefenceText1.text = Enemy.defence.ToString();
             }
             else
             {
                 int remainingDamage = Hero.attack - Enemy.defence;
                 Enemy.defence = 0;
                 Enemy.hp -= remainingDamage;
-                enemysDefenceText.text = "0";
-                enemysHpText.text = Enemy.hp.ToString();
+                enemysDefenceText1.text = "0";
+                enemysHpText1.text = Enemy.hp.ToString();
             }
         }
         else
         {
             Enemy.hp -= Hero.attack;
-            enemysHpText.text = Enemy.hp.ToString();
+            enemysHpText1.text = Enemy.hp.ToString();
         }
 
         if (Enemy.hp <= 0) //if hero destroyed enemy
@@ -62,15 +62,15 @@ public class BattleManager : MonoBehaviour
         /*if (Enemy.attack > 0)
         {
             Enemy.attack = 0;
-            enemysAttackText.text = Enemy.attack.ToString();
+            enemysAttackText1.text = Enemy.attack.ToString();
         }*/
 
         //Enemys pre Reset
 
-        if (Enemy.imp.defence > 0)
+        if (Enemy.darkImp.defence > 0)
         {
-            Enemy.imp.defence = 0;
-            Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
+            Enemy.darkImp.defence = 0;
+            Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
         }
 
         //Hero Reset
@@ -103,22 +103,22 @@ public class BattleManager : MonoBehaviour
         }
         else if (MapManager.stageIndex == 2)
         {
-            Enemy.B(Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText, Dealer.enemysHpText);
+            Enemy.B(Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText1, Dealer.enemysHpText1);
         }
         else
         {
-            Enemy.A(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText);
+            Enemy.A(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText1);
         }*/
 
         //Enemys action
 
-        if (Enemy.imp.isStuned)
+        if (Enemy.darkImp.isStuned)
         {
             //dont act
         }
         else
         {
-            Enemy.imp.Act();
+            Enemy.darkImp.Act();
             if (Hero.isWeak)
             {
                 Debug.Log("Weak by " + StatusEffects.heroWeakAmount + " for " + StatusEffects.heroWeakRounds + " rounds");
@@ -134,11 +134,11 @@ public class BattleManager : MonoBehaviour
         //  FOR DEMO MAP 1 without stun card
         /*if (CollideWithEnemy.enemysName.Equals("Enemy A"))
         {
-            EnemysAI.A(discard, herosDefenceText, herosHpText, enemysDefenceText);
+            EnemysAI.A(discard, herosDefenceText, herosHpText, enemysDefenceText1);
         }
         else if (CollideWithEnemy.enemysName.Equals("Enemy B"))
         {
-            EnemysAI.B(discard, herosDefenceText, herosHpText, enemysDefenceText, enemysHpText);
+            EnemysAI.B(discard, herosDefenceText, herosHpText, enemysDefenceText1, enemysHpText1);
         }*/
 
         //Deal Cards
@@ -183,15 +183,15 @@ public class BattleManager : MonoBehaviour
 
         //Enemy Reset
         
-        Enemy.imp.action = Random.Range(0, 100);
-        Enemy.imp.isStuned = false;
-        Enemy.imp.isEnraged = false;
-        Enemy.imp.attack = 0;
-        Enemy.imp.PrepareMove();
-        Enemy.imp.WhatWillDo();
+        Enemy.darkImp.action = Random.Range(0, 100);
+        Enemy.darkImp.isStuned = false;
+        Enemy.darkImp.isEnraged = false;
+        Enemy.darkImp.attack = 0;
+        Enemy.darkImp.PrepareMove();
+        Enemy.darkImp.WhatWillDo();
 
-        Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
-        Dealer.enemysStatusEffectsText.text = "";
-        Dealer.enemysAttackText.text = Enemy.imp.attack.ToString();
+        Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
+        Dealer.enemysStatusEffectsText1.text = "";
+        Dealer.enemysAttackText1.text = Enemy.darkImp.attack.ToString();
     }
 }
