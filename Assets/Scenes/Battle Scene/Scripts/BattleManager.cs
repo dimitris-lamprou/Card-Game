@@ -64,10 +64,35 @@ public class BattleManager : MonoBehaviour
             Enemy.attack = 0;
             enemysAttackText.text = Enemy.attack.ToString();
         }*/
+
+        //Enemys pre Reset
+
         if (Enemy.imp.defence > 0)
         {
             Enemy.imp.defence = 0;
             Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
+        }
+
+        //Hero Reset
+
+        Hero.defence = 0;
+        Hero.stamina = Hero.staminaCap;
+        Hero.attack = 0;
+
+        Dealer.herosDefenceText.text = Hero.defence.ToString();
+        Dealer.herosStatusEffectsText.text = "";
+        Dealer.herosStaminaText.text = Hero.stamina.ToString();
+        Dealer.herosAttackText.text = Hero.attack.ToString();
+        Dealer.discardText.text = discard.Count.ToString();
+
+        if (StatusEffects.heroStunRounds > 0)
+        {
+            StatusEffects.heroStunRounds--;
+        }
+
+        if (StatusEffects.heroStunRounds > 0)
+        {
+            Dealer.herosStatusEffectsText.text += StatusEffects.stunIcon;
         }
 
         //Enemys action
@@ -85,6 +110,8 @@ public class BattleManager : MonoBehaviour
             Enemy.A(discard, Dealer.herosDefenceText, Dealer.herosHpText, Dealer.enemysDefenceText);
         }*/
 
+        //Enemys action
+
         if (Enemy.imp.isStuned)
         {
             //dont act
@@ -92,6 +119,11 @@ public class BattleManager : MonoBehaviour
         else
         {
             Enemy.imp.Act();
+            if (Hero.isWeak)
+            {
+                Debug.Log("Weak by " + StatusEffects.heroWeakAmount + " for " + StatusEffects.heroWeakRounds + " rounds");
+                StatusEffects.Weak("Hero");
+            }
         }
 
         /*if (Enemy.attack > 0)
@@ -149,10 +181,8 @@ public class BattleManager : MonoBehaviour
             Dealer.Deal(deck);
         }
 
-        //Reset
-        Hero.defence = 0;
-        Hero.stamina = Hero.staminaCap;
-        Hero.attack = 0;
+        //Enemy Reset
+        
         Enemy.imp.action = Random.Range(0, 100);
         Enemy.imp.isStuned = false;
         Enemy.imp.isEnraged = false;
@@ -160,23 +190,8 @@ public class BattleManager : MonoBehaviour
         Enemy.imp.PrepareMove();
         Enemy.imp.WhatWillDo();
 
-        if (StatusEffects.heroStunRounds > 0)
-        {
-            StatusEffects.heroStunRounds--;
-        }
-
-        Dealer.herosDefenceText.text = Hero.defence.ToString();
-        Dealer.herosStatusEffectsText.text = "";
-        Dealer.herosStaminaText.text = Hero.stamina.ToString();
-        Dealer.herosAttackText.text = Hero.attack.ToString();
         Dealer.enemysDefenceText.text = Enemy.imp.defence.ToString();
         Dealer.enemysStatusEffectsText.text = "";
         Dealer.enemysAttackText.text = Enemy.imp.attack.ToString();
-        Dealer.discardText.text = discard.Count.ToString();
-
-        if (StatusEffects.heroStunRounds > 0)
-        {
-            Dealer.herosStatusEffectsText.text += StatusEffects.stunIcon;
-        }
     }
 }

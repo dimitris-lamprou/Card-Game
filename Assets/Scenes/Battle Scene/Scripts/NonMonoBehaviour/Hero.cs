@@ -16,6 +16,9 @@ public static class Hero
 
     public static List<Card> deck = new();
 
+    //status effects
+    public static bool isWeak = false;
+
     public static void Heal(int amount)
     {
         hp += amount;

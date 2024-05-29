@@ -42,7 +42,6 @@ public class Enemy
         else if (name.Equals("Bite"))
         {
             attack = 6;
-            //and Weak
         }
     }
 
@@ -55,7 +54,6 @@ public class Enemy
             move = "Bite";
             Move(move);
             countMove2++;
-            Debug.Log("move2 = " + countMove2);
             return;
         }
         else if (countMove2 == 2)
@@ -64,7 +62,6 @@ public class Enemy
             move = "Rake";
             Move(move);
             countMove1++;
-            Debug.Log("move1 = " + countMove1);
             return;
         }
 
@@ -73,7 +70,6 @@ public class Enemy
             move = "Rake";
             Move(move);
             countMove1++;
-            Debug.Log("move1 = " + countMove1);
             countMove2 = 0;
         }
         else
@@ -81,7 +77,6 @@ public class Enemy
             move = "Bite";
             Move(move);
             countMove2++;
-            Debug.Log("move2 = " + countMove2);
             countMove1 = 0;
         }
     }
@@ -95,6 +90,7 @@ public class Enemy
                 break;
             case "Bite":
                 DealDamage();
+                MakeHeroWeak();
                 break;
         }
     }
@@ -297,5 +293,12 @@ public class Enemy
                 Debug.Log("Enemy is confused and will not do anything");
             }
         }*/
+    }
+
+    public void MakeHeroWeak()
+    {
+        StatusEffects.heroWeakAmount = Random.Range(1,3);
+        StatusEffects.heroWeakRounds = Random.Range(1,3);
+        Hero.isWeak = true;
     }
 }

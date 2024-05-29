@@ -77,6 +77,8 @@ public class Dealer : MonoBehaviour
         herosDefenceText.text = Hero.defence.ToString();
         herosAttackText.text = Hero.attack.ToString();
 
+        enemysHpText.text = Enemy.imp.hp.ToString();
+
         if (MapManager.isFromMap)
         {
             enemysImage.sprite = Resources.Load<Sprite>("Enemies/" + MapManager.stageIndex.ToString());
