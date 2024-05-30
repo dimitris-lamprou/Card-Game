@@ -1,8 +1,16 @@
+using System.Linq;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
 {
     [SerializeField] private GameObject newCards;
+
+    private string enemysName;
+
+    private void Start()
+    {
+        enemysName = gameObject.name;
+    }
 
     private void OnMouseEnter()
     {
@@ -21,29 +29,34 @@ public class DealDamage : MonoBehaviour
     {
         if (Hero.attack > 0)
         {
-            if (Enemy.darkImp.defence > 0)
+            Enemy enemy = Enemy.enemies.FirstOrDefault(e => e.name == enemysName);
+            EnemysUiText enemysUiTextDefence = Dealer.enemiesDefenceText.
+                FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+            EnemysUiText enemysUiTextHp = Dealer.enemiesHpText.FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+
+            if (enemy.defence > 0)
             {
-                if (Enemy.darkImp.defence >= Hero.attack)
+                if (enemy.defence >= Hero.attack)
                 {
-                    Enemy.darkImp.defence -= Hero.attack;
-                    Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
+                    enemy.defence -= Hero.attack;
+                   enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
                 }
                 else
                 {
-                    int remainingDamage = Hero.attack - Enemy.darkImp.defence;
-                    Enemy.darkImp.defence = 0;
-                    Enemy.darkImp.hp -= remainingDamage;
-                    Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
-                    Dealer.enemysHpText1.text = Enemy.darkImp.hp.ToString();
+                    int remainingDamage = Hero.attack - enemy.defence;
+                    enemy.defence = 0;
+                    enemy.hp -= remainingDamage;
+                   enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
+                    enemysUiTextHp.tmp_Text.text = enemy.hp.ToString();
                 }
             }
             else
             {
-                Enemy.darkImp.hp -= Hero.attack;
-                Dealer.enemysHpText1.text = Enemy.darkImp.hp.ToString();
+                enemy.hp -= Hero.attack;
+                enemysUiTextHp.tmp_Text.text = enemy.hp.ToString();
             }
 
-            if (Enemy.darkImp.hp <= 0) //if hero destroyed enemy
+            if (enemy.hp <= 0) //if hero destroyed enemy
             {
                 //TODO MUST BE A FUNCTION OR CLASS
                 //Store Exp
@@ -51,8 +64,8 @@ public class DealDamage : MonoBehaviour
                 //Reset
                 Hero.stamina = 3; // = cap for later
                 Hero.attack = 0;
-                Enemy.darkImp.defence = 0;
-                Enemy.darkImp.hp = 4;
+                enemy.defence = 0;
+                enemy.hp = 4;
                 if (MapManager.isFromMap)
                 {
                     newCards.SetActive(true);

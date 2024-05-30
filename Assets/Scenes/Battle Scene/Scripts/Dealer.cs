@@ -21,19 +21,23 @@ public class Dealer : MonoBehaviour
     public static TMP_Text enemysThoughtText1;
     public static TMP_Text enemysStatusEffectsText1;
     public static TMP_Text enemysAttackText1;
-    public static TMP_Text enemysActionText1;
     public static TMP_Text enemysHpText2;
     public static TMP_Text enemysDefenceText2;
     public static TMP_Text enemysThoughtText2;
     public static TMP_Text enemysStatusEffectsText2;
     public static TMP_Text enemysAttackText2;
-    public static TMP_Text enemysActionText2;
     public static TMP_Text discardText;
     public static TMP_Text graveyardText;
     public static GameObject cardPrefab;
     public static Canvas canvas;
     public static TMP_Text deckCountText;
     public static Card dazed;
+
+    public static List<EnemysUiText> enemiesHpText = new();
+    public static List<EnemysUiText> enemiesDefenceText = new();
+    public static List<EnemysUiText> enemiesThoughtText = new();
+    public static List<EnemysUiText> enemiesStatusEffectsText = new();
+    public static List<EnemysUiText> enemiesAttackText = new();
 
     private static readonly SqliteConnection db = DBContext.db;
     private static readonly SqliteCommand cmd = DBContext.cmd;
@@ -55,16 +59,84 @@ public class Dealer : MonoBehaviour
         herosAttackText = GameObject.FindWithTag("Attack Text").GetComponent<TMP_Text>();
         herosStatusEffectsText = GameObject.FindWithTag("Heros Status Effects Text").GetComponent<TMP_Text>();
 
+        enemiesHpText.AddRange(new[]
+        {
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Health Text1").GetComponent<TMP_Text>(),
+                name = "Enemys Health Text1"
+            },
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Health Text2").GetComponent<TMP_Text>(),
+                name = "Enemys Health Text2"
+            }
+        });
+
+        enemiesDefenceText.AddRange(new[]
+        {
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Defence Text1").GetComponent<TMP_Text>(),
+                name = "Enemys Defence Text1"
+            },
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Defence Text2").GetComponent<TMP_Text>(),
+                name = "Enemys Defence Text2"
+            }
+        });
+
+        enemiesThoughtText.AddRange(new[]
+        {
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Thought Text1").GetComponent<TMP_Text>(),
+                name = "Enemys Thought Text1"
+            },
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Thought Text2").GetComponent<TMP_Text>(),
+                name = "Enemys Thought Text2"
+            }
+        });
+
+        enemiesStatusEffectsText.AddRange(new[]
+        {
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Status Effects Text1").GetComponent<TMP_Text>(),
+                name = "Enemys Status Effects Text1"
+            },
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Status Effects Text2").GetComponent<TMP_Text>(),
+                name = "Enemys Status Effects Text2"
+            },
+        });
+
+        enemiesAttackText.AddRange(new[]
+        {
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Attack Text1").GetComponent<TMP_Text>(),
+                name = "Enemys Attack Text1"
+            },
+            new EnemysUiText
+            {
+                tmp_Text = GameObject.FindWithTag("Enemys Attack Text2").GetComponent<TMP_Text>(),
+                name = "Enemys Attack Text2"
+            }
+        });
+
         enemysHpText1 = GameObject.FindWithTag("Enemys Health Text1").GetComponent<TMP_Text>();
         enemysDefenceText1 = GameObject.FindWithTag("Enemys Defence Text1").GetComponent<TMP_Text>();
-        enemysActionText1 = GameObject.FindWithTag("Enemys Thought Text1").GetComponent<TMP_Text>();
         enemysThoughtText1 = GameObject.FindWithTag("Enemys Thought Text1").GetComponent<TMP_Text>();
         enemysStatusEffectsText1 = GameObject.FindWithTag("Enemys Status Effects Text1").GetComponent<TMP_Text>();
         enemysAttackText1 = GameObject.FindWithTag("Enemys Attack Text1").GetComponent<TMP_Text>();
 
         enemysHpText2 = GameObject.FindWithTag("Enemys Health Text2").GetComponent<TMP_Text>();
         enemysDefenceText2 = GameObject.FindWithTag("Enemys Defence Text2").GetComponent<TMP_Text>();
-        enemysActionText2 = GameObject.FindWithTag("Enemys Thought Text2").GetComponent<TMP_Text>();
         enemysThoughtText2 = GameObject.FindWithTag("Enemys Thought Text2").GetComponent<TMP_Text>();
         enemysStatusEffectsText2 = GameObject.FindWithTag("Enemys Status Effects Text2").GetComponent<TMP_Text>();
         enemysAttackText2 = GameObject.FindWithTag("Enemys Attack Text2").GetComponent<TMP_Text>();
@@ -84,15 +156,16 @@ public class Dealer : MonoBehaviour
         Shuffle(deck);
         Deal(deck);
 
-        Enemy.darkImp.PrepareMove();
-        Enemy.darkImp.WhatWillDo();
+        Enemy.imp.PrepareMove();
+        Enemy.imp.WhatWillDo();
 
         herosHpText.text = Hero.hp.ToString();
         herosStaminaText.text = Hero.stamina.ToString();
         herosDefenceText.text = Hero.defence.ToString();
         herosAttackText.text = Hero.attack.ToString();
 
-        enemysHpText1.text = Enemy.darkImp.hp.ToString();
+        enemysHpText1.text = Enemy.imp.hp.ToString();
+        enemysHpText2.text = Enemy.darkImp.hp.ToString();
 
         if (MapManager.isFromMap)
         {

@@ -67,10 +67,10 @@ public class BattleManager : MonoBehaviour
 
         //Enemys pre Reset
 
-        if (Enemy.darkImp.defence > 0)
+        if (Enemy.imp.defence > 0)
         {
-            Enemy.darkImp.defence = 0;
-            Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
+            Enemy.imp.defence = 0;
+            Dealer.enemysDefenceText1.text = Enemy.imp.defence.ToString();
         }
 
         //Hero Reset
@@ -112,13 +112,13 @@ public class BattleManager : MonoBehaviour
 
         //Enemys action
 
-        if (Enemy.darkImp.isStuned)
+        if (Enemy.imp.isStuned)
         {
             //dont act
         }
         else
         {
-            Enemy.darkImp.Act();
+            Enemy.imp.Act();
             if (Hero.isWeak)
             {
                 Debug.Log("Weak by " + StatusEffects.heroWeakAmount + " for " + StatusEffects.heroWeakRounds + " rounds");
@@ -183,15 +183,15 @@ public class BattleManager : MonoBehaviour
 
         //Enemy Reset
         
-        Enemy.darkImp.action = Random.Range(0, 100);
-        Enemy.darkImp.isStuned = false;
-        Enemy.darkImp.isEnraged = false;
-        Enemy.darkImp.attack = 0;
-        Enemy.darkImp.PrepareMove();
-        Enemy.darkImp.WhatWillDo();
+        Enemy.imp.action = Random.Range(0, 100);
+        Enemy.imp.isStuned = false;
+        Enemy.imp.isEnraged = false;
+        Enemy.imp.attack = 0;
+        Enemy.imp.PrepareMove();
+        Enemy.imp.WhatWillDo();
 
-        Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
+        Dealer.enemysDefenceText1.text = Enemy.imp.defence.ToString();
         Dealer.enemysStatusEffectsText1.text = "";
-        Dealer.enemysAttackText1.text = Enemy.darkImp.attack.ToString();
+        Dealer.enemysAttackText1.text = Enemy.imp.attack.ToString();
     }
 }

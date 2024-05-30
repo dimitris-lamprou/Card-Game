@@ -143,7 +143,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         if (effect.Contains("Stun"))
         {
-            Enemy.darkImp.isStuned = true;
+            Enemy.imp.isStuned = true;
             Dealer.enemysStatusEffectsText1.text += "<sprite name=Stun>";
             Dealer.enemysThoughtText1.text = "";
         }
@@ -158,21 +158,21 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         if (effect.Contains("Enrage"))
         {
-            Enemy.darkImp.isEnraged = true;
-            if (Enemy.darkImp.defence > 0)
+            Enemy.imp.isEnraged = true;
+            if (Enemy.imp.defence > 0)
             {
-                Enemy.darkImp.defence--;
-                Dealer.enemysDefenceText1.text = Enemy.darkImp.defence.ToString();
+                Enemy.imp.defence--;
+                Dealer.enemysDefenceText1.text = Enemy.imp.defence.ToString();
             }
-            Enemy.darkImp.attack++;
-            Dealer.enemysAttackText1.text = Enemy.darkImp.attack.ToString();
+            Enemy.imp.attack++;
+            Dealer.enemysAttackText1.text = Enemy.imp.attack.ToString();
             Dealer.enemysStatusEffectsText1.text += "<sprite name=Enrage>";
         }
         if (effect.Contains("Drain")) //only for test reasons
         {
-            if (Enemy.darkImp.isEnraged)
+            if (Enemy.imp.isEnraged)
             {
-                Enemy.darkImp.hp--;
+                Enemy.imp.hp--;
                 if (Hero.hp == Hero.hpCap)
                 {
                     //dont do anything
@@ -181,7 +181,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 {
                     Hero.hp++;
                 }
-                Dealer.enemysHpText1.text = Enemy.darkImp.hp.ToString();
+                Dealer.enemysHpText1.text = Enemy.imp.hp.ToString();
                 Dealer.herosHpText.text = Hero.hp.ToString();
             }
         }

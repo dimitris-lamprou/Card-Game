@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class Enemy
 {
+    public string name;
     public int hpCap;
     public int hp;
     public int defence;
@@ -17,8 +19,10 @@ public class Enemy
     public int percentageOfMove;
     public string move1;
     public string move2;
+    public int position;
 
     public static string move;
+    public static List<Enemy> enemies = new();
 
     //Enemies
     public static Enemy imp;
@@ -28,6 +32,7 @@ public class Enemy
     {
         imp = new()
         {
+            name = "Imp",
             hpCap = 30,
             hp = 30,
             defence = 0,
@@ -37,10 +42,12 @@ public class Enemy
             action = 0,
             percentageOfMove = 60,
             move1 = "Rake",
-            move2 = "Bite"
+            move2 = "Bite",
+            position = 1
         };
         darkImp = new()
         {
+            name = "DarkImp",
             hpCap = 40,
             hp = 40,
             defence = 0,
@@ -50,8 +57,44 @@ public class Enemy
             action = 0,
             percentageOfMove = 60,
             move1 = "PowerRake",
-            move2 = "PowerBite"
+            move2 = "PowerBite",
+            position = 2
         };
+        enemies.AddRange(new[]
+        {
+            new Enemy
+            {
+                name = "Imp",
+                hpCap = 30,
+                hp = 30,
+                defence = 0,
+                attack = 0,
+                isStuned = false,
+                isEnraged = false,
+                action = 0,
+                percentageOfMove = 60,
+                move1 = "Rake",
+                move2 = "Bite",
+                position = 1
+            },
+            new Enemy
+            {
+                name = "DarkImp",
+                hpCap = 40,
+                hp = 40,
+                defence = 0,
+                attack = 0,
+                isStuned = false,
+                isEnraged = false,
+                action = 0,
+                percentageOfMove = 60,
+                move1 = "PowerRake",
+                move2 = "PowerBite",
+                position = 2
+            },
+            // Add more enemies here
+        });
+
     }
 
     public void Move(string name)
@@ -226,16 +269,16 @@ public class Enemy
         switch (move)
         {
             case "Rake":
-                Dealer.enemysActionText1.text = "+10 <sprite name=Attack>";
+                Dealer.enemysThoughtText1.text = "+10 <sprite name=Attack>";
                 break;
             case "Bite":
-                Dealer.enemysActionText1.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
+                Dealer.enemysThoughtText1.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
                 break;
             case "PowerRake":
-                Dealer.enemysActionText1.text = "+15 <sprite name=Attack>";
+                Dealer.enemysThoughtText1.text = "+15 <sprite name=Attack>";
                 break;
             case "PowerBite":
-                Dealer.enemysActionText1.text = "+8 <sprite name=Attack> and <sprite name=Weak>";
+                Dealer.enemysThoughtText1.text = "+8 <sprite name=Attack> and <sprite name=Weak>";
                 break;
         }
         
@@ -244,46 +287,46 @@ public class Enemy
         {
             if (Enemy.action == 0)
             {
-                Dealer.enemysActionText1.text = "+3 <sprite name=Attack>";
+                Dealer.enemysThoughtText1.text = "+3 <sprite name=Attack>";
             }
             else if (Enemy.action == 1)
             {
-                Dealer.enemysActionText1.text = "+7 <sprite name=Defence>";
+                Dealer.enemysThoughtText1.text = "+7 <sprite name=Defence>";
             }
             else if (Enemy.action == 2)
             {
-                Dealer.enemysActionText1.text = "+5 <sprite name=Defence>";
+                Dealer.enemysThoughtText1.text = "+5 <sprite name=Defence>";
             }
             else if (Enemy.action == 3)
             {
-                Dealer.enemysActionText1.text = "+3 <sprite name=Heal>";
+                Dealer.enemysThoughtText1.text = "+3 <sprite name=Heal>";
             }
             else
             {
-                Dealer.enemysActionText1.text = "Enemy is confused and will not do anything";
+                Dealer.enemysThoughtText1.text = "Enemy is confused and will not do anything";
             }
         }
         else
         {
             if (Enemy.action == 0)
             {
-                Dealer.enemysActionText1.text = "+5 <sprite name=Attack>";
+                Dealer.enemysThoughtText1.text = "+5 <sprite name=Attack>";
             }
             else if (Enemy.action == 1)
             {
-                Dealer.enemysActionText1.text = "+5 <sprite name=Defence>";
+                Dealer.enemysThoughtText1.text = "+5 <sprite name=Defence>";
             }
             else if (Enemy.action == 2)
             {
-                Dealer.enemysActionText1.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
+                Dealer.enemysThoughtText1.text = "+3 <sprite name=Attack> +2 <sprite name=Defence>";
             }
             else if (Enemy.action == 3)
             {
-                Dealer.enemysActionText1.text = "Enemy will add Dazed to your deck";
+                Dealer.enemysThoughtText1.text = "Enemy will add Dazed to your deck";
             }
             else
             {
-                Dealer.enemysActionText1.text = "Enemy is confused and will not do anything";
+                Dealer.enemysThoughtText1.text = "Enemy is confused and will not do anything";
             }
         }*/
 
