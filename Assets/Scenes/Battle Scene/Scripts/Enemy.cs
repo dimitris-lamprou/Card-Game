@@ -264,21 +264,21 @@ public class Enemy
         }
     }
 
-    public void WhatWillDo()
+    public void WhatWillDo(TMP_Text enemysThought) //not good
     {
         switch (move)
         {
             case "Rake":
-                Dealer.enemysThoughtText1.text = "+10 <sprite name=Attack>";
+                enemysThought.text = "+10 <sprite name=Attack>";
                 break;
             case "Bite":
-                Dealer.enemysThoughtText1.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
+                enemysThought.text = "+6 <sprite name=Attack> and <sprite name=Weak>";
                 break;
             case "PowerRake":
-                Dealer.enemysThoughtText1.text = "+15 <sprite name=Attack>";
+                enemysThought.text = "+15 <sprite name=Attack>";
                 break;
             case "PowerBite":
-                Dealer.enemysThoughtText1.text = "+8 <sprite name=Attack> and <sprite name=Weak>";
+                enemysThought.text = "+8 <sprite name=Attack> and <sprite name=Weak>";
                 break;
         }
         

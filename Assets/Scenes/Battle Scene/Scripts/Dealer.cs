@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Mono.Data.Sqlite;
+using System.Linq;
 
 public class Dealer : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class Dealer : MonoBehaviour
     private static readonly SqliteCommand cmd = DBContext.cmd;
 
     private static bool isTheFirstTime = true;
+
+    private Enemy enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -147,6 +150,8 @@ public class Dealer : MonoBehaviour
             Enemy.InitEnemies();
         }
 
+        enemy = Enemy.enemies.FirstOrDefault(e => e.position == 1);
+
         deck.Clear();
         deck.AddRange(Hero.deck);
 
@@ -156,16 +161,21 @@ public class Dealer : MonoBehaviour
         Shuffle(deck);
         Deal(deck);
 
-        Enemy.imp.PrepareMove();
-        Enemy.imp.WhatWillDo();
+        enemy.PrepareMove();
+        enemy.WhatWillDo(enemysThoughtText1);
 
         herosHpText.text = Hero.hp.ToString();
         herosStaminaText.text = Hero.stamina.ToString();
         herosDefenceText.text = Hero.defence.ToString();
         herosAttackText.text = Hero.attack.ToString();
 
-        enemysHpText1.text = Enemy.imp.hp.ToString();
-        enemysHpText2.text = Enemy.darkImp.hp.ToString();
+        /*enemysHpText1.text = enemy.hp.ToString();               //print all enemies hp fix
+        enemysHpText2.text = Enemy.darkImp.hp.ToString();*/
+        foreach (var enemyHpText in enemiesHpText)
+        {
+            enemyHpText.tmp_Text.text = Enemy.enemies.FirstOrDefault(e => enemyHpText.name.Contains(e.position.ToString())).
+                hp.ToString();
+        }
 
         if (MapManager.isFromMap)
         {

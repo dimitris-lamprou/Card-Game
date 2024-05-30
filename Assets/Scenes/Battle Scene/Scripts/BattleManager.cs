@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -9,8 +10,27 @@ public class BattleManager : MonoBehaviour
 
     private readonly int handLimit = Hero.handLimit;
 
+    private int attackingEnemyPosition = 1;
+    private Enemy enemy;
+    private Enemy nextEnemy;
+    private EnemysUiText enemysUiTextDefence;
+    private EnemysUiText enemysUiTextStatusEffects;
+    private EnemysUiText enemysUiTextAttack;
+    private EnemysUiText nextEnemysUiTextThought;
+    private EnemysUiText enemysUiTextThought;
+
     public void EndTurn()
     {
+        enemy = Enemy.enemies.FirstOrDefault(e => e.position == attackingEnemyPosition);
+        nextEnemy = Enemy.enemies.FirstOrDefault(e => e.position == 
+            ((attackingEnemyPosition + 1 >= 3) ? 1 : attackingEnemyPosition + 1));
+        enemysUiTextDefence = Dealer.enemiesDefenceText.FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        enemysUiTextStatusEffects = Dealer.enemiesStatusEffectsText.FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        enemysUiTextAttack = Dealer.enemiesAttackText.FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        nextEnemysUiTextThought = Dealer.enemiesThoughtText.
+            FirstOrDefault(e => e.name.Contains(((enemy.position + 1 >= 3) ? 1 : enemy.position + 1).ToString())); //not good
+        enemysUiTextThought = Dealer.enemiesThoughtText.FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+
         //Stops end turn in case Hero has attack
 
         /*if (Hero.attack > 0)
@@ -65,12 +85,12 @@ public class BattleManager : MonoBehaviour
             enemysAttackText1.text = Enemy.attack.ToString();
         }*/
 
-        //Enemys pre Reset
+        //Enemys pre Reset              //Maybe here reset all enemies
 
-        if (Enemy.imp.defence > 0)
+        if (enemy.defence > 0)
         {
-            Enemy.imp.defence = 0;
-            Dealer.enemysDefenceText1.text = Enemy.imp.defence.ToString();
+            enemy.defence = 0;
+            enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
         }
 
         //Hero Reset
@@ -112,13 +132,13 @@ public class BattleManager : MonoBehaviour
 
         //Enemys action
 
-        if (Enemy.imp.isStuned)
+        if (enemy.isStuned)
         {
             //dont act
         }
         else
         {
-            Enemy.imp.Act();
+            enemy.Act();
             if (Hero.isWeak)
             {
                 Debug.Log("Weak by " + StatusEffects.heroWeakAmount + " for " + StatusEffects.heroWeakRounds + " rounds");
@@ -181,17 +201,25 @@ public class BattleManager : MonoBehaviour
             Dealer.Deal(deck);
         }
 
-        //Enemy Reset
+        //Enemy Reset                           //Maybe reset all enemies
         
-        Enemy.imp.action = Random.Range(0, 100);
-        Enemy.imp.isStuned = false;
-        Enemy.imp.isEnraged = false;
-        Enemy.imp.attack = 0;
-        Enemy.imp.PrepareMove();
-        Enemy.imp.WhatWillDo();
+        enemy.action = Random.Range(0, 100);
+        enemy.isStuned = false;
+        enemy.isEnraged = false;
+        enemy.attack = 0;
 
-        Dealer.enemysDefenceText1.text = Enemy.imp.defence.ToString();
-        Dealer.enemysStatusEffectsText1.text = "";
-        Dealer.enemysAttackText1.text = Enemy.imp.attack.ToString();
+        nextEnemy.PrepareMove();
+        enemy.WhatWillDo(nextEnemysUiTextThought.tmp_Text); //not good
+
+        enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
+        enemysUiTextStatusEffects.tmp_Text.text = "";
+        enemysUiTextAttack.tmp_Text.text = enemy.attack.ToString();
+        enemysUiTextThought.tmp_Text.text = string.Empty; 
+
+        attackingEnemyPosition++;
+        if (attackingEnemyPosition == 3) // later 3 will be 7 cause we will have 6 enemies i think
+        {
+            attackingEnemyPosition = 1;
+        }
     }
 }
