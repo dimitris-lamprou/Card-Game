@@ -143,9 +143,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         if (effect.Contains("Stun"))
         {
-            Enemy.imp.isStuned = true;
-            Dealer.enemysStatusEffectsText1.text += "<sprite name=Stun>";
-            Dealer.enemysThoughtText1.text = "";
+            Hero.hasStun = true;
         }
         if (effect.Contains("Reckless"))
         {

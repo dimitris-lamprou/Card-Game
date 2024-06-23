@@ -132,19 +132,14 @@ public class BattleManager : MonoBehaviour
 
         //Enemys action
 
-        if (enemy.isStuned)
+        
+        enemy.Act();
+        if (Hero.isWeak)
         {
-            //dont act
+            Debug.Log("Weak by " + StatusEffects.heroWeakAmount + " for " + StatusEffects.heroWeakRounds + " rounds");
+            StatusEffects.Weak("Hero");
         }
-        else
-        {
-            enemy.Act();
-            if (Hero.isWeak)
-            {
-                Debug.Log("Weak by " + StatusEffects.heroWeakAmount + " for " + StatusEffects.heroWeakRounds + " rounds");
-                StatusEffects.Weak("Hero");
-            }
-        }
+        
 
         /*if (Enemy.attack > 0)
         {

@@ -225,6 +225,11 @@ public class Enemy
 
     public void DealDamage()
     {
+        if (this.isStuned)
+        {
+            return;
+        }
+
         if (Hero.defence > 0)
         {
             if (Hero.defence >= attack)

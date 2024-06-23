@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DealDamage : MonoBehaviour
@@ -14,9 +15,17 @@ public class DealDamage : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (Hero.attack > 0)
+        if (Hero.hasStun)
+        {
+            Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Stun Cursor"), Vector2.zero, CursorMode.Auto);
+        }
+        else if (Hero.attack > 0)
         {
             Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Attack Cursor"), Vector2.zero, CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Cursor"), Vector2.zero, CursorMode.Auto);
         }
     }
 
@@ -27,13 +36,29 @@ public class DealDamage : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (Hero.attack > 0)
-        {
-            Enemy enemy = Enemy.enemies.FirstOrDefault(e => e.name == enemysName);
-            EnemysUiText enemysUiTextDefence = Dealer.enemiesDefenceText.
-                FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
-            EnemysUiText enemysUiTextHp = Dealer.enemiesHpText.FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        Enemy enemy = Enemy.enemies.FirstOrDefault(e => e.name == enemysName);
 
+        EnemysUiText enemysUiTextDefence = Dealer.enemiesDefenceText.
+            FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        EnemysUiText enemysUiTextHp = Dealer.enemiesHpText.
+            FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        EnemysUiText enemysUiTextStatusEffects = Dealer.enemiesStatusEffectsText.
+            FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        EnemysUiText enemysUiTextThought = Dealer.enemiesThoughtText.
+            FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+
+
+        if (Hero.hasStun)
+        {
+            enemy.isStuned = true;
+            enemysUiTextStatusEffects.tmp_Text.text += "<sprite name=Stun>";
+            //enemysUiTextThought.tmp_Text.text = "";
+
+            Hero.hasStun = false;
+            OnMouseEnter();
+        }
+        else if (Hero.attack > 0)
+        {     
             if (enemy.defence > 0)
             {
                 if (enemy.defence >= Hero.attack)
@@ -75,7 +100,7 @@ public class DealDamage : MonoBehaviour
 
             Hero.attack = 0;
             Dealer.herosAttackText.text = Hero.attack.ToString();
+            Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Cursor"), Vector2.zero, CursorMode.Auto);
         }
-        Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Cursor"), Vector2.zero, CursorMode.Auto);
     }
 }
