@@ -161,19 +161,11 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (effect.Contains("Enrage"))
         {
             Hero.hasEnrage = true;
-            /*Enemy.imp.isEnraged = true;
-            if (Enemy.imp.defence > 0)
-            {
-                Enemy.imp.defence--;
-                Dealer.enemysDefenceText1.text = Enemy.imp.defence.ToString();
-            }
-            Enemy.imp.attack++;
-            Dealer.enemysAttackText1.text = Enemy.imp.attack.ToString();
-            Dealer.enemysStatusEffectsText1.text += "<sprite name=Enrage>";*/
         }
         if (effect.Contains("Drain")) //only for test reasons
         {
-            if (Enemy.imp.isEnraged)
+            Hero.hasDrain = true;
+            /*if (Enemy.imp.isEnraged)
             {
                 Enemy.imp.hp--;
                 if (Hero.hp == Hero.hpCap)
@@ -186,7 +178,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 }
                 Dealer.enemysHpText1.text = Enemy.imp.hp.ToString();
                 Dealer.herosHpText.text = Hero.hp.ToString();
-            }
+            }*/
         }
 
         Dealer.discard.Add(playedCard);

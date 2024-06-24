@@ -1,8 +1,7 @@
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class DealDamage : MonoBehaviour
+public class TargetingSystem : MonoBehaviour
 {
     [SerializeField] private GameObject newCards;
 
@@ -22,6 +21,10 @@ public class DealDamage : MonoBehaviour
         else if (Hero.hasEnrage)
         {
             Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Enrage Cursor"), Vector2.zero, CursorMode.Auto);
+        }
+        else if (Hero.hasDrain)
+        {
+            Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Drain Cursor"), Vector2.zero, CursorMode.Auto);
         }
         else if (Hero.attack > 0)
         {
@@ -79,53 +82,98 @@ public class DealDamage : MonoBehaviour
             enemysUiTextAttack.tmp_Text.text = enemy.attack.ToString();
             enemysUiTextStatusEffects.tmp_Text.text += "<sprite name=Enrage>";
 
+            if (Hero.hasDrain) //must be a condition that refers to card Flurry of insults
+            {
+                int amount = Random.Range(3, 6);
+
+                foreach (var enemy1 in Enemy.enemies)
+                {
+                    if (enemy1.isEnraged)
+                    {
+                        DealDamage(enemy1,
+                            Dealer.enemiesDefenceText.FirstOrDefault(e => e.name.Contains(enemy1.position.ToString())),
+                            Dealer.enemiesHpText.FirstOrDefault(e => e.name.Contains(enemy1.position.ToString())),
+                            amount);
+
+                        Hero.Heal(amount);
+                    }
+                }
+
+                Hero.hasDrain = false;
+            }
+
             Hero.hasEnrage = false;
             OnMouseEnter();
         }
-        else if (Hero.attack > 0)
-        {     
-            if (enemy.defence > 0)
+        else if (Hero.hasDrain)
+        {
+            int amount = Random.Range(3, 6);
+
+            foreach (var enemy1 in Enemy.enemies)
             {
-                if (enemy.defence >= Hero.attack)
+                if (enemy1.isEnraged)
                 {
-                    enemy.defence -= Hero.attack;
-                   enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
+                    DealDamage(enemy1, 
+                        Dealer.enemiesDefenceText.FirstOrDefault(e => e.name.Contains(enemy1.position.ToString())),
+                        Dealer.enemiesHpText.FirstOrDefault(e => e.name.Contains(enemy1.position.ToString())),
+                        amount);
+
+                    Hero.Heal(amount);
                 }
-                else
-                {
-                    int remainingDamage = Hero.attack - enemy.defence;
-                    enemy.defence = 0;
-                    enemy.hp -= remainingDamage;
-                   enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
-                    enemysUiTextHp.tmp_Text.text = enemy.hp.ToString();
-                }
-            }
-            else
-            {
-                enemy.hp -= Hero.attack;
-                enemysUiTextHp.tmp_Text.text = enemy.hp.ToString();
             }
 
-            if (enemy.hp <= 0) //if hero destroyed enemy
-            {
-                //TODO MUST BE A FUNCTION OR CLASS
-                //Store Exp
-                Debug.Log("Enemy died");
-                //Reset
-                Hero.stamina = 3; // = cap for later
-                Hero.attack = 0;
-                enemy.defence = 0;
-                enemy.hp = 4;
-                if (MapManager.isFromMap)
-                {
-                    newCards.SetActive(true);
-                    //SceneManager.LoadScene(2);
-                }
-            }
+            Hero.hasDrain = false;
+            OnMouseEnter();
+        }
+        else if (Hero.attack > 0)
+        {
+            DealDamage(enemy, enemysUiTextDefence, enemysUiTextHp, Hero.attack);
 
             Hero.attack = 0;
             Dealer.herosAttackText.text = Hero.attack.ToString();
             Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Cursor"), Vector2.zero, CursorMode.Auto);
+        }
+    }
+
+    private void DealDamage(Enemy receiver, EnemysUiText enemysUiTextDefence, EnemysUiText enemysUiTextHp, int amount)
+    {
+        if (receiver.defence > 0)
+        {
+            if (receiver.defence >= Hero.attack)
+            {
+                receiver.defence -= Hero.attack;
+                enemysUiTextDefence.tmp_Text.text = receiver.defence.ToString();
+            }
+            else
+            {
+                int remainingDamage = Hero.attack - receiver.defence;
+                receiver.defence = 0;
+                receiver.hp -= remainingDamage;
+                enemysUiTextDefence.tmp_Text.text = receiver.defence.ToString();
+                enemysUiTextHp.tmp_Text.text = receiver.hp.ToString();
+            }
+        }
+        else
+        {
+            receiver.hp -= Hero.attack;
+            enemysUiTextHp.tmp_Text.text = receiver.hp.ToString();
+        }
+
+        if (receiver.hp <= 0) //if hero destroyed enemy
+        {
+            //TODO MUST BE A FUNCTION OR CLASS
+            //Store Exp
+            Debug.Log("Enemy died");
+            //Reset
+            Hero.stamina = 3; // = cap for later
+            Hero.attack = 0;
+            receiver.defence = 0;
+            receiver.hp = 4;
+            if (MapManager.isFromMap)
+            {
+                newCards.SetActive(true);
+                //SceneManager.LoadScene(2);
+            }
         }
     }
 }
