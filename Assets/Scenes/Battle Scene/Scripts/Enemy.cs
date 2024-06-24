@@ -102,16 +102,16 @@ public class Enemy
         switch (name)
         {
             case "Rake":
-                attack = 10;
+                attack += 10;
                 break;
             case "Bite":
-                attack = 6;
+                attack += 6;
                 break;
             case "PowerRake":
-                attack = 15;
+                attack += 15;
                 break;
             case "PowerBite":
-                attack = 8;
+                attack += 8;
                 break;
         }
     }

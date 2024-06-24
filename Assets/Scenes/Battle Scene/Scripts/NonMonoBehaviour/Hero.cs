@@ -21,6 +21,7 @@ public static class Hero
 
     //status eefects to apply
     public static bool hasStun = false;
+    public static bool hasEnrage = false;
 
     public static void Heal(int amount)
     {

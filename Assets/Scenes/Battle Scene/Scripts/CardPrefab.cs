@@ -150,13 +150,18 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (Hero.defence > 0)
             {
                 Hero.defence-= Random.Range(1,3);
+                if (Hero.defence < 0)
+                {
+                    Hero.defence = 0;
+                }
                 Dealer.herosDefenceText.text = Hero.defence.ToString();
             }
             Dealer.herosStatusEffectsText.text += "<sprite name=Reckless>";
         }
         if (effect.Contains("Enrage"))
         {
-            Enemy.imp.isEnraged = true;
+            Hero.hasEnrage = true;
+            /*Enemy.imp.isEnraged = true;
             if (Enemy.imp.defence > 0)
             {
                 Enemy.imp.defence--;
@@ -164,7 +169,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             }
             Enemy.imp.attack++;
             Dealer.enemysAttackText1.text = Enemy.imp.attack.ToString();
-            Dealer.enemysStatusEffectsText1.text += "<sprite name=Enrage>";
+            Dealer.enemysStatusEffectsText1.text += "<sprite name=Enrage>";*/
         }
         if (effect.Contains("Drain")) //only for test reasons
         {

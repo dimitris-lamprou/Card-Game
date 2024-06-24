@@ -19,6 +19,10 @@ public class DealDamage : MonoBehaviour
         {
             Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Stun Cursor"), Vector2.zero, CursorMode.Auto);
         }
+        else if (Hero.hasEnrage)
+        {
+            Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Enrage Cursor"), Vector2.zero, CursorMode.Auto);
+        }
         else if (Hero.attack > 0)
         {
             Cursor.SetCursor(Resources.Load<Texture2D>("Icons/Attack Cursor"), Vector2.zero, CursorMode.Auto);
@@ -46,6 +50,8 @@ public class DealDamage : MonoBehaviour
             FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
         EnemysUiText enemysUiTextThought = Dealer.enemiesThoughtText.
             FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
+        EnemysUiText enemysUiTextAttack = Dealer.enemiesAttackText.
+            FirstOrDefault(e => e.name.Contains(enemy.position.ToString()));
 
 
         if (Hero.hasStun)
@@ -55,6 +61,25 @@ public class DealDamage : MonoBehaviour
             //enemysUiTextThought.tmp_Text.text = "";
 
             Hero.hasStun = false;
+            OnMouseEnter();
+        }
+        else if (Hero.hasEnrage)
+        {
+            enemy.isEnraged = true;
+            if (enemy.defence > 0)
+            {
+                enemy.defence-= Random.Range(1,3);
+                if (enemy.defence < 0)
+                {
+                    enemy.defence = 0;
+                }
+                enemysUiTextDefence.tmp_Text.text = enemy.defence.ToString();
+            }
+            enemy.attack+= Random.Range(1,3);
+            enemysUiTextAttack.tmp_Text.text = enemy.attack.ToString();
+            enemysUiTextStatusEffects.tmp_Text.text += "<sprite name=Enrage>";
+
+            Hero.hasEnrage = false;
             OnMouseEnter();
         }
         else if (Hero.attack > 0)
