@@ -149,7 +149,7 @@ public class CardPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             if (Hero.defence > 0)
             {
-                Hero.defence--;
+                Hero.defence-= Random.Range(1,3);
                 Dealer.herosDefenceText.text = Hero.defence.ToString();
             }
             Dealer.herosStatusEffectsText.text += "<sprite name=Reckless>";
